@@ -259,6 +259,10 @@ module.exports = async (_env, options) => {
         REACT_APP_WEB_APP_URL: isDev
           ? process.env.REACT_APP_WEB_APP_URL || "https://app.clausemoor.com"
           : process.env.REACT_APP_WEB_APP_URL || "",
+        // brand.ts reads NEXT_PUBLIC_*, REACT_APP_*, and bare names directly so
+        // Next and this bundler can each inline them. Every name must be listed
+        // here: an undefined process.env.FOO left in the browser bundle throws
+        // "process is not defined" and blanks the task pane.
         REACT_APP_PRODUCT_NAME: process.env.REACT_APP_PRODUCT_NAME || process.env.PRODUCT_NAME || "",
         REACT_APP_SUPPORT_EMAIL: process.env.REACT_APP_SUPPORT_EMAIL || process.env.SUPPORT_EMAIL || "",
         REACT_APP_SALES_EMAIL: process.env.REACT_APP_SALES_EMAIL || process.env.SALES_EMAIL || "",
@@ -268,6 +272,24 @@ module.exports = async (_env, options) => {
         REACT_APP_SOURCE_CODE_URL: process.env.REACT_APP_SOURCE_CODE_URL || process.env.SOURCE_CODE_URL || "",
         REACT_APP_APP_URL: process.env.REACT_APP_APP_URL || process.env.APP_URL || "",
         REACT_APP_MARKETING_URL: process.env.REACT_APP_MARKETING_URL || process.env.MARKETING_URL || "",
+        NEXT_PUBLIC_PRODUCT_NAME: process.env.NEXT_PUBLIC_PRODUCT_NAME || "",
+        NEXT_PUBLIC_SUPPORT_EMAIL: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "",
+        NEXT_PUBLIC_SALES_EMAIL: process.env.NEXT_PUBLIC_SALES_EMAIL || "",
+        NEXT_PUBLIC_TERMS_URL: process.env.NEXT_PUBLIC_TERMS_URL || "",
+        NEXT_PUBLIC_PRIVACY_URL: process.env.NEXT_PUBLIC_PRIVACY_URL || "",
+        NEXT_PUBLIC_DPA_URL: process.env.NEXT_PUBLIC_DPA_URL || "",
+        NEXT_PUBLIC_SOURCE_CODE_URL: process.env.NEXT_PUBLIC_SOURCE_CODE_URL || "",
+        NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || "",
+        NEXT_PUBLIC_MARKETING_URL: process.env.NEXT_PUBLIC_MARKETING_URL || "",
+        PRODUCT_NAME: process.env.PRODUCT_NAME || "",
+        SUPPORT_EMAIL: process.env.SUPPORT_EMAIL || "",
+        SALES_EMAIL: process.env.SALES_EMAIL || "",
+        TERMS_URL: process.env.TERMS_URL || "",
+        PRIVACY_URL: process.env.PRIVACY_URL || "",
+        DPA_URL: process.env.DPA_URL || "",
+        SOURCE_CODE_URL: process.env.SOURCE_CODE_URL || "",
+        APP_URL: process.env.APP_URL || "",
+        MARKETING_URL: process.env.MARKETING_URL || "",
         // Sentry is off unless a DSN is baked in at build time (the pane is
         // a static bundle; there is no runtime environment to read).
         REACT_APP_SENTRY_DISABLED: process.env.REACT_APP_SENTRY_DISABLED || "",
