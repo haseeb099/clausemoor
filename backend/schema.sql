@@ -92,6 +92,13 @@ create table if not exists public.user_profiles (
       jsonb_typeof(web_search) = 'object'
       and octet_length(web_search::text) <= 1000
     ),
+  -- Stripe billing for hosted Chambers / Firm (20261112_01).
+  stripe_customer_id text,
+  stripe_subscription_id text,
+  subscription_plan_id text,
+  subscription_status text,
+  subscription_interval text,
+  subscription_updated_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -105,6 +112,14 @@ create unique index if not exists user_profiles_email_lower_unique
 
 create index if not exists idx_user_profiles_email
   on public.user_profiles(email);
+
+create unique index if not exists user_profiles_stripe_customer_id_uidx
+  on public.user_profiles (stripe_customer_id)
+  where stripe_customer_id is not null;
+
+create unique index if not exists user_profiles_stripe_subscription_id_uidx
+  on public.user_profiles (stripe_subscription_id)
+  where stripe_subscription_id is not null;
 
 -- The profile, then the account's personal organization
 -- (ensure_personal_organization, defined with organizations below). Each in
@@ -12366,5 +12381,6 @@ insert into public.schema_migrations (filename) values
   ('20261101_21_private_catalogue_paged_per_kind.sql'),
   ('20261101_22_document_text_unfinished_index.sql'),
   ('20261101_23_document_text_backfill_from_unfinished.sql'),
-  ('20261101_24_wipe_memory_files_batch.sql')
+  ('20261101_24_wipe_memory_files_batch.sql'),
+  ('20261112_01_billing_subscriptions.sql')
 on conflict (filename) do nothing;
