@@ -91,10 +91,12 @@ describe("billingApi", () => {
     });
 
     it("uses a portal fallback when the response has no detail or url", async () => {
-        authenticatedFetch.mockResolvedValue(jsonResponse({}, 200));
+        authenticatedFetch.mockResolvedValue(
+            new Response("not-json", { status: 500, headers: { "Content-Type": "text/plain" } }),
+        );
         await expect(openBillingPortal()).rejects.toMatchObject({
             message: "Could not open billing portal",
-            status: 200,
+            status: 500,
             code: null,
         });
     });
