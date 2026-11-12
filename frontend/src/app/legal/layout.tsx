@@ -7,6 +7,12 @@ export default function LegalLayout({ children }: { children: ReactNode }) {
         <div className="min-h-dvh bg-white text-gray-900">
             <header className="border-b border-gray-200 px-6 py-4">
                 <nav className="mx-auto flex max-w-3xl flex-wrap gap-4 text-sm">
+                    <Link href="/pricing" className="underline">
+                        Pricing
+                    </Link>
+                    <Link href="/contact" className="underline">
+                        Contact
+                    </Link>
                     <Link href="/legal/terms" className="underline">
                         Terms
                     </Link>

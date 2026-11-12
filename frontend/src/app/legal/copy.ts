@@ -19,7 +19,7 @@ ${LEGAL_BANNER}
 
 5. AI output can be wrong. A qualified lawyer must review it before it is relied on, sent, or filed.
 
-6. Fees are in the order form, in pounds sterling and exclusive of VAT unless the form says otherwise. This build does not take card payments inside the app.
+6. Fees are in the order form, in pounds sterling and exclusive of VAT unless the form says otherwise. Published list prices are indicative; the signed order form controls. Sales are on invoice. This build does not take card payments inside the app.
 
 7. Each party keeps the other's non-public information confidential.
 

@@ -14,6 +14,7 @@ function firstDefined(values: Array<string | undefined>): string | undefined {
 
 export const DEFAULT_PRODUCT_NAME = "Clausemoor";
 export const DEFAULT_SUPPORT_EMAIL = "support@clausemoor.com";
+export const DEFAULT_SALES_EMAIL = "sales@clausemoor.com";
 export const DEFAULT_SOURCE_CODE_URL = "https://github.com/haseeb099/clausemoor";
 
 export function productName(): string {
@@ -22,6 +23,10 @@ export function productName(): string {
 
 export function supportEmail(): string {
   return firstDefined([process.env.SUPPORT_EMAIL]) ?? DEFAULT_SUPPORT_EMAIL;
+}
+
+export function salesEmail(): string {
+  return firstDefined([process.env.SALES_EMAIL]) ?? DEFAULT_SALES_EMAIL;
 }
 
 export function sourceCodeUrl(): string {

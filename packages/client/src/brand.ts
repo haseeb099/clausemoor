@@ -18,6 +18,7 @@ function firstDefined(values: Array<string | undefined>): string | undefined {
 
 export const DEFAULT_PRODUCT_NAME = "Clausemoor";
 export const DEFAULT_SUPPORT_EMAIL = "support@clausemoor.com";
+export const DEFAULT_SALES_EMAIL = "sales@clausemoor.com";
 export const DEFAULT_SOURCE_CODE_URL =
     "https://github.com/haseeb099/clausemoor";
 export const DEFAULT_TERMS_URL = "/legal/terms";
@@ -47,6 +48,16 @@ export function supportEmail(): string {
             process.env.REACT_APP_SUPPORT_EMAIL,
             process.env.SUPPORT_EMAIL,
         ]) ?? DEFAULT_SUPPORT_EMAIL
+    );
+}
+
+export function salesEmail(): string {
+    return (
+        firstDefined([
+            process.env.NEXT_PUBLIC_SALES_EMAIL,
+            process.env.REACT_APP_SALES_EMAIL,
+            process.env.SALES_EMAIL,
+        ]) ?? DEFAULT_SALES_EMAIL
     );
 }
 

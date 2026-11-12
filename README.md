@@ -48,7 +48,9 @@ Stop the stack with `npm run stack:down`. The local Supabase keys in `.env.examp
 | Guide | [docs/deployment-saas.md](docs/deployment-saas.md) | [docs/self-hosted.md](docs/self-hosted.md) |
 | Customer data | On your hosting, under the DPA | On the client's servers |
 
-Set `PRODUCT_NAME`, `SUPPORT_EMAIL`, `TERMS_URL`, `PRIVACY_URL`, `DPA_URL`, and `SOURCE_CODE_URL` before you go live. The legal pages under `/legal` and [docs/legal](docs/legal) are templates. Have a UK solicitor review them. Plan names live in [frontend/config/plans.json](frontend/config/plans.json). This build does not take card payments.
+Set `PRODUCT_NAME`, `SUPPORT_EMAIL`, `SALES_EMAIL`, `TERMS_URL`, `PRIVACY_URL`, `DPA_URL`, and `SOURCE_CODE_URL` before you go live. The legal pages under `/legal` and [docs/legal](docs/legal) are templates. Have a UK solicitor review them.
+
+Commercial plans and list prices live in [frontend/config/plans.json](frontend/config/plans.json). Customers see them at `/pricing` and request an invoice via `/contact`. This build does not take card payments; use the [order form template](docs/legal/order-form.md). The operator checklist is [docs/gtm-launch.md](docs/gtm-launch.md).
 
 Error reporting is **off** until you set `SENTRY_DSN` and `FRONTEND_SENTRY_DSN` to your own Sentry projects. Nothing is sent to the upstream project.
 

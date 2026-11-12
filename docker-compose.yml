@@ -407,6 +407,7 @@ services:
         MIKE_VERSION: ${MIKE_VERSION:-}
         PRODUCT_NAME: ${PRODUCT_NAME:-Clausemoor}
         SUPPORT_EMAIL: ${SUPPORT_EMAIL:-support@clausemoor.com}
+        SALES_EMAIL: ${SALES_EMAIL:-sales@clausemoor.com}
         TERMS_URL: ${TERMS_URL:-/legal/terms}
         PRIVACY_URL: ${PRIVACY_URL:-/legal/privacy}
         DPA_URL: ${DPA_URL:-/legal/dpa}

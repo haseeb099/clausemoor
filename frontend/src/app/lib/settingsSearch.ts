@@ -66,8 +66,8 @@ export const SETTINGS_SEARCH_ENTRIES: readonly SettingsSearchEntry[] = [
         tabId: "account",
         tab: "Account",
         title: "Usage Plan",
-        description: "The plan your account is on.",
-        keywords: ["plan", "subscription", "billing", "free", "pro", "tier", "upgrade", "pricing", "usage"],
+        description: "Your current plan, Chambers and Firm pricing, and how to contact sales.",
+        keywords: ["plan", "subscription", "billing", "free", "pro", "tier", "upgrade", "pricing", "usage", "chambers", "firm", "invoice"],
         href: "/settings#usage-plan",
     },
     {

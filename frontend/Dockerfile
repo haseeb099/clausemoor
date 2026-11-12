@@ -35,6 +35,7 @@ COPY packages/client /app/packages/client
 # Non-empty runtime SENTRY_* values override them. See docs/observability.md.
 ARG PRODUCT_NAME=Clausemoor
 ARG SUPPORT_EMAIL=support@clausemoor.com
+ARG SALES_EMAIL=sales@clausemoor.com
 ARG TERMS_URL=/legal/terms
 ARG PRIVACY_URL=/legal/privacy
 ARG DPA_URL=/legal/dpa
@@ -54,6 +55,7 @@ ARG MIKE_VERSION=
 ARG GIT_SHA=
 ENV NEXT_PUBLIC_PRODUCT_NAME=$PRODUCT_NAME \
     NEXT_PUBLIC_SUPPORT_EMAIL=$SUPPORT_EMAIL \
+    NEXT_PUBLIC_SALES_EMAIL=$SALES_EMAIL \
     NEXT_PUBLIC_TERMS_URL=$TERMS_URL \
     NEXT_PUBLIC_PRIVACY_URL=$PRIVACY_URL \
     NEXT_PUBLIC_DPA_URL=$DPA_URL \
