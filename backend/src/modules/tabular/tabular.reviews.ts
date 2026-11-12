@@ -8,7 +8,7 @@ import { recordAudit } from "../../lib/audit";
 import { chunkArray } from "../../lib/arrays";
 import { mutateInBatches, selectAllByKey, selectInBatches } from "../../lib/batchedQuery";
 import { walkFolderGraph } from "../../lib/folderTree";
-import type { TabularReviewHistoryStatus } from "@mike/contracts";
+import type { TabularReviewHistoryStatus } from "@clausemoor/contracts";
 import {
     checkProjectAccess,
     creatorScopedAllowed,

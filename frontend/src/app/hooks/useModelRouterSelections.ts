@@ -8,7 +8,7 @@ import {
     ROUTER_SLUGS,
     routerSelections,
     type RouterSelections,
-} from "@mike/client";
+} from "@clausemoor/client";
 
 /** The server's per-router lists as the pickers' `RouterSelections`. */
 export function routerSelectionsFromLists(

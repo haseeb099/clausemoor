@@ -5,7 +5,7 @@
 import "./fonts/fonts.css";
 import "./globals.css";
 import { CrashScreen } from "@/app/components/shared/CrashScreen";
-import { PillButtonUI } from "@mike/ui";
+import { PillButtonUI } from "@clausemoor/ui";
 
 export default function GlobalError({
     error,
@@ -17,7 +17,7 @@ export default function GlobalError({
     return (
         <html lang="en">
             <head>
-                <title>Something went wrong – Mike</title>
+                <title>Something went wrong – Clausemoor</title>
             </head>
             <body className="font-sans antialiased">
                 <CrashScreen

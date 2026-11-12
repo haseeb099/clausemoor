@@ -7,7 +7,7 @@ import {
   SettingsDescription,
   SettingsLabel,
 } from "@/app/components/settings/SettingsText";
-import { GlassCardUI, ToggleSwitchUI } from "@mike/ui";
+import { GlassCardUI, ToggleSwitchUI } from "@clausemoor/ui";
 import { SettingsHeading } from "@/app/components/settings/SettingsHeading";
 import { SettingsRow } from "@/app/components/settings/SettingsRow";
 
@@ -44,7 +44,7 @@ export default function AppearancePage() {
           <div className="min-w-0 space-y-1">
             <SettingsLabel>Dark mode</SettingsLabel>
             <SettingsDescription>
-              Use a darker color palette throughout Mike.
+              Use a darker color palette throughout Clausemoor.
             </SettingsDescription>
             {darkModeError && (
               <p role="alert" className="text-xs text-red-600">

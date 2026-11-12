@@ -1,0 +1,22 @@
+Clausemoor
+Copyright (c) 2026 Muhammad Haseeb Rafique and contributors to this fork.
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+Clausemoor is based on the open-source Mike project by Open Legal Products,
+Inc., licensed under AGPL-3.0. The original work and its copyright notices
+remain in this repository, including LICENSE, CREDITS.md, and the copyright
+lines in source files. This fork changes the product name, removes the
+upstream error-reporting destinations, and adds operator branding, legal
+templates, and deployment notes. It does not change the licence.
+
+Bundled workflow and contract templates keep their own licence notices. The
+upstream catalog repository is Open-Legal-Products/mike-workflows.
+
+Corresponding source for this version: https://github.com/haseeb099/clausemoor
+
+The Mike name and logo are not used as the brand of this product. A single
+attribution line identifies the upstream project.

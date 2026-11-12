@@ -92,7 +92,7 @@ test("an unowned backend 5xx preserves its exception, operation, route, status, 
   expect(JSON.stringify(event)).not.toContain("PRIVATE_SERVER_DETAIL");
   expect(event.level).toBe("error");
   expect(tagsOf(event)).toMatchObject({
-    service: "mike-word-addin",
+    service: "clausemoor-word-addin",
     surface: "taskpane",
     component: "mike-api",
     operation: "workflows.run",

@@ -9,6 +9,7 @@ import type {
     OAuthTokens,
 } from "@modelcontextprotocol/sdk/shared/auth.js";
 import { AppError } from "../appError";
+import { productName } from "../brand";
 import { createServerSupabase } from "../supabase";
 import {
     authConfigPatch,
@@ -469,7 +470,7 @@ export class DbMcpOAuthProvider implements OAuthClientProvider {
     get clientMetadata(): OAuthClientMetadata {
         const env = oauthClientEnvFor(this.connector.server_url);
         return {
-            client_name: "Mike",
+            client_name: productName(),
             redirect_uris: [this.redirectUri],
             grant_types: ["authorization_code", "refresh_token"],
             response_types: ["code"],

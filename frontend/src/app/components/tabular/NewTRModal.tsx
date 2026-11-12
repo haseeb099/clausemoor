@@ -30,12 +30,12 @@ import { FileDirectory } from "../shared/FileDirectory";
 import { Modal } from "../modals/Modal";
 import { ModalSelect } from "../modals/ModalSelect";
 import { FieldLabel, FormTextInput } from "../ui/form-field";
-import { ToggleSwitchUI } from "@mike/ui";
+import { ToggleSwitchUI } from "@clausemoor/ui";
 import { ModelToggle } from "../assistant/ModelToggle";
 import {
     isRouterModelSelected,
     type NoModelsReason,
-} from "@mike/client";
+} from "@clausemoor/client";
 import { useUserProfile } from "@/app/contexts/UserProfileContext";
 import { useModelApiKeys } from "@/app/hooks/useModelApiKeys";
 import { useModelRouterSelections } from "@/app/hooks/useModelRouterSelections";

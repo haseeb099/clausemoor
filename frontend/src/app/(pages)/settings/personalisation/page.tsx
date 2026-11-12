@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CustomInstructionsSection } from "@/app/components/settings/CustomInstructionsSection";
 import { ResponseStyleSection } from "@/app/components/settings/ResponseStyleSection";
-import { GlassCardUI } from "@mike/ui";
+import { GlassCardUI } from "@clausemoor/ui";
 import { SettingsHeading } from "@/app/components/settings/SettingsHeading";
 import { SettingsDescription } from "@/app/components/settings/SettingsText";
 import {
@@ -141,7 +141,7 @@ function PersonalisationForm({
       <section className="space-y-3">
         <SettingsHeading id="your-background">Your background</SettingsHeading>
         <SettingsDescription>
-          Tell Mike about your role and practice so responses can be tailored to
+          Tell Clausemoor about your role and practice so responses can be tailored to
           your professional context.
         </SettingsDescription>
         <GlassCardUI>

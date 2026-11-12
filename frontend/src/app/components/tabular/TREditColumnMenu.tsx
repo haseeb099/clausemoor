@@ -17,7 +17,7 @@ import {
     PillButtonUI,
     LIQUID_GLASS_FLOAT_CLASS,
     LIQUID_GLASS_SUBTLE_CLASS,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { FieldLabel } from "@/app/components/ui/form-field";
 
 // Liquid-glass field styling shared by the menu's inputs/controls, matching the

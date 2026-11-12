@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import { MIKE_SENTRY_DSN, diagnosticEvent } from "@mike/client";
+import { diagnosticEvent } from "@clausemoor/client";
 import { rewriteEnvelope, tunnelDecision, browserReportBudget } from "./sentryTunnel";
 
 const encoder = new TextEncoder();
@@ -44,21 +44,16 @@ describe("tunnelDecision", () => {
         });
     });
 
-    it("forwards to the built-in Mike project otherwise, with runtime tags", () => {
-        const decision = tunnelDecision({
+    it("drops the envelope when the operator has not set a DSN", () => {
+        expect(tunnelDecision({
             SENTRY_ENVIRONMENT: "production",
             SENTRY_INSTALL: "official",
-        } as unknown as NodeJS.ProcessEnv);
-        expect(decision).toMatchObject({
+        } as unknown as NodeJS.ProcessEnv)).toEqual({ kind: "drop" });
+        expect(tunnelDecision({ SENTRY_DSN: OWN_DSN, SENTRY_INSTALL: "official" } as unknown as NodeJS.ProcessEnv)).toMatchObject({
             kind: "forward",
-            dsn: MIKE_SENTRY_DSN.frontend,
-            environment: "production",
             install: "official",
         });
-        expect((decision as { url: string }).url).toMatch(
-            /^https:\/\/o\d+\.ingest\.us\.sentry\.io\/api\/\d+\/envelope\/$/,
-        );
-        expect(tunnelDecision({ SENTRY_INSTALL: "anything-else" } as unknown as NodeJS.ProcessEnv)).toMatchObject({
+        expect(tunnelDecision({ SENTRY_DSN: OWN_DSN, SENTRY_INSTALL: "anything-else" } as unknown as NodeJS.ProcessEnv)).toMatchObject({
             install: "community",
         });
     });
@@ -207,20 +202,17 @@ it("applies the runtime destination's repeat policy in the tunnel", () => {
     expect(rewriteEnvelope(raw, { dsn: OWN_DSN }, own)!.byteLength).toBeGreaterThan(0);
 });
 
-it("caps explicitly configured Mike destinations after final envelope reconstruction", () => {
-    for (const env of [
-        { SENTRY_DSN: MIKE_SENTRY_DSN.frontend },
-        { NEXT_PUBLIC_SENTRY_DSN: MIKE_SENTRY_DSN.backend },
-        { SENTRY_DSN: "https://custom@sentry.invalid/73" },
-    ]) {
-        const accepts = browserReportBudget({ NODE_ENV: "production", ...env });
-        const raw = envelope([{}, { type: "event" }, diagnosticEvent({ message: "PRIVATE_QUOTA_CANARY", tags: { diagnostic_test: "true" } })]);
-        let sent = 0;
-        for (let n = 0; n < 60; n++) {
-            const out = rewriteEnvelope(raw, { dsn: OWN_DSN }, accepts)!;
-            if (out.byteLength) sent++;
-            expect(new TextDecoder().decode(out)).not.toContain("PRIVATE_QUOTA_CANARY");
-        }
-        expect(sent).toBe(env.SENTRY_DSN?.includes("custom@") ? 60 : 50);
+it("does not apply an upstream daily cap to the operator's Sentry project", () => {
+    const accepts = browserReportBudget({
+        NODE_ENV: "production",
+        SENTRY_DSN: "https://custom@sentry.invalid/73",
+    });
+    const raw = envelope([{}, { type: "event" }, diagnosticEvent({ message: "PRIVATE_QUOTA_CANARY", tags: { diagnostic_test: "true" } })]);
+    let sent = 0;
+    for (let n = 0; n < 60; n++) {
+        const out = rewriteEnvelope(raw, { dsn: OWN_DSN }, accepts)!;
+        if (out.byteLength) sent++;
+        expect(new TextDecoder().decode(out)).not.toContain("PRIVATE_QUOTA_CANARY");
     }
+    expect(sent).toBe(60);
 });

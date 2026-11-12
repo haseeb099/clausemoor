@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, FileText, Waypoints } from "lucide-react";
-import { ExcerptModalUI, ExcerptPillUI, PlaybookPillUI } from "@mike/ui";
-import { parseExcerpts, type MessageExcerpt } from "@mike/client";
+import { ExcerptModalUI, ExcerptPillUI, PlaybookPillUI } from "@clausemoor/ui";
+import { parseExcerpts, type MessageExcerpt } from "@clausemoor/client";
 
 const COLLAPSED_CONTENT_HEIGHT = 144;
 

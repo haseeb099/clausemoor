@@ -14,7 +14,7 @@ import {
   REASONING_LEVEL_LABELS,
   orderedModelGroups,
   GlassCardUI,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import {
   useUserProfile,
   type PreferenceField,
@@ -28,7 +28,7 @@ import {
   canonicalModelId,
   routerSelections,
   type ModelOption,
-} from "@mike/client";
+} from "@clausemoor/client";
 import { isModelAvailable } from "@/app/lib/modelAvailability";
 import {
   SettingsDescription,
@@ -178,7 +178,7 @@ export default function ModelPreferencesPage() {
       <section className="space-y-3" aria-labelledby="subagents-heading">
         <SettingsHeading id="subagents-heading">Subagents</SettingsHeading>
         <SettingsDescription>
-          Mike can hand parts of a task to subagents that work on them
+          Clausemoor can hand parts of a task to subagents that work on them
           separately and report back. These are the defaults it follows unless
           you ask for something else in the chat.
         </SettingsDescription>
@@ -187,7 +187,7 @@ export default function ModelPreferencesPage() {
             <div className="space-y-1">
               <SettingsLabel>Model</SettingsLabel>
               <SettingsDescription>
-                The model each subagent runs on. Chosen per task lets Mike
+                The model each subagent runs on. Chosen per task lets Clausemoor
                 match the model to the work.
               </SettingsDescription>
             </div>

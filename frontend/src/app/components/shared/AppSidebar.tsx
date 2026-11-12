@@ -27,6 +27,7 @@ import {
 } from "@/app/contexts/WorkspaceContext";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import { productName } from "@clausemoor/client";
 import { SidebarChatItem } from "@/app/components/shared/SidebarChatItem";
 import {
     Dropdown,
@@ -37,7 +38,7 @@ import {
     DropdownRadioItem,
     DropdownSeparator,
     DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { SidebarHeading } from "@/app/components/shared/SidebarHeading";
 import { SidebarLogo } from "@/app/components/shared/SidebarLogo";
 import { SidebarProjectItem } from "@/app/components/shared/SidebarProjectItem";
@@ -263,8 +264,8 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
               ]
             : null;
     // The sidebar is headed by whose work it is showing: the organization's
-    // name in its workspace, and plain "Mike" for personal work. `null` while
-    // a remembered organization's name is still loading — saying "Mike" for
+    // name in its workspace, and plain "Clausemoor" for personal work. `null` while
+    // a remembered organization's name is still loading — saying "Clausemoor" for
     // that moment would be naming the wrong workspace.
     const sidebarHeading = activeOrganization
         ? activeOrganization.name
@@ -272,7 +273,7 @@ export function AppSidebar({ isOpen, onToggle }: AppSidebarProps) {
             workspaceId !== PERSONAL_WORKSPACE &&
             organizations === null
           ? null
-          : "Mike";
+          : productName();
     const [recentProjects, setRecentProjects] = useState<Project[] | null>(
         null,
     );

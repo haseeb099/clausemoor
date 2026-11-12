@@ -10,7 +10,7 @@ import {
     pillButtonUIClassName,
     authGlassCardUIClassName,
     authInputUIClassName,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { SiteLogo } from "@/app/components/site-logo";
 import {
     MIN_PASSWORD_LENGTH,

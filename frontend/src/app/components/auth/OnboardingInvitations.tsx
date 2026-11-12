@@ -13,7 +13,7 @@ import {
 } from "@/app/lib/mikeApi";
 import { ORG_ROLE_LABELS, type OrgRole } from "@/app/lib/permissions";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import { GlassCardUI, PillButtonUI } from "@mike/ui";
+import { GlassCardUI, PillButtonUI } from "@clausemoor/ui";
 
 /** The authenticated endpoint only exposes invitations for a verified email. */
 export function OnboardingInvitations({

@@ -1,4 +1,4 @@
-// Bridge for the shell's own pages (the connection screen). The Mike web app
+// Bridge for the shell's own pages (the connection screen). The Clausemoor web app
 // itself gets no privileged APIs — it must behave identically in a browser —
 // with one deliberate exception: guestCredentials, which the login page uses
 // to offer "Continue as guest" in local mode. It is read-only and gated

@@ -8,7 +8,7 @@ import {
     DropdownTrigger,
     HeaderButtonUI,
     TabPillButtonUI,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 
 interface DocumentUploadMenuProps {
     onSavedFiles?: (() => void) | null;

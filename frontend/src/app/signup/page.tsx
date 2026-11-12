@@ -11,8 +11,9 @@ import {
     authGlassCardUIClassName,
     authInputUIClassName,
     AuthDividerUI,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import Link from "next/link";
+import { privacyUrl, termsUrl } from "@clausemoor/client";
 import { SiteLogo } from "@/app/components/site-logo";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { cn } from "@/app/lib/utils";
@@ -244,7 +245,7 @@ function SignupContent() {
                             <div className="text-center text-xs text-gray-500">
                                 By signing up, you agree to our{" "}
                                 <Link
-                                    href="https://mikeoss.com/terms"
+                                    href={termsUrl()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-600 hover:underline"
@@ -253,7 +254,7 @@ function SignupContent() {
                                 </Link>{" "}
                                 and{" "}
                                 <Link
-                                    href="https://mikeoss.com/privacy"
+                                    href={privacyUrl()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-600 hover:underline"

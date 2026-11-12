@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { DocumentSearchEvent } from "@mike/contracts";
+import type { DocumentSearchEvent } from "@clausemoor/contracts";
 import { EventBlock } from "./EventBlocks";
 import { EventDisclosureButton } from "./EventDisclosure";
 

@@ -1,3 +1,3 @@
 "use client";
 
-export { MikeIcon } from "@mike/ui";
+export { MikeIcon } from "@clausemoor/ui";

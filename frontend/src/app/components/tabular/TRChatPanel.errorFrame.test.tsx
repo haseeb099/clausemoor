@@ -9,7 +9,7 @@ import {
 } from "@/app/lib/mikeApi";
 import type { Message } from "@/app/components/shared/types";
 import { TRChatPanel } from "./TRChatPanel";
-import { ToastViewportUI, clearToasts } from "@mike/ui";
+import { ToastViewportUI, clearToasts } from "@clausemoor/ui";
 
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 
@@ -112,13 +112,13 @@ describe("TRChatPanel terminal error frame", () => {
         // The server's own wording is internal: it is never shown.
         expect(alert).not.toHaveTextContent("0xdeadbeef");
         expect(alert).toHaveTextContent(
-            "Mike couldn't finish this answer. Try again.",
+            "Clausemoor couldn't finish this answer. Try again.",
         );
 
         // What already streamed is kept, and the bubble says the turn failed.
         expect(await screen.findByText(/Clause 4 says/)).toBeVisible();
         expect(
-            screen.getByText("Mike couldn't finish this answer. Try again.", {
+            screen.getByText("Clausemoor couldn't finish this answer. Try again.", {
                 selector: "p",
             }),
         ).toBeVisible();

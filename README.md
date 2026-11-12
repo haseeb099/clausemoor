@@ -1,124 +1,74 @@
-# Mike
+# Clausemoor
 
-![Mike](docs/assets/link-image.jpg)
+Clausemoor is a legal AI workspace for law firms. Teams use it to review documents, draft, run playbooks and tabular reviews, and work from Microsoft Word. It is built for two ways of selling:
 
-Mike (MikeOSS) is an open-source legal AI platform for document review,
-drafting, and legal research.
+- **Hosted SaaS.** You run Clausemoor and firms subscribe.
+- **Self-hosted.** You install it on a client's servers and sell a support contract.
 
-It combines a Next.js frontend, an Express backend, Supabase Auth/Postgres,
-and Cloudflare R2-compatible object storage.
-
-Website: [mikeoss.com](https://mikeoss.com)
-
-![Mike assistant home screen](docs/assets/mike-home.png)
+Clausemoor is based on the open-source Mike project by Open Legal Products, Inc., licensed under AGPL-3.0.
 
 ## Features
 
-- Chat with legal documents and open matters
-- Review documents and apply suggested edits
-- Run reusable assistant and tabular-review workflows
-- Organize projects, folders, and a document library
-- Verify citations and research US case law with CourtListener
-- Work from Microsoft Word with the task-pane add-in
-- Run supported language models locally through Ollama
+- Assistant chat over matters and documents, with citations
+- Document review and suggested edits, including tracked changes
+- Tabular review across a set of documents
+- Reusable workflows and playbooks
+- Projects, a document library, and organisation workspaces
+- Microsoft Word task-pane add-in
+- Desktop shell for Mac
+- Bring-your-own model keys (Anthropic, OpenAI, Gemini, and others) and optional local models through Ollama
+- UK/EU-oriented deployment notes for a hosted service and for a customer install
 
 ## Quick start
 
-The included Docker Compose stack runs Mike, Supabase, RustFS object storage,
-and local email capture without requiring managed infrastructure.
+You need Docker, and one model API key.
 
-1. Copy the local environment templates:
+```bash
+cp .env.example .env
+cp backend/.env.example backend/.env
+openssl rand -hex 32   # use a fresh value for each required secret
+```
 
-   ```bash
-   cp .env.example .env
-   cp backend/.env.example backend/.env
-   ```
+In `backend/.env`, replace `DOWNLOAD_SIGNING_SECRET` and `USER_API_KEYS_ENCRYPTION_SECRET`, and set an Anthropic, OpenAI, or Gemini key.
 
-2. In `backend/.env`, set `DOWNLOAD_SIGNING_SECRET` and
-   `USER_API_KEYS_ENCRYPTION_SECRET` to separate values generated with:
+```bash
+docker compose up --build
+```
 
-   ```bash
-   openssl rand -hex 32
-   ```
+Open http://localhost:3000 and create an account. Mailpit catches local mail at http://localhost:8025.
 
-3. Add an Anthropic, Gemini, or OpenAI API key to `backend/.env`, unless you
-   plan to use Ollama exclusively.
+Stop the stack with `npm run stack:down`. The local Supabase keys in `.env.example` are public demo keys. Do not expose that stack to the internet. See [docs/self-hosted.md](docs/self-hosted.md) and [docs/deployment-saas.md](docs/deployment-saas.md).
 
-4. Start the stack. Either run the published images (built once in CI, with
-   their Sentry source maps and release) by pinning a version in `.env`:
+## Deployment options
 
-   ```bash
-   echo "MIKE_IMAGE_TAG=$(cat VERSION)" >> .env
-   docker compose pull && docker compose up --no-build -d
-   ```
+| | Hosted SaaS | Self-hosted |
+| --- | --- | --- |
+| Who runs the servers | You | The client |
+| What you sell | A subscription | An install plus a support contract |
+| Guide | [docs/deployment-saas.md](docs/deployment-saas.md) | [docs/self-hosted.md](docs/self-hosted.md) |
+| Customer data | On your hosting, under the DPA | On the client's servers |
 
-   or build everything from this checkout:
+Set `PRODUCT_NAME`, `SUPPORT_EMAIL`, `TERMS_URL`, `PRIVACY_URL`, `DPA_URL`, and `SOURCE_CODE_URL` before you go live. The legal pages under `/legal` and [docs/legal](docs/legal) are templates. Have a UK solicitor review them. Plan names live in [frontend/config/plans.json](frontend/config/plans.json). This build does not take card payments.
 
-   ```bash
-   docker compose up --build
-   ```
+Error reporting is **off** until you set `SENTRY_DSN` and `FRONTEND_SENTRY_DSN` to your own Sentry projects. Nothing is sent to the upstream project.
 
-5. Open [http://localhost:3000](http://localhost:3000) and create an account.
+## Development
 
-To stop, run `npm run stack:down` rather than `docker compose stop`: stopped
-containers are never removed on their own and keep images and volumes in use.
-See "Stop and clean up" in `docs/local-development.md`.
+Node.js 22.19 or newer.
 
-The bundled credentials and infrastructure are intended for local development
-only. See [Local development](docs/local-development.md) for service endpoints,
-authentication behavior, Ollama setup, and first-run guidance.
+```bash
+cd frontend && npm ci && npm run typecheck && npm run lint && npm test
+cd ../backend && npm ci && npm run build && npm test
+```
 
-### Telemetry
+`npm run build` in `frontend` produces the production web app. The Word add-in is `word-addin` (`npm run typecheck` and `npm run build`). The Mac shell is `desktop`.
 
-Mike sends scrubbed error reports (no document content, user identities, or
-request data) to the project's Sentry by default. Development builds (`next dev`,
-the backend run from source, the add-in's dev server) send nothing unless you
-set a DSN yourself. Set `SENTRY_DISABLED=true` to
-opt out, or set `SENTRY_DSN` and `FRONTEND_SENTRY_DSN` to use your own. Both
-take effect at runtime for the published images as well, because browser
-reports travel through the Next server. See the
-[observability guide](docs/observability.md) for the exact policy, per-runtime
-variables, and the [Sentry data audit](docs/sentry-data-audit.md).
+## Licence and attribution
 
-## Repository
+Clausemoor is licensed under the GNU Affero General Public License version 3. See [LICENSE](LICENSE). Anyone who uses a modified version over a network must be able to get the corresponding source. The app shows a **Source code** link, aimed at `SOURCE_CODE_URL` (default: https://github.com/haseeb099/clausemoor).
 
-| Path | Purpose |
-| --- | --- |
-| `frontend/` | Next.js web application |
-| `backend/` | Express API, document processing, and database access |
-| `word-addin/` | Microsoft Word task-pane add-in |
-| `backend/schema.sql` | Complete schema for fresh databases |
-| `backend/migrations/` | Dated migrations for existing deployments |
-| `docker-compose.yml` | Local application and infrastructure stack |
-| `docs/` | Development, deployment, testing, and feature guides |
+Copyright notices from the upstream project are kept. See [NOTICE](NOTICE) and [CREDITS.md](CREDITS.md).
 
-## Documentation
+Clausemoor is based on the open-source Mike project by Open Legal Products, Inc., licensed under AGPL-3.0.
 
-- [Documentation index](docs/README.md)
-- [Local development](docs/local-development.md)
-- [Manual and production deployment](docs/deployment.md)
-- [Troubleshooting](docs/troubleshooting.md)
-- [MCP connectors](docs/connectors.md)
-- [Google Workspace: Drive, Gmail, and Calendar](docs/google-workspace.md)
-- [CourtListener integration](docs/courtlistener.md)
-- [Microsoft Word add-in](word-addin/README.md)
-- [Tamper-evident exports](docs/tamper-evident-exports.md)
-- [Safe local testing](docs/safe-local-testing.md)
-- [Preset contract templates and publisher credits](docs/preset-templates.md)
-- [End-to-end testing and CI](docs/e2e-ci.md)
-- [Contributing](CONTRIBUTING.md)
-- [Open-source credits](CREDITS.md)
-- [Security policy](SECURITY.md)
-
-## System workflows
-
-Mike's system assistant and tabular-review workflows are maintained in the
-[`Open-Legal-Products/mike-workflows`](https://github.com/Open-Legal-Products/mike-workflows)
-repository. See [Contributing](CONTRIBUTING.md#mike-workflows) for how they are
-packaged and synchronized with this application.
-
-## License
-
-Mike is available under the [GNU Affero General Public License v3.0](LICENSE).
-Bundled [public contract templates](docs/preset-templates.md#maintaining-the-catalog)
-retain their publishers' separate licenses and notices.
+Third-party document libraries and their notices are listed in CREDITS.md. Workflow templates synced from the upstream catalog keep that catalog's own licence.

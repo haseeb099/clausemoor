@@ -32,7 +32,7 @@ before(async () => {
   staticRoot = await mkdtemp(path.join(os.tmpdir(), "mike-word-host-"));
   await writeFile(
     path.join(staticRoot, "taskpane.html"),
-    "<!doctype html><title>Mike Word</title>",
+    "<!doctype html><title>Clausemoor Word</title>",
   );
   await writeFile(path.join(staticRoot, "taskpane.js"), "void 0;");
 
@@ -72,7 +72,7 @@ test("serves health and the task pane", async () => {
 
   const taskpane = await fetch(`${addinOrigin}/`);
   assert.equal(taskpane.status, 200);
-  assert.match(await taskpane.text(), /Mike Word/);
+  assert.match(await taskpane.text(), /Clausemoor Word/);
 });
 
 test("asks crawlers not to index the add-in pages", async () => {

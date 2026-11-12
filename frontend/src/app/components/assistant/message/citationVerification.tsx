@@ -1,6 +1,6 @@
 import { CircleAlert } from "lucide-react";
 import type { Citation, DocumentCitationQuote } from "../../shared/types";
-import { PillButtonUI } from "@mike/ui";
+import { PillButtonUI } from "@clausemoor/ui";
 import {
   Popover,
   PopoverContent,

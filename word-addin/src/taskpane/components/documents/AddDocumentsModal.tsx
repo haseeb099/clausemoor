@@ -16,7 +16,7 @@ import {
 } from "../../lib/documentUpload";
 import { Modal } from "../primitives/Modal";
 import { Spinner } from "../../../shared/ui/spinner";
-import { TabPillButtonUI } from "@mike/ui";
+import { TabPillButtonUI } from "@clausemoor/ui";
 import {
   FileTypeIcon,
   ProjectSvgIcon,

@@ -19,7 +19,7 @@ import {
     HeaderButtonUI,
     HeaderButtonsUI,
     headerButtonClassName,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import {
     LIQUID_GLASS_SELECTED_CLASS,
 } from "@/app/components/ui/liquid-surface";

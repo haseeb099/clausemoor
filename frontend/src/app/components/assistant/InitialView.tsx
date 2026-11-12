@@ -6,7 +6,7 @@ import quickActionsIcon from "../../../../public/icons/features/quick-actions.sv
 import { MoreHorizontal } from "lucide-react";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { useUserProfile } from "@/app/contexts/UserProfileContext";
-import { MikeIcon, LIQUID_GLASS_HOVER_CLASS, LIQUID_GLASS_SUBTLE_CLASS } from "@mike/ui";
+import { MikeIcon, LIQUID_GLASS_HOVER_CLASS, LIQUID_GLASS_SUBTLE_CLASS } from "@clausemoor/ui";
 import { ChatInput, type ChatInputHandle } from "./ChatInput";
 import type { Document, Message, QuickAction } from "../shared/types";
 

@@ -24,7 +24,7 @@ import {
     COMPOSER_SEND_BUTTON_CLASS,
     ExcerptModalUI,
     ExcerptPillUI,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { UploadOverlay } from "./UploadOverlay";
 import { DocumentPill } from "../shared/DocumentPill";
 import { AddDocumentsModal } from "../modals/AddDocumentsModal";
@@ -73,7 +73,7 @@ import {
     partitionSupportedDocumentFiles,
 } from "@/app/lib/documentUploadValidation";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import { serializeExcerpts, type MessageExcerpt, type NoModelsReason } from "@mike/client";
+import { serializeExcerpts, type MessageExcerpt, type NoModelsReason } from "@clausemoor/client";
 import { useConfiguredModels } from "@/app/hooks/useConfiguredModels";
 
 export interface ChatInputHandle {

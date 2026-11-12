@@ -1,0 +1,24 @@
+{
+  "note": "PLACEHOLDER. Payments are not connected. Edit this file before you sell a plan, and have a UK solicitor review the customer terms.",
+  "currency": "GBP",
+  "plans": [
+    {
+      "id": "chambers",
+      "name": "Chambers",
+      "price": "Contact us",
+      "audience": "Hosted subscription for a small firm"
+    },
+    {
+      "id": "firm",
+      "name": "Firm",
+      "price": "Contact us",
+      "audience": "Hosted subscription for a larger practice"
+    },
+    {
+      "id": "self-hosted",
+      "name": "Self-hosted",
+      "price": "Support contract",
+      "audience": "Installed on the client's own servers"
+    }
+  ]
+}

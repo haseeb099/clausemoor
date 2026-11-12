@@ -42,26 +42,18 @@ describe("shared-redaction block", () => {
     });
 });
 
-/**
- * The default DSNs are the same table in both files, so every runtime of a
- * community install reports to the same Sentry organisation. Each runtime's
- * own tests only compare it with its own table; this is the drift check.
- */
-function dsnTable(file: string): string {
-    const match = readFileSync(file, "utf8").match(
-        /export const MIKE_SENTRY_DSN = \{[\s\S]*?\}(?: as const)?;/,
-    );
-    if (!match) throw new Error(`no MIKE_SENTRY_DSN table in ${file}`);
-    return match[0]
-        .split("\n")
-        .map((line) => line.trim())
-        .filter(Boolean)
-        .join("\n");
-}
+const UPSTREAM_SENTRY_KEYS = [
+    "d0d66029ed783707289c965cd3d5c868",
+    "fa97921af9f387723a4bc3d42dd7bb44",
+    "2b90028876534676ea38580cfc61cdde",
+];
 
-it("keeps the default DSN table identical in the backend and the shared scrubber", () => {
-    expect(dsnTable(BACKEND)).toBe(dsnTable(SHARED));
-    expect(dsnTable(SHARED)).toMatch(/backend:\s*"https:\/\/[0-9a-f]+@o\d+\.ingest/);
+it("does not embed the upstream Sentry DSNs", () => {
+    for (const file of [BACKEND, SHARED]) {
+        const source = readFileSync(file, "utf8");
+        expect(source).not.toMatch(/ingest\.us\.sentry\.io/);
+        for (const key of UPSTREAM_SENTRY_KEYS) expect(source).not.toContain(key);
+    }
 });
 
 

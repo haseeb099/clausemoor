@@ -23,7 +23,7 @@ import {
   DropdownItem,
   DropdownSeparator,
   DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import chatIcon from "@icons/features/chat.svg";
 import quickActionsIcon from "@icons/features/quick-actions.svg";
 import workflowIcon from "@icons/features/workflow.svg";

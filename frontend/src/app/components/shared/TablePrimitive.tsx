@@ -19,7 +19,7 @@ import {
     DropdownItem,
     DropdownSeparator,
     DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import {
     LIQUID_GLASS_SELECTED_CLASS,
     LIQUID_GLASS_GROUP_HOVER_CLASS,

@@ -169,7 +169,7 @@ export function initialize(): void {
       _user = null;
       _error = reportFault(error, {
         action: "sign in",
-        fallback: "Mike couldn't sign you in. Try again.",
+        fallback: "Clausemoor couldn't sign you in. Try again.",
         operation: "word.session",
       }).message;
     })
@@ -209,7 +209,7 @@ export async function signIn(email: string, password: string): Promise<void> {
     _user = null;
     _error = reportFault(error, {
       action: "sign in",
-      fallback: "Mike couldn't sign you in. Try again.",
+      fallback: "Clausemoor couldn't sign you in. Try again.",
       operation: "word.session",
       codeMessages: {
         invalid_credentials: "That email and password don't match an account.",
@@ -306,7 +306,7 @@ export async function signInWithGoogle(): Promise<void> {
                   if (generation === _sessionGeneration) {
                     _error = reportFault(error, {
                       action: "complete Google sign-in",
-                      fallback: "Mike couldn't complete Google sign-in.",
+                      fallback: "Clausemoor couldn't complete Google sign-in.",
                       operation: "word.session",
                     }).message;
                   }
@@ -337,7 +337,7 @@ export async function signInWithGoogle(): Promise<void> {
       // to a URL..."), which means nothing to a user.
       fail(
         reportFault(error, {
-          fallback: "Mike couldn't open Google sign-in. Try again.",
+          fallback: "Clausemoor couldn't open Google sign-in. Try again.",
           operation: "word.session",
         }).message,
       );
@@ -376,7 +376,7 @@ export async function signOut(): Promise<void> {
     // out again, not the sign-in screen's error state.
     notifyError(error, {
       action: "sign out",
-      fallback: "Mike couldn't sign you out. Try again.",
+      fallback: "Clausemoor couldn't sign you out. Try again.",
       dedupeKey: "sign-out",
       operation: "word.session",
       onRetry: signOut,

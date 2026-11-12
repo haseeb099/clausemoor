@@ -1,6 +1,6 @@
 # Documentation
 
-## Run and deploy Mike
+## Run and deploy Clausemoor
 
 - [Local development](local-development.md) — Docker Compose, local services,
   registration, Ollama, and first-run setup
@@ -54,7 +54,7 @@
 ## Open-source acknowledgments
 
 - [Open-source credits](../CREDITS.md) — the libraries, tools, and
-  infrastructure behind Mike
+  infrastructure behind Clausemoor
 
 ## Historical design and investigation notes
 

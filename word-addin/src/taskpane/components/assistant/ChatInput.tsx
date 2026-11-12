@@ -13,14 +13,14 @@ import {
   slashCommandQueryFromValue,
   withoutSlashCommand,
   workflowSlashCommandFromTitle,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import {
   serializeExcerpts,
   type MessageExcerpt,
   NO_MODELS_MESSAGES,
   routerSelections as routerSelectionsFromProfile,
   type RouterSelections,
-} from "@mike/client";
+} from "@clausemoor/client";
 import { WorkflowModal } from "../workflows/WorkflowModal";
 import { PlaybookModal, playbookTitle } from "../playbooks/PlaybookModal";
 import { ChatInput as ChatInputShell } from "../../../shared/chat/ChatInput";

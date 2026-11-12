@@ -14,7 +14,7 @@ import {
     DropdownItem,
     DropdownSeparator,
     DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 
 interface Props {
     onBrowseAll: () => void;

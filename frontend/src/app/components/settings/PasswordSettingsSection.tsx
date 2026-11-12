@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { authInputUIClassName, InputUI, PillButtonUI, GlassCardUI } from "@mike/ui";
+import { authInputUIClassName, InputUI, PillButtonUI, GlassCardUI } from "@clausemoor/ui";
 import {
   MIN_PASSWORD_LENGTH,
   isPasswordTooLong,
@@ -80,7 +80,7 @@ export function PasswordSettingsSection() {
       setPasswordStatus("Password added to your account.");
     } catch (error) {
       // GoTrue's own wording ("Password should be at least 6 characters")
-      // contradicts Mike's policy, so the code decides the text instead.
+      // contradicts Clausemoor's policy, so the code decides the text instead.
       setPasswordSetError(
         describeError(error, {
           action: "set your password",

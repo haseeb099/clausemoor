@@ -1,5 +1,5 @@
-// End-to-end proof that the packaged Mike.app hosts the real product against
-// a real local stack: launches the packaged Mike.app (dist/mac-arm64 on Apple
+// End-to-end proof that the packaged Clausemoor.app hosts the real product against
+// a real local stack: launches the packaged Clausemoor.app (dist/mac-arm64 on Apple
 // silicon, dist/mac on Intel) with a debugging port, drives it with Playwright
 // over CDP (the shell's window IS a Chromium page), signs up and onboards a
 // fresh user, creates a project, and screenshots each stage.
@@ -43,7 +43,7 @@ const SERVER_URL = (process.env.MIKE_E2E_URL ?? "http://localhost:3000").replace
 const DOWNLOAD_DIR = path.join(ARTIFACTS, "downloads");
 const CAPTURE_FILE = path.join(ARTIFACTS, "external-urls.txt");
 // Isolated userData: never touch the developer's real settings/window bounds,
-// and never collide with a running Mike.app on the single-instance lock.
+// and never collide with a running Clausemoor.app on the single-instance lock.
 const USER_DATA_DIR = path.join(ARTIFACTS, "userdata");
 const CDP_PORT = 9223;
 const RUN_ID = Date.now().toString(36);
@@ -136,7 +136,7 @@ try {
   });
   await completeOnboardingIfRequired(page, {
     name: "Desktop E2E",
-    organisation: "Mike Desktop CI",
+    organisation: "Clausemoor Desktop CI",
   });
   // ...and authenticated is when the app sidebar renders. Onboarding's own
   // shell has no sidebar, so this assertion only passes once the wizard has

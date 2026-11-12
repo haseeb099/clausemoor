@@ -1,5 +1,5 @@
 import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
-import type { ConnectorApprovalItem } from "@mike/contracts";
+import type { ConnectorApprovalItem } from "@clausemoor/contracts";
 import { workspaceDb } from "./googleWorkspaceDb";
 import { ConnectorSetupError } from "../../mcp/errors";
 import {
@@ -153,7 +153,7 @@ describe("Google Workspace opt-in and OAuth", () => {
       "https://www.googleapis.com/auth/gmail.compose",
     ]);
   });
-  it("stores selected account identity separately from the Mike identity and encrypts secrets", async () => {
+  it("stores selected account identity separately from the Clausemoor identity and encrypts secrets", async () => {
     const s = await connected();
     const status = await workspaceStatus(s.db, personalConnectorOwner("u1"), "gmail");
     expect(status.accountEmail).toBe("different-google-account@example.com");
@@ -201,7 +201,7 @@ describe("Google Workspace opt-in and OAuth", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
   it.each(["gmail", "google-calendar"] as const)(
-    "rejects %s consent from a different Mike user before token exchange",
+    "rejects %s consent from a different Clausemoor user before token exchange",
     async (provider) => {
       const s = workspaceDb();
       const { authorizationUrl } = await startWorkspaceOAuth(
@@ -424,7 +424,7 @@ describe("Google connector settings", () => {
       s.db,
     );
     expect(refused.event.status).toBe("error");
-    expect(refused.content).toContain("Gmail is not offered on this Mike server.");
+    expect(refused.content).toContain("Gmail is not offered on this Clausemoor server.");
     expect(
       (await planGoogleWorkspaceCall(personalConnectorOwner("u1"), "gmail_send", email, s.db)).type,
     ).toBe("result");

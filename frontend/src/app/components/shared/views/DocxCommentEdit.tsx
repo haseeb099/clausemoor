@@ -8,7 +8,7 @@ import type {
     ReviewCommentPlacement,
 } from "@docx-editor.dev/core/contracts/editor";
 import { useEditorSnapshot } from "@docx-editor.dev/react";
-import { TextButtonUI, PillButtonUI } from "@mike/ui";
+import { TextButtonUI, PillButtonUI } from "@clausemoor/ui";
 import { FORM_CONTROL_GLASS_CLASS } from "@/app/components/ui/form-field";
 import { cn } from "@/app/lib/utils";
 import { docxEditComment } from "./docxCommentEditing";

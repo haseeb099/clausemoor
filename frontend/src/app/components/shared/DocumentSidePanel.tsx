@@ -20,7 +20,7 @@ import { DocumentPaneTitle } from "@/app/components/shared/DocumentPaneTitle";
 import { PdfView } from "@/app/components/shared/views/PdfView";
 import { DocxView } from "@/app/components/shared/views/DocxView";
 import { SpreadsheetView } from "@/app/components/shared/views/SpreadsheetView";
-import { CloseButton, PillButtonUI } from "@mike/ui";
+import { CloseButton, PillButtonUI } from "@clausemoor/ui";
 import type { Document } from "@/app/components/shared/types";
 import type { DocumentVersion } from "@/app/lib/mikeApi";
 import { cn } from "@/app/lib/utils";

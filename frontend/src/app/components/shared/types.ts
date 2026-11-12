@@ -1,17 +1,17 @@
-import type { AssistantEvent as WireAssistantEvent } from "@mike/contracts";
-// Shared TypeScript types for Mike AI legal assistant
+import type { AssistantEvent as WireAssistantEvent } from "@clausemoor/contracts";
+// Shared TypeScript types for Clausemoor AI legal assistant
 
 import type {
   SourceDocument,
   SourceDocumentQuote,
   SourceDocumentType,
   SourceSubdocument,
-} from "@mike/contracts";
+} from "@clausemoor/contracts";
 import type {
   AskInputItem as SharedAskInputItem,
   AskInputResponseItem as SharedAskInputResponseItem,
   AskInputsEvent as SharedAskInputsEvent,
-} from "@mike/contracts";
+} from "@clausemoor/contracts";
 
 export interface Folder {
   id: string;

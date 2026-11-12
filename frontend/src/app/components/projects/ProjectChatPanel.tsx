@@ -39,7 +39,7 @@ import {
     type ChatInputHandle,
 } from "@/app/components/assistant/ChatInput";
 import { ChatInputPrompt } from "@/app/components/assistant/ChatInputPrompt";
-import { ResponseSelectionMenuUI, MikeIcon } from "@mike/ui";
+import { ResponseSelectionMenuUI, MikeIcon } from "@clausemoor/ui";
 import { ChatPanelHeader } from "@/app/components/shared/ChatPanelHeader";
 import { HeaderActionsMenu } from "@/app/components/shared/HeaderActionsMenu";
 import { ApiKeyMissingPopup } from "@/app/components/popups/ApiKeyMissingPopup";
@@ -58,7 +58,7 @@ import { can, roleFromLoaded } from "@/app/lib/permissions";
 import { LIQUID_GLASS_FLAT_CLASS } from "@/app/components/ui/liquid-surface";
 import { cn } from "@/app/lib/utils";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import type { MessageExcerpt } from "@mike/client";
+import type { MessageExcerpt } from "@clausemoor/client";
 
 const ICON_SIZE = 28;
 const GAP = 14;

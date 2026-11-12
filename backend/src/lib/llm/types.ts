@@ -2,7 +2,7 @@
 // Callers always speak OpenAI-style tools + { role, content } messages; each
 // provider translates internally.
 
-import type { WebSource } from "@mike/contracts";
+import type { WebSource } from "@clausemoor/contracts";
 
 export type Provider =
     | "claude"
@@ -119,7 +119,7 @@ export type UserApiKeys = {
     /** The key for the user's own OpenAI-compatible endpoint. */
     custom?: string | null;
     courtlistener?: string | null;
-    /** Search API keys for Mike's own web search (see lib/webSearch). */
+    /** Search API keys for Clausemoor's own web search (see lib/webSearch). */
     brave?: string | null;
     tavily?: string | null;
     deepseek?: string | null;
@@ -209,7 +209,7 @@ export type StreamChatResult = {
 // ---------------------------------------------------------------------------
 // Configured models
 // ---------------------------------------------------------------------------
-// The static catalog in models.ts covers the hosted providers Mike ships with.
+// The static catalog in models.ts covers the hosted providers Clausemoor ships with.
 // Deployments that also run self-hosted or third-party OpenAI-compatible
 // endpoints declare them through MIKE_MODEL_CONFIG_JSON; see registry.ts.
 
@@ -220,7 +220,7 @@ export type ConfiguredModel = {
     provider: "openai-compatible";
     location: ModelLocation;
     label?: string;
-    /** Model name to send upstream when it differs from the Mike-facing id. */
+    /** Model name to send upstream when it differs from the Clausemoor-facing id. */
     apiModel?: string;
     baseUrl: string;
     apiKeyEnv?: string;

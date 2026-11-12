@@ -1,4 +1,4 @@
-import type { WebToolErrorCode, WebToolEvent } from "@mike/contracts";
+import type { WebToolErrorCode, WebToolEvent } from "@clausemoor/contracts";
 import type { NormalizedToolCall } from "../../../../lib/llm";
 import { AppError } from "../../../../lib/appError";
 import { reportError } from "../../../../lib/observability/sentry";
@@ -107,7 +107,7 @@ const READ_TOOL = {
 };
 
 /**
- * Mike's web tools for a turn. With the provider's own search, only the page
+ * Clausemoor's web tools for a turn. With the provider's own search, only the page
  * reader: the provider's tool is also called web_search.
  */
 export function webToolsFor(plan: WebSearchPlan | null) {
@@ -127,7 +127,7 @@ function pageKey(raw: string): string | null {
 }
 
 /**
- * What one turn has done with Mike's web tools. `readable` holds the pages
+ * What one turn has done with Clausemoor's web tools. `readable` holds the pages
  * read_webpage may open: without that limit, text injected into a page or a
  * document could make the model "read" a URL carrying the user's data to a
  * server of the attacker's choosing.
@@ -237,7 +237,7 @@ function failure(
 
 type WebToolContext = {
     state: WebTurnState;
-    /** Mike's search service, or null when the model searches by itself. */
+    /** Clausemoor's search service, or null when the model searches by itself. */
     account: WebSearchAccount | null;
     nonce?: string;
     signal?: AbortSignal;

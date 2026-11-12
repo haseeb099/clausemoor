@@ -21,7 +21,7 @@ import {
     LIQUID_GLASS_MODAL_ROW_HOVER_CLASS,
     LIQUID_GLASS_MODAL_ROW_SELECTED_CLASS,
 } from "@/app/components/ui/liquid-surface";
-import { LIQUID_GLASS_SUBTLE_CLASS } from "@mike/ui";
+import { LIQUID_GLASS_SUBTLE_CLASS } from "@clausemoor/ui";
 
 type WorkflowPreviewMode = "auto" | "prompt" | "columns";
 type MobilePickerPane = "list" | "details";

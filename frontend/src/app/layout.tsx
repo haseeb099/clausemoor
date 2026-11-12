@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { appUrl, productName } from "@clausemoor/client";
 // Self-hosted Inter and EB Garamond; sets --font-inter and --font-eb-garamond.
 import "./fonts/fonts.css";
 import "./globals.css";
 import { Providers } from "@/app/components/providers";
+import { SourceNotice } from "@/app/components/SourceNotice";
+
+const brand = productName();
+const publicAppUrl = appUrl();
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://app.mikeoss.com"),
-    title: "Mike - Legal AI Platform",
+    metadataBase: new URL(publicAppUrl),
+    title: `${brand} - Legal AI Platform`,
     description:
         "AI-powered legal document analysis and contract review platform.",
     icons: {
@@ -18,9 +23,9 @@ export const metadata: Metadata = {
     },
     openGraph: {
         type: "website",
-        url: "https://app.mikeoss.com",
-        siteName: "Mike",
-        title: "Mike - Legal AI Platform",
+        url: publicAppUrl,
+        siteName: brand,
+        title: `${brand} - Legal AI Platform`,
         description:
             "AI-powered legal document analysis and contract review platform.",
         images: [
@@ -28,13 +33,13 @@ export const metadata: Metadata = {
                 url: "/link-image.jpg",
                 width: 1200,
                 height: 651,
-                alt: "Mike",
+                alt: brand,
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Mike - Legal AI Platform",
+        title: `${brand} - Legal AI Platform`,
         description:
             "AI-powered legal document analysis and contract review platform.",
         images: ["/link-image.jpg"],
@@ -52,6 +57,7 @@ export default function RootLayout({
                 className="font-sans antialiased"
             >
                 <Providers>{children}</Providers>
+                <SourceNotice />
             </body>
         </html>
     );

@@ -8,7 +8,7 @@ import {
     NO_MODELS_MESSAGES,
     isOrganizationNoModelsReason,
     type NoModelsReason,
-} from "@mike/client";
+} from "@clausemoor/client";
 import { WarningPopup } from "./WarningPopup";
 
 export function NoModelsWarningPopup({

@@ -1,6 +1,6 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
-import type { ConnectorApprovalItem } from "@mike/contracts";
+import type { ConnectorApprovalItem } from "@clausemoor/contracts";
 import type { OpenAIToolSchema } from "../llm";
 import { type ConnectorOwner, workspaceFilter } from "../connectorOwner";
 import { AppError } from "../appError";
@@ -582,7 +582,7 @@ export async function planMcpToolCall(
             type: "result",
             ...unavailableTool(
                 openaiToolName,
-                "This action is too large to review in Mike.",
+                "This action is too large to review in Clausemoor.",
             ),
         };
     }

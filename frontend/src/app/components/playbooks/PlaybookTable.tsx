@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { RowActions } from "@/app/components/shared/RowActions";
-import { DropdownItem, PillButtonUI } from "@mike/ui";
+import { DropdownItem, PillButtonUI } from "@clausemoor/ui";
 import { AccessScopeLabel } from "@/app/components/shared/AccessScopeLabel";
 import {
   CreatorLabel,

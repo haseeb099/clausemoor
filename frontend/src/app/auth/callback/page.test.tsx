@@ -28,7 +28,7 @@ vi.mock("@/app/lib/authRedirects", () => ({
 }));
 
 vi.mock("@/app/components/site-logo", () => ({
-    SiteLogo: () => <div>Mike</div>,
+    SiteLogo: () => <div>Clausemoor</div>,
 }));
 
 describe("AuthCallbackPage", () => {
@@ -55,7 +55,7 @@ describe("AuthCallbackPage", () => {
         );
     });
 
-    it("does not send the user chasing a new link when Mike is down", async () => {
+    it("does not send the user chasing a new link when Clausemoor is down", async () => {
         exchangeAuthCode.mockRejectedValue(
             Object.assign(new Error("boom"), { status: 503 }),
         );
@@ -63,10 +63,10 @@ describe("AuthCallbackPage", () => {
         render(<AuthCallbackPage />);
 
         expect(await screen.findByRole("alert")).toHaveTextContent(
-            "Mike is temporarily unavailable. Try again in a moment.",
+            "Clausemoor is temporarily unavailable. Try again in a moment.",
         );
         expect(
             screen.getByRole("link", { name: "Contact support" }),
-        ).toHaveAttribute("href", expect.stringContaining("will@mikeoss.com"));
+        ).toHaveAttribute("href", expect.stringContaining("support@clausemoor.com"));
     });
 });

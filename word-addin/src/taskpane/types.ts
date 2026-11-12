@@ -1,4 +1,4 @@
-import type { AssistantEvent as WireAssistantEvent } from "@mike/contracts";
+import type { AssistantEvent as WireAssistantEvent } from "@clausemoor/contracts";
 /** API contracts used by the Word task pane. */
 
 export interface LibraryFolder {
@@ -118,8 +118,8 @@ export type WordEditBlockEvent = {
   key?: string;
 };
 
-export type { WordDocumentEdit } from "@mike/contracts";
-import type { WordDocumentEdit } from "@mike/contracts";
+export type { WordDocumentEdit } from "@clausemoor/contracts";
+import type { WordDocumentEdit } from "@clausemoor/contracts";
 
 /**
  * A backend-persisted assistant activity the Word surface does not render yet.
@@ -159,7 +159,7 @@ export interface WordCitation {
   quotes?: { quote?: string | null; text?: string | null }[] | null;
 }
 
-export type { WordEditResolutionStatus } from "@mike/contracts";
+export type { WordEditResolutionStatus } from "@clausemoor/contracts";
 
 export interface Message {
   id?: string;

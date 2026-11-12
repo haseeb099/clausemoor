@@ -353,8 +353,8 @@ describe("same-origin API gateway", () => {
         // The real scrubber: once reportError marked the error, the console
         // bridge's copy of this exact log call is dropped, not re-sent.
         const { createEventScrubber } = await vi.importActual<
-            typeof import("@mike/client")
-        >("@mike/client");
+            typeof import("@clausemoor/client")
+        >("@clausemoor/client");
         const scrubber = createEventScrubber();
         const [reported] = reportError.mock.calls.at(-1) as [unknown];
         scrubber.markReported(reported);

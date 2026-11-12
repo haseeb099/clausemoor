@@ -49,11 +49,11 @@ export default defineConfig({
             },
             // The shared packages, by the same names tsconfig.json maps.
             {
-                find: /^@mike\/ui$/,
+                find: /^@clausemoor\/ui$/,
                 replacement: resolvePath("../packages/ui/src/index.ts"),
             },
             {
-                find: /^@mike\/client$/,
+                find: /^@clausemoor\/client$/,
                 replacement: resolvePath("../packages/client/src/index.ts"),
             },
             {

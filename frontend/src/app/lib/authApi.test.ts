@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { describeError } from "@mike/client";
+import { describeError } from "@clausemoor/client";
 import { isReported } from "@/app/lib/errorReporting";
 import {
     AuthApiError,

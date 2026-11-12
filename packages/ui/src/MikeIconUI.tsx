@@ -2,7 +2,6 @@
 
 import React, { useId, useSyncExternalStore } from "react";
 
-const DEGREES = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 const STOP_TRANSITION = "stop-color 220ms ease, stop-opacity 220ms ease";
 
 type IconPalette = {
@@ -167,32 +166,24 @@ function GlassGradient({
     );
 }
 
-function Blades({ ids }: { ids: Record<string, string> }) {
+/** Original Clausemoor seal: a broken ring (a clause) over a horizon. */
+function Mark({ ids }: { ids: Record<string, string> }) {
     return (
         <g transform="translate(250, 250)">
-            {DEGREES.map((deg) => (
-                <g key={deg} transform={`rotate(${deg})`}>
-                    <use
-                        href={`#${ids.blade}`}
-                        fill={`url(#${ids.glassFill})`}
-                    />
-                    <use
-                        href={`#${ids.blade}`}
-                        fill={`url(#${ids.innerLight})`}
-                    />
-                    <use
-                        href={`#${ids.blade}`}
-                        fill={`url(#${ids.specular})`}
-                        clipPath={`url(#${ids.topClip})`}
-                    />
-                    <use
-                        href={`#${ids.blade}`}
-                        fill="none"
-                        stroke={`url(#${ids.glassBorder})`}
-                        strokeWidth="0.8"
-                    />
-                </g>
-            ))}
+            <path
+                d="M78,-92 A118,118 0 1 0 78,92 L46,62 A78,78 0 1 1 46,-62 Z"
+                fill={`url(#${ids.glassFill})`}
+                stroke={`url(#${ids.glassBorder})`}
+                strokeWidth="3"
+            />
+            <rect
+                x="-36"
+                y="118"
+                width="168"
+                height="16"
+                rx="8"
+                fill={`url(#${ids.glassFill})`}
+            />
         </g>
     );
 }
@@ -283,13 +274,9 @@ export function MikeIcon({
                     <clipPath id={m.topClip}>
                         <rect x="30" y="-25" width="130" height="23" />
                     </clipPath>
-                    <path
-                        id={m.blade}
-                        d="M 40,0 A 4,4 0 0 1 43,-3 Q 95,-22 147,-3 A 4,4 0 0 1 150,0 A 4,4 0 0 1 147,3 Q 95,22 43,3 A 4,4 0 0 1 40,0 Z"
-                    />
                 </defs>
 
-                <Blades ids={m} />
+                <Mark ids={m} />
             </svg>
         </span>
     );

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Search, X } from "lucide-react";
 import { cn } from "@/app/lib/utils";
-import { LIQUID_GLASS_SUBTLE_CLASS } from "@mike/ui";
+import { LIQUID_GLASS_SUBTLE_CLASS } from "@clausemoor/ui";
 
 type SearchBarSize = "sm" | "normal";
 

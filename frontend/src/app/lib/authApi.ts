@@ -1,4 +1,4 @@
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 import {
     markErrorHandled,
     reportApiFailure,
@@ -7,7 +7,7 @@ import {
 import {
     reportedUpstreamMessage,
     type Operation,
-} from "@mike/client";
+} from "@clausemoor/client";
 
 export interface AuthUser {
     id: string;

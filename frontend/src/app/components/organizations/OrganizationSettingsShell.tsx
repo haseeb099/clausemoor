@@ -22,7 +22,7 @@ import { useItemWorkspace } from "@/app/hooks/useItemWorkspace";
 import { getOrg, type Org } from "@/app/lib/mikeApi";
 import { isOrgAdmin, isOrgOwner } from "@/app/lib/permissions";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import { PillButtonUI } from "@mike/ui";
+import { PillButtonUI } from "@clausemoor/ui";
 
 // An organization's settings area: the same frame as a person's settings,
 // with its sections down the side.

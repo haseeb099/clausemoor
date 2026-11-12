@@ -1,4 +1,4 @@
-import type { WebSource, WebToolEvent } from "@mike/contracts";
+import type { WebSource, WebToolEvent } from "@clausemoor/contracts";
 import type { ProviderWebSearchEvent } from "../../../../lib/llm";
 import {
     allowWebPage,

@@ -94,7 +94,7 @@ module.exports = async (_env, options) => {
     }
 
     // Word loads the task pane over HTTPS, and its WebView blocks "mixed content"
-    // (HTTP requests from an HTTPS page). Proxy the local Mike API through this
+    // (HTTP requests from an HTTPS page). Proxy the local Clausemoor API through this
     // HTTPS dev server so authentication and API calls stay same-origin and the
     // HttpOnly session cookie works consistently across Word hosts.
     const apiTarget = process.env.API_PROXY_TARGET || "http://localhost:3001";
@@ -197,8 +197,8 @@ module.exports = async (_env, options) => {
         // Shared UI primitives and the framework-free client behavior behind
         // them (error presentation, the model catalog, uploads, excerpts,
         // Sentry hygiene): one implementation for the web app and the add-in.
-        "@mike/ui": sharedPackage("ui"),
-        "@mike/client": sharedPackage("client"),
+        "@clausemoor/ui": sharedPackage("ui"),
+        "@clausemoor/client": sharedPackage("client"),
       },
     },
     module: {
@@ -246,7 +246,7 @@ module.exports = async (_env, options) => {
         // Development defaults stay on the HTTPS dev-server origin, whose
         // proxies reach the HTTP backends without mixed-content failures.
         // Production hosting must reverse-proxy this same-origin path to the
-        // Mike backend so HttpOnly auth cookies are never third-party cookies.
+        // Clausemoor backend so HttpOnly auth cookies are never third-party cookies.
         REACT_APP_API_BASE_URL:
           process.env.REACT_APP_API_BASE_URL || "/api",
         // Deployment override only. Leaving it empty makes DEFAULT_MODEL_ID in
@@ -254,11 +254,19 @@ module.exports = async (_env, options) => {
         // model — this config file cannot import that TypeScript constant, so
         // repeating its value here would be a second copy that silently drifts.
         REACT_APP_DEFAULT_MODEL: process.env.REACT_APP_DEFAULT_MODEL || "",
-        // The Mike web app origin — the task pane links here (e.g. the
+        // The Clausemoor web app origin — the task pane links here (e.g. the
         // account/api-keys page); it never fetches from it.
         REACT_APP_WEB_APP_URL: isDev
-          ? process.env.REACT_APP_WEB_APP_URL || "https://app.mikeoss.com"
-          : undefined,
+          ? process.env.REACT_APP_WEB_APP_URL || "https://app.clausemoor.com"
+          : process.env.REACT_APP_WEB_APP_URL || "",
+        REACT_APP_PRODUCT_NAME: process.env.REACT_APP_PRODUCT_NAME || process.env.PRODUCT_NAME || "",
+        REACT_APP_SUPPORT_EMAIL: process.env.REACT_APP_SUPPORT_EMAIL || process.env.SUPPORT_EMAIL || "",
+        REACT_APP_TERMS_URL: process.env.REACT_APP_TERMS_URL || process.env.TERMS_URL || "",
+        REACT_APP_PRIVACY_URL: process.env.REACT_APP_PRIVACY_URL || process.env.PRIVACY_URL || "",
+        REACT_APP_DPA_URL: process.env.REACT_APP_DPA_URL || process.env.DPA_URL || "",
+        REACT_APP_SOURCE_CODE_URL: process.env.REACT_APP_SOURCE_CODE_URL || process.env.SOURCE_CODE_URL || "",
+        REACT_APP_APP_URL: process.env.REACT_APP_APP_URL || process.env.APP_URL || "",
+        REACT_APP_MARKETING_URL: process.env.REACT_APP_MARKETING_URL || process.env.MARKETING_URL || "",
         // Sentry is off unless a DSN is baked in at build time (the pane is
         // a static bundle; there is no runtime environment to read).
         REACT_APP_SENTRY_DISABLED: process.env.REACT_APP_SENTRY_DISABLED || "",

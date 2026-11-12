@@ -3,7 +3,7 @@
  * `operation` naming the flow, the component, Word's own code or the
  * server's code and request id — and when a failure shown to the user is
  * NOT sent (a 4xx, a cancellation, a fault some other layer already filed).
- * Exercised from the frontend runner through the add-in's `@mike/*` aliases.
+ * Exercised from the frontend runner through the add-in's `@clausemoor/*` aliases.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -41,9 +41,9 @@ vi.mock("@sentry/react", () => ({
 }));
 
 import * as Sentry from "@sentry/react";
-import { diagnosticEvent } from "@mike/client";
-import { clearToasts } from "@mike/client";
-import { UserVisibleError } from "@mike/client";
+import { diagnosticEvent } from "@clausemoor/client";
+import { clearToasts } from "@clausemoor/client";
+import { UserVisibleError } from "@clausemoor/client";
 import {
     isReported,
     reportApiFailure,
@@ -261,12 +261,12 @@ describe("what a notice reports", () => {
 describe("userMessage", () => {
     it("reports a fault only when the screen names the flow", () => {
         const bug = new Error("boom");
-        expect(userMessage(bug, { fallback: "Mike couldn't open this chat." })).toBe(
-            "Mike couldn't open this chat.",
+        expect(userMessage(bug, { fallback: "Clausemoor couldn't open this chat." })).toBe(
+            "Clausemoor couldn't open this chat.",
         );
         expect(Sentry.captureException).not.toHaveBeenCalled();
 
-        reportFault(bug, { fallback: "Mike couldn't open this chat.", operation: "word_chat.turn" });
+        reportFault(bug, { fallback: "Clausemoor couldn't open this chat.", operation: "word_chat.turn" });
         expect(Sentry.captureException).toHaveBeenCalledWith(bug);
         expect(tagsOf(state.scopes[0])).toEqual({ component: "notify", operation: "word_chat.turn" });
         // Shown a second time (the card and its persisted copy): one event.

@@ -5,7 +5,7 @@
 # map the maintainers upload can ever match the bundle a self-hoster runs, and
 # nothing tags their events with a release. Publishing the exact bundles whose
 # maps were uploaded fixes both: run the official image and your browser
-# errors arrive readable and attributed to `mike@<version>+<sha12>`.
+# errors arrive readable and attributed to `clausemoor@<version>+<sha12>`.
 # Operators who still build from source keep working as before.
 #
 # Identity. /VERSION is the version under development. A push to main builds
@@ -30,7 +30,7 @@
 # Forks. The image owner is the repository owner, so a fork publishes to its
 # own namespace with no setup. Where events go is decided together with where
 # maps go, never silently upstream: the upstream repository bakes the built-in
-# Mike DSNs; a fork that sets FORK_SENTRY_DSN_* variables bakes its own DSNs
+# Clausemoor DSNs; a fork that sets FORK_SENTRY_DSN_* variables bakes its own DSNs
 # (and uploads maps when SENTRY_ORG/SENTRY_PROJECT_*/SENTRY_AUTH_TOKEN are set
 # too); a fork that sets nothing publishes images with reporting off.
 #
@@ -116,7 +116,7 @@ jobs:
             if [[ "$REF_NAME" == "main" ]]; then tags="$tags main"; fi
           fi
           owner="$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')"
-          release="mike@${version}+${SHA:0:12}"
+          release="clausemoor@${version}+${SHA:0:12}"
 
           # Where events go (baked into the images) and whether maps are uploaded.
           if [[ "$owner" == "open-legal-products" ]]; then

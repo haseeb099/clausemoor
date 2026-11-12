@@ -11,7 +11,7 @@ import {
     FormTextInput,
 } from "@/app/components/ui/form-field";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import { LIQUID_GLASS_FLAT_CLASS } from "@mike/ui";
+import { LIQUID_GLASS_FLAT_CLASS } from "@clausemoor/ui";
 
 type OpenSourceContributorMode = "named" | "anonymous";
 type OpenSourceStatus = "idle" | "loading" | "complete";
@@ -320,8 +320,8 @@ export function OpenSourceWorkflowModal({
                                             htmlFor="open-source-disclosure-consent"
                                             className="cursor-pointer"
                                         >
-                                            GitHub repository and on the
-                                            mikeoss.com website.
+                                            GitHub repository, the upstream
+                                            open workflow catalog.
                                         </label>
                                     </p>
                                 </div>

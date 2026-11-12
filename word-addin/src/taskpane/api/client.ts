@@ -1,4 +1,4 @@
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 import type {
   ApiKeyStatus,
   Document,
@@ -13,7 +13,7 @@ import type {
 // parity tests) never pull this module, and its runtime imports, into
 // the web app's type-check graph.
 export type { ApiKeyStatus } from "../types";
-import type { RouterProfileLists } from "@mike/client";
+import type { RouterProfileLists } from "@clausemoor/client";
 import { networkFailure } from "../lib/networkError";
 import { sessionHandledError } from "../lib/sessionRefresh";
 import {
@@ -31,16 +31,16 @@ import {
   uploadFilesWithSessionCore,
   type UploadOutcome,
   type UploadProgress,
-} from "@mike/client";
+} from "@clausemoor/client";
 
 export {
   UploadBatchError,
   failedUploadMessage,
-} from "@mike/client";
+} from "@clausemoor/client";
 export type {
   UploadOutcome,
   UploadProgress,
-} from "@mike/client";
+} from "@clausemoor/client";
 
 type AuthHeaderProvider = () => Promise<Record<string, string>>;
 

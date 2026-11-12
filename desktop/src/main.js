@@ -1,6 +1,6 @@
-// Mike for Mac — a native desktop shell around the Mike web app.
+// Clausemoor for Mac — a native desktop shell around the Clausemoor web app.
 //
-// Design decision (mirrors the Word add-in): Mike clients don't re-implement
+// Design decision (mirrors the Word add-in): Clausemoor clients don't re-implement
 // the product UI — the web app IS the product, and this shell gives it a
 // first-class macOS home: real menu bar with shortcuts, window-state
 // persistence, external links opening in the default browser, a connection
@@ -29,7 +29,7 @@ const { pathToFileURL } = require("url");
 // mode runs the ENTIRE stack on this Mac (src/local/supervisor.js): the
 // connect screen offers it, and once chosen the shell boots the local
 // services and loads the local frontend.
-const DEFAULT_SERVER_URL = "https://app.mikeoss.com";
+const DEFAULT_SERVER_URL = "https://app.clausemoor.com";
 const LOCAL_FRONTEND_URL = require("./local/config").FRONTEND_URL;
 const CONNECT_PAGE = path.join(__dirname, "pages", "connect.html");
 const LOCAL_BOOT_PAGE = path.join(__dirname, "pages", "local-boot.html");
@@ -50,7 +50,7 @@ const PROBE_TIMEOUT_MS = 5_000;
 // ---------------------------------------------------------------------------
 // Settings — a plain JSON file in userData. Deliberately no dependency: the
 // shell stores two things (server URL, window bounds) and a schema-less file
-// keeps the prototype inspectable (~/Library/Application Support/Mike/).
+// keeps the prototype inspectable (~/Library/Application Support/Clausemoor/).
 // ---------------------------------------------------------------------------
 
 const settingsPath = () => path.join(app.getPath("userData"), "settings.json");
@@ -69,7 +69,7 @@ function saveSettings(patch) {
     fs.mkdirSync(path.dirname(settingsPath()), { recursive: true });
     fs.writeFileSync(settingsPath(), JSON.stringify(next, null, 2));
   } catch (err) {
-    console.error("[mike-desktop] failed to save settings", err);
+    console.error("[clausemoor-desktop] failed to save settings", err);
   }
   return next;
 }
@@ -123,7 +123,7 @@ function openExternalOrCapture(url) {
     try {
       fs.appendFileSync(captureFile, url + "\n");
     } catch (err) {
-      console.error("[mike-desktop] failed to capture external url", err);
+      console.error("[clausemoor-desktop] failed to capture external url", err);
     }
     return;
   }
@@ -133,7 +133,7 @@ function openExternalOrCapture(url) {
 // ---------------------------------------------------------------------------
 // Navigation policy — who may show what, where.
 //
-// The main window hosts exactly one origin: the configured Mike server (plus
+// The main window hosts exactly one origin: the configured Clausemoor server (plus
 // the shell's own bundled pages). Popups exist for one reason: the MCP
 // connector OAuth flow opens `about:blank` first to keep a synchronous window
 // handle, then steers it through third-party consent pages and back to an
@@ -349,14 +349,14 @@ function setupDownloads() {
             JSON.stringify({ state, savePath, url: item.getURL() }) + "\n",
           );
         } catch (err) {
-          console.error("[mike-desktop] failed to log download", err);
+          console.error("[clausemoor-desktop] failed to log download", err);
         }
       }
       reservedSavePaths.delete(savePath);
       if (state === "completed") {
         app.dock?.downloadFinished(savePath);
       } else {
-        console.error("[mike-desktop] download", state, item.getURL());
+        console.error("[clausemoor-desktop] download", state, item.getURL());
       }
     });
   });
@@ -523,7 +523,7 @@ async function serverReachable(url) {
 }
 
 // True first launch, in a build that can actually run locally: the user has
-// never chosen where Mike runs, so ask — "cloud or this Mac" is a decision a
+// never chosen where Clausemoor runs, so ask — "cloud or this Mac" is a decision a
 // user shouldn't need to know a keyboard shortcut to make. Any explicit
 // signal (an override, --local, or a saved choice) skips the chooser, so
 // automation and returning users never see it. Builds without the local
@@ -581,7 +581,7 @@ async function startLocalAndLoad() {
       });
       await win.loadURL(LOCAL_FRONTEND_URL);
     } catch (err) {
-      console.error("[mike-desktop] local stack failed", err);
+      console.error("[clausemoor-desktop] local stack failed", err);
       await showConnectPage(
         `Local mode failed to start: ${String(err?.message ?? err).slice(0, 300)}`,
       );
@@ -768,9 +768,12 @@ function buildMenu() {
       role: "help",
       submenu: [
         {
-          label: "Mike on GitHub",
+          label: "Source code",
           click: () =>
-            openExternalOrCapture("https://github.com/Open-Legal-Products/mike"),
+            openExternalOrCapture(
+              process.env.SOURCE_CODE_URL ||
+                "https://github.com/haseeb099/clausemoor",
+            ),
         },
       ],
     },
@@ -784,7 +787,7 @@ function buildMenu() {
 
 // Test seam: relocate userData BEFORE the single-instance lock and any window
 // bounds are read/written. Without it an e2e run would fight the developer's
-// own running Mike.app for the instance lock (and lose, quitting instantly)
+// own running Clausemoor.app for the instance lock (and lose, quitting instantly)
 // and would read/write their real window bounds. Must precede requestSingle-
 // InstanceLock — the lock lives in userData.
 if (process.env.MIKE_USER_DATA_DIR) {
@@ -837,8 +840,8 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 process.on("uncaughtException", (err) => {
-  console.error("[mike-desktop] uncaught", err);
+  console.error("[clausemoor-desktop] uncaught", err);
   if (app.isReady() && win === null) {
-    dialog.showErrorBox("Mike", String(err?.message ?? err));
+    dialog.showErrorBox("Clausemoor", String(err?.message ?? err));
   }
 });

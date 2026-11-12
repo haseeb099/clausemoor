@@ -2,9 +2,9 @@
 # Build from the repository root: `docker build -f frontend/Dockerfile .`
 # (docker-compose.yml does the same). The image mirrors the repository layout
 # under /app: the frontend at /app/frontend plus the sibling directories
-# production code reaches through tsconfig `paths` aliases, `@mike/contracts`
-# -> /app/packages/contracts, `@mike/ui` -> /app/packages/ui and
-# `@mike/client` -> /app/packages/client. Nothing else. The layout matters:
+# production code reaches through tsconfig `paths` aliases, `@clausemoor/contracts`
+# -> /app/packages/contracts, `@clausemoor/ui` -> /app/packages/ui and
+# `@clausemoor/client` -> /app/packages/client. Nothing else. The layout matters:
 # next.config.ts sets the Turbopack root to the frontend's parent directory,
 # which must contain the packages. `next build` type-checks
 # tsconfig.build.json, which leaves test files -- and their imports of shared
@@ -33,6 +33,14 @@ COPY packages/client /app/packages/client
 
 # Baked Sentry defaults for the Next server and browser tunnel (optional).
 # Non-empty runtime SENTRY_* values override them. See docs/observability.md.
+ARG PRODUCT_NAME=Clausemoor
+ARG SUPPORT_EMAIL=support@clausemoor.com
+ARG TERMS_URL=/legal/terms
+ARG PRIVACY_URL=/legal/privacy
+ARG DPA_URL=/legal/dpa
+ARG SOURCE_CODE_URL=https://github.com/haseeb099/clausemoor
+ARG APP_URL=https://app.clausemoor.com
+ARG MARKETING_URL=https://clausemoor.com
 ARG NEXT_PUBLIC_SENTRY_DSN=
 ARG NEXT_PUBLIC_SENTRY_DISABLED=
 ARG NEXT_PUBLIC_SENTRY_INSTALL=
@@ -40,11 +48,19 @@ ARG NEXT_PUBLIC_SENTRY_ENVIRONMENT=
 ARG NEXT_PUBLIC_SENTRY_RELEASE=
 # Release identity: the product version (VERSION, or VERSION-dev.<run> for a
 # main build) and the commit, both from the publish workflow. Together they
-# make the release `mike@<version>+<sha12>` for the browser bundle (inlined)
-# and the Next server; a local build without them is `mike@0.0.0...`.
+# make the release `clausemoor@<version>+<sha12>` for the browser bundle (inlined)
+# and the Next server; a local build without them is `clausemoor@0.0.0...`.
 ARG MIKE_VERSION=
 ARG GIT_SHA=
-ENV NEXT_PUBLIC_SENTRY_DSN=$NEXT_PUBLIC_SENTRY_DSN \
+ENV NEXT_PUBLIC_PRODUCT_NAME=$PRODUCT_NAME \
+    NEXT_PUBLIC_SUPPORT_EMAIL=$SUPPORT_EMAIL \
+    NEXT_PUBLIC_TERMS_URL=$TERMS_URL \
+    NEXT_PUBLIC_PRIVACY_URL=$PRIVACY_URL \
+    NEXT_PUBLIC_DPA_URL=$DPA_URL \
+    NEXT_PUBLIC_SOURCE_CODE_URL=$SOURCE_CODE_URL \
+    NEXT_PUBLIC_APP_URL=$APP_URL \
+    NEXT_PUBLIC_MARKETING_URL=$MARKETING_URL \
+    NEXT_PUBLIC_SENTRY_DSN=$NEXT_PUBLIC_SENTRY_DSN \
     NEXT_PUBLIC_SENTRY_DISABLED=$NEXT_PUBLIC_SENTRY_DISABLED \
     NEXT_PUBLIC_SENTRY_INSTALL=$NEXT_PUBLIC_SENTRY_INSTALL \
     NEXT_PUBLIC_SENTRY_ENVIRONMENT=$NEXT_PUBLIC_SENTRY_ENVIRONMENT \

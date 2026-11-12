@@ -10,7 +10,6 @@ import {
     normalizeVersion,
     releaseName,
     redactText,
-    MIKE_SENTRY_DSN,
     installKind,
     redactFilesystemPaths,
     repoRelativePath,
@@ -276,20 +275,20 @@ describe("query parameter forms", () => {
 });
 
 describe("releaseName", () => {
-    it("prefers an explicit release and otherwise builds mike@<version>+<sha12>", () => {
-        expect(releaseName("mike@1.4.0", "2.1.0", "abcdef1234567890")).toBe("mike@1.4.0");
-        expect(releaseName("  ", "2.1.0", "abcdef1234567890abcd")).toBe("mike@2.1.0+abcdef123456");
+    it("prefers an explicit release and otherwise builds clausemoor@<version>+<sha12>", () => {
+        expect(releaseName("clausemoor@1.4.0", "2.1.0", "abcdef1234567890")).toBe("clausemoor@1.4.0");
+        expect(releaseName("  ", "2.1.0", "abcdef1234567890abcd")).toBe("clausemoor@2.1.0+abcdef123456");
         expect(releaseName(undefined, "2.1.0-dev.57", "abcdef1234567890")).toBe(
-            "mike@2.1.0-dev.57+abcdef123456",
+            "clausemoor@2.1.0-dev.57+abcdef123456",
         );
     });
 
     it("marks builds that did not come from the release workflow as 0.0.0", () => {
-        expect(releaseName(undefined, undefined, "abcdef1234567890")).toBe("mike@0.0.0+abcdef123456");
-        expect(releaseName(undefined, undefined, undefined)).toBe("mike@0.0.0");
-        expect(releaseName("", "", "")).toBe("mike@0.0.0");
+        expect(releaseName(undefined, undefined, "abcdef1234567890")).toBe("clausemoor@0.0.0+abcdef123456");
+        expect(releaseName(undefined, undefined, undefined)).toBe("clausemoor@0.0.0");
+        expect(releaseName("", "", "")).toBe("clausemoor@0.0.0");
         expect(releaseName(undefined, "not a version", "abcdef1234567890")).toBe(
-            "mike@0.0.0+abcdef123456",
+            "clausemoor@0.0.0+abcdef123456",
         );
     });
 
@@ -302,7 +301,7 @@ describe("releaseName", () => {
 
     it("agrees with the CommonJS twin the build configs use", () => {
         const cases: [string | undefined, string | undefined, string | undefined][] = [
-            ["mike@1.4.0", "2.1.0", "abcdef1234567890"],
+            ["clausemoor@1.4.0", "2.1.0", "abcdef1234567890"],
             [undefined, "2.1.0", "abcdef1234567890"],
             [undefined, "v2.1.0-dev.3", "abcdef1234567890"],
             [undefined, "garbage", "abc"],
@@ -400,11 +399,12 @@ describe("automatic captures of an already-reported error", () => {
 });
 
 describe("resolveDsn", () => {
-    it("is off when disabled, uses an explicit DSN, else the built-in Mike DSN", () => {
-        expect(resolveDsn({ disabled: "true", dsn: "https://x@y/1", fallback: MIKE_SENTRY_DSN.frontend })).toEqual({ dsn: "", source: "disabled" });
+    it("is off when disabled, uses an explicit DSN, else the caller's fallback", () => {
+        expect(resolveDsn({ disabled: "true", dsn: "https://x@y/1", fallback: "https://fallback.example/1" })).toEqual({ dsn: "", source: "disabled" });
         expect(resolveDsn({ disabled: "TRUE ", fallback: "f" })).toEqual({ dsn: "", source: "disabled" });
         expect(resolveDsn({ disabled: "false", dsn: " https://x@y/1 ", fallback: "f" })).toEqual({ dsn: "https://x@y/1", source: "env" });
-        expect(resolveDsn({ dsn: "", fallback: MIKE_SENTRY_DSN.wordAddin })).toEqual({ dsn: MIKE_SENTRY_DSN.wordAddin, source: "default" });
+        expect(resolveDsn({ dsn: "", fallback: "" })).toEqual({ dsn: "", source: "default" });
+        expect(resolveDsn({ dsn: "", fallback: "https://fallback.example/1" })).toEqual({ dsn: "https://fallback.example/1", source: "default" });
     });
 
     it("only an explicit 'official' marks the official deployment", () => {
@@ -552,7 +552,7 @@ describe("explicitly opted-in development reporting", () => {
         expect(scrubEvent(thrown)).not.toBeNull();
 
         // Logged through Next's console interceptor, but the nested Error
-        // was thrown in Mike's code: its stack keeps the event.
+        // was thrown in Clausemoor's code: its stack keeps the event.
         const nested = new Error("render failed");
         nested.stack = `Error: render failed\n    at ChatView (${origin}/_next/static/chunks/src_app_chat_page_tsx_9f8e7d._.js:12:5)`;
         const logged: ScrubbableEvent = {
@@ -577,7 +577,7 @@ describe("explicitly opted-in development reporting", () => {
             ];
         };
         // A parenthesised location with trailing whitespace, and a bare one,
-        // both in Mike's code: the event is kept.
+        // both in Clausemoor's code: the event is kept.
         expect(scrubEvent(...loggedWithStack(
             `Error: x\n    at ChatView (${origin}/_next/static/chunks/src_app_page_tsx_1a._.js:12:5)  \t`,
         ))).not.toBeNull();

@@ -25,7 +25,7 @@ import {
 } from "@/app/components/shared/TablePrimitive";
 import { EmptyState } from "@/app/components/ui/empty-state";
 import type { PlaybookRunListItem } from "@/app/lib/mikeApi";
-import { DropdownItem, PillButtonUI } from "@mike/ui";
+import { DropdownItem, PillButtonUI } from "@clausemoor/ui";
 import { formatDateTime, runOutcome, runTitle } from "./PlaybookRuns";
 
 // The document takes the free width; the details sit together on the right,

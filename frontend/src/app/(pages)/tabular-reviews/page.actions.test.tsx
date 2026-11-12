@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ReactNode } from "react";
 import type { TabularReview } from "@/app/components/shared/types";
-import { ToastViewportUI, clearToasts } from "@mike/ui";
+import { ToastViewportUI, clearToasts } from "@clausemoor/ui";
 import TabularReviewsPage from "./page";
 
 const { data, push, deleteReview } = vi.hoisted(() => ({

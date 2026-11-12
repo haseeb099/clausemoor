@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { WorkflowSlashCommandUI } from "@mike/ui";
+import { WorkflowSlashCommandUI } from "@clausemoor/ui";
 import type { Workflow } from "../../types";
 import { deleteWorkflow, updateWorkflow } from "../../api/mikeApi";
 import { Modal } from "../primitives/Modal";
@@ -148,7 +148,7 @@ export function WorkflowDetailsModal({
     } catch (reason) {
       setError(
         reportFault(reason, {
-          fallback: "Mike couldn't save this workflow. Try again.",
+          fallback: "Clausemoor couldn't save this workflow. Try again.",
           operation: "workflows.run",
         }).message,
       );
@@ -169,7 +169,7 @@ export function WorkflowDetailsModal({
     } catch (reason) {
       setDeleteError(
         reportFault(reason, {
-          fallback: "Mike couldn't delete this workflow. Try again.",
+          fallback: "Clausemoor couldn't delete this workflow. Try again.",
           operation: "workflows.run",
         }).message,
       );

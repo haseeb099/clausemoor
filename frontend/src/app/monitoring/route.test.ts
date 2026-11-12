@@ -106,7 +106,7 @@ describe("POST /monitoring", () => {
     });
 
     it.each([
-        ["upstream", "", "", 200, "default"],
+        ["no DSN", "", "", 204, "default"],
         ["fork without Sentry", "true", "", 204, "disabled"],
         ["fork with its own Sentry", "", OWN_DSN, 200, "build"],
     ])("preserves %s defaults with the stock Compose environment", async (_kind, disabled, dsn, status, source) => {
@@ -132,7 +132,13 @@ describe("POST /monitoring", () => {
         process.env.SENTRY_DISABLED = "false";
         process.env.SENTRY_DSN = OWN_DSN;
         fetchMock.mockResolvedValue(new Response(null, { status: 200 }));
-        const response = await post(envelope([{ dsn: "https://placeholder@localhost/1" }, { type: "event" }, {}]));
+        const response = await post(
+            envelope([
+                { dsn: "https://placeholder@localhost/1" },
+                { type: "event" },
+                { exception: { values: [{ type: "Reenabled" }] } },
+            ]),
+        );
         expect(response.status).toBe(200);
         expect(fetchMock).toHaveBeenCalledOnce();
         const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
@@ -142,6 +148,7 @@ describe("POST /monitoring", () => {
     });
 
     it.each([undefined, "1"])("cancels an oversized stream before reading it all (Content-Length: %s)", async (declared) => {
+        process.env.SENTRY_DSN = OWN_DSN;
         let reads = 0;
         const cancel = vi.fn();
         const body = new ReadableStream<Uint8Array>({
@@ -164,6 +171,7 @@ describe("POST /monitoring", () => {
     });
 
     it("rejects oversized, empty and unparseable envelopes without forwarding", async () => {
+        process.env.SENTRY_DSN = OWN_DSN;
         expect((await post("", { "content-length": String(MAX_ENVELOPE_BYTES + 1) })).status).toBe(413);
         expect((await post("x".repeat(MAX_ENVELOPE_BYTES + 1))).status).toBe(413);
         expect((await post("")).status).toBe(400);
@@ -172,9 +180,12 @@ describe("POST /monitoring", () => {
     });
 
     it("answers 502 when Sentry is unreachable", async () => {
+        process.env.SENTRY_DSN = OWN_DSN;
         fetchMock.mockRejectedValue(new Error("ECONNREFUSED"));
         const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-        const response = await post(envelope([{ dsn: "x" }, { type: "event" }, {}]));
+        const response = await post(
+            envelope([{ dsn: "x" }, { type: "event" }, { exception: { values: [{ type: "Unreachable" }] } }]),
+        );
         expect(response.status).toBe(502);
         warn.mockRestore();
     });
@@ -188,13 +199,16 @@ describe("POST /monitoring", () => {
         });
         fetchMock.mockResolvedValue(new Response(body, { status: 200 }));
         const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-        const response = await post(envelope([{ dsn: "x" }, { type: "event" }, {}]));
+        const response = await post(
+            envelope([{ dsn: "x" }, { type: "event" }, { exception: { values: [{ type: "StreamRelease" }] } }]),
+        );
         expect(response.status).toBe(200);
         expect(warn).not.toHaveBeenCalled();
         warn.mockRestore();
     });
 
     it("answers 413 for an oversized stream even when cancelling it fails", async () => {
+        process.env.SENTRY_DSN = OWN_DSN;
         const body = new ReadableStream<Uint8Array>({
             pull(controller) {
                 controller.enqueue(new Uint8Array(MAX_ENVELOPE_BYTES + 1));

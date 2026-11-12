@@ -22,7 +22,7 @@ import {
 } from "../../lib/webSearch";
 import { resolveRequestTimeZone } from "../../lib/userTime";
 import { createAssistantHistoryLoader, attachPriorReasoning, buildDocContext, buildMessages, buildUserPersonalisationPrompt, devLog, enrichWithPriorEvents, loadUserMessageSentTimes, buildWorkflowStore, appendAskInputsResponseToAssistantMessage, runApprovedConnectorActions, generateSpotlightNonce, type AskInputsResponseRequest, type ChatMessage, type SubagentDefaults } from "./engine/index";
-import type { McpToolEvent } from "@mike/contracts";
+import type { McpToolEvent } from "@clausemoor/contracts";
 import { getUserModelSettings, resolveUserChatSelection } from "../user/user.service";
 import {
     checkProjectAccess,

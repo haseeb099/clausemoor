@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Download, ExternalLink, SquarePen } from "lucide-react";
 import { downloadDocumentFile } from "@/app/lib/downloadDocument";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import { TextButtonUI, textButtonUIClassName } from "@mike/ui";
+import { TextButtonUI, textButtonUIClassName } from "@clausemoor/ui";
 import { WarningPopup } from "../popups/WarningPopup";
 import { FileTypeIcon } from "./FileTypeIcon";
 import { DocumentVersionPicker } from "./DocumentVersionPicker";

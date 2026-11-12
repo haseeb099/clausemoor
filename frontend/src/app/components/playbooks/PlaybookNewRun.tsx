@@ -8,10 +8,10 @@ import { NoModelsWarningPopup } from "@/app/components/popups/NoModelsWarningPop
 import { useUserProfile } from "@/app/contexts/UserProfileContext";
 import { useModelApiKeys } from "@/app/hooks/useModelApiKeys";
 import { useModelRouterSelections } from "@/app/hooks/useModelRouterSelections";
-import type { NoModelsReason } from "@mike/client";
+import type { NoModelsReason } from "@clausemoor/client";
 import type { PlaybookReviewScope } from "@/app/lib/mikeApi";
 import { EDITOR_SURFACE_CLASS } from "@/app/components/ui/liquid-surface";
-import { PillButtonUI } from "@mike/ui";
+import { PillButtonUI } from "@clausemoor/ui";
 import {
   PLAYBOOK_HELP_CLASS,
   PLAYBOOK_LABEL_CLASS,

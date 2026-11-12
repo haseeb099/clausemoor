@@ -8,7 +8,7 @@ import {
 } from "@/app/lib/mikeApi";
 import type { TabularReview } from "@/app/components/shared/types";
 import { TRView } from "./TabularReviewView";
-import { ToastViewportUI } from "@mike/ui";
+import { ToastViewportUI } from "@clausemoor/ui";
 
 const { apiKeyState } = vi.hoisted(() => ({
     apiKeyState: {

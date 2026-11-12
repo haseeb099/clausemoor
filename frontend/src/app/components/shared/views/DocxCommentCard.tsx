@@ -9,7 +9,7 @@ import type {
     Editor,
     ReviewCommentPlacement,
 } from "@docx-editor.dev/core/contracts/editor";
-import { TextButtonUI, Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "@mike/ui";
+import { TextButtonUI, Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from "@clausemoor/ui";
 import { LIQUID_FLOAT_PANEL_SURFACE_CLASS } from "@/app/components/ui/liquid-surface";
 import { DocxCommentEdit } from "./DocxCommentEdit";
 import { DocxCommentReply } from "./DocxCommentReply";

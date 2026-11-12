@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type {
   GoogleWorkspaceProvider,
   NativeConnectorTool,
-} from "@mike/contracts";
+} from "@clausemoor/contracts";
 import {
   cancelGoogleDriveOAuth,
   cancelGoogleWorkspaceOAuth,
@@ -169,7 +169,7 @@ export function useGoogleConnector(
     try {
       if (!popup)
         throw new GoogleConnectorFlowError(
-          "Allow popups for Mike, then try adding the connector again.",
+          "Allow popups for Clausemoor, then try adding the connector again.",
         );
       const { authorizationUrl } = await api.start();
       pending = new URL(authorizationUrl).searchParams.get("state");

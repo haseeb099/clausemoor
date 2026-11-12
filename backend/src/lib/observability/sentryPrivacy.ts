@@ -42,7 +42,7 @@ export function identifyApplicationError(error: object, kind: ErrorKind): void {
 
 /** Fixed external protocol vocabulary; application labels use the source contract above. */
 export const DIAGNOSTIC_VOCABULARY: Record<string, ReadonlySet<string>> = Object.fromEntries(Object.entries({
-  service: 'mike-backend mike-frontend mike-word-addin',
+  service: 'clausemoor-backend clausemoor-frontend clausemoor-word-addin',
   role: 'api worker worker-thread job',
   runtime: 'browser server edge',
   surface: 'taskpane commands dialog',
@@ -400,7 +400,7 @@ export function diagnosticEnvelope(envelope: Envelope, destination?: string): En
 /** Applies to browser, server, workers and add-in, in both install modes. */
 export function privacyBoundaryIntegration(options: { acceptEvent?: (event: RecordValue) => boolean } = {}) {
   return {
-    name: 'MikePrivacyBoundary',
+    name: 'ClausemoorPrivacyBoundary',
     setup(client: {
       getTransport(): Transport | undefined;
       getDsn?(): { protocol: string; publicKey?: string; host: string; port?: string; path?: string; projectId: string } | undefined;

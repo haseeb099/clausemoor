@@ -22,7 +22,7 @@ import { ModelToggle } from "../assistant/ModelToggle";
 import {
     isRouterModelSelected,
     type NoModelsReason,
-} from "@mike/client";
+} from "@clausemoor/client";
 import { NoModelsWarningPopup } from "../popups/NoModelsWarningPopup";
 import { useUserProfile } from "@/app/contexts/UserProfileContext";
 import { useModelApiKeys } from "@/app/hooks/useModelApiKeys";

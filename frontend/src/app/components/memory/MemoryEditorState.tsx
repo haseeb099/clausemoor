@@ -1,6 +1,6 @@
 "use client";
 
-import { PillButtonUI } from "@mike/ui";
+import { PillButtonUI } from "@clausemoor/ui";
 import type { MemoryAutosaveStatus } from "./useMemoryAutosave";
 import type { MemoryCurrent } from "@/app/lib/mikeApi";
 

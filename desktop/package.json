@@ -1,9 +1,9 @@
 {
-  "name": "mike-desktop",
-  "productName": "Mike",
+  "name": "clausemoor-desktop",
+  "productName": "Clausemoor",
   "version": "0.1.0",
   "private": true,
-  "description": "Mike for Mac — desktop shell around the Mike web app",
+  "description": "Clausemoor for Mac — desktop shell around the Clausemoor web app",
   "main": "src/main.js",
   "engines": {
     "node": ">=22.19.0"

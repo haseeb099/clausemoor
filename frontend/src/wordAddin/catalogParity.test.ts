@@ -1,7 +1,7 @@
 /**
  * The Word add-in builds its model picker from the same catalog as the web
  * app: packages/client/src/modelCatalog.ts, which both compile through the
- * "@mike/client" alias (the add-in's typecheck and build fail if that alias
+ * "@clausemoor/client" alias (the add-in's typecheck and build fail if that alias
  * breaks). These tests keep a hand copy from creeping
  * back in, check the add-in's thin adapter for its own key-status shape
  * against the web app's, and keep the shared catalog in line with the
@@ -16,7 +16,7 @@ import {
     LEGACY_MODEL_IDS,
     noModelsReason,
     type RouterSelections,
-} from "@mike/client";
+} from "@clausemoor/client";
 import {
     isModelAvailable as addinIsModelAvailable,
     noModelsReason as addinNoModelsReason,
@@ -32,7 +32,7 @@ import {
     LEGACY_MODEL_IDS as BACKEND_LEGACY_MODEL_IDS,
     reasoningLevelsForModel as backendReasoningLevels,
 } from "../../../backend/src/lib/llm/models";
-import { reasoningLevelsForModel } from "@mike/ui";
+import { reasoningLevelsForModel } from "@clausemoor/ui";
 
 const ADDIN_ROOT = path.resolve(__dirname, "../../../word-addin");
 

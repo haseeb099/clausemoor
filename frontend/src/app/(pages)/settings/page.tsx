@@ -1,10 +1,12 @@
 "use client";
 
 import { ProfilePhotoSettings } from "@/app/components/settings/ProfilePhotoSettings";
+import { SourceNotice } from "@/app/components/SourceNotice";
+import plans from "../../../../config/plans.json";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
-import { PillButtonUI, GlassCardUI } from "@mike/ui";
+import { PillButtonUI, GlassCardUI } from "@clausemoor/ui";
 import { Modal } from "@/app/components/modals/Modal";
 import { FieldLabel } from "@/app/components/ui/form-field";
 import { SettingsTextInput } from "@/app/components/settings/SettingsTextInput";
@@ -328,6 +330,10 @@ export default function SettingsPage() {
             <p className="text-base font-medium text-gray-500 capitalize">
               {profile?.tier || "Free"}
             </p>
+            <p className="text-xs leading-5 text-gray-500">
+              {plans.note} Published placeholders:{" "}
+              {plans.plans.map((plan) => plan.name).join(", ")}.
+            </p>
           </SettingsRow>
         </GlassCardUI>
       </section>
@@ -357,6 +363,7 @@ export default function SettingsPage() {
           </SettingsRow>
         </GlassCardUI>
       </section>
+      <SourceNotice detailed />
       <ConfirmPopup
         open={deleteConfirm}
         title="Delete account?"

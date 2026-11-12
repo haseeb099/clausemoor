@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { GlassCardUI } from "@mike/ui";
+import { GlassCardUI } from "@clausemoor/ui";
 import { SkeletonLine } from "@/app/components/shared/TablePrimitive";
 import { SettingsLabel } from "./SettingsText";
 

@@ -52,7 +52,7 @@ declare const trackedEditHandleBrand: unique symbol;
 
 /**
  * An in-memory reference to only the Word revisions created for one logical
- * Mike edit. Callers must treat the string as opaque.
+ * Clausemoor edit. Callers must treat the string as opaque.
  */
 export type TrackedEditHandle = string & {
   readonly [trackedEditHandleBrand]: true;
@@ -864,7 +864,7 @@ async function narrowChangesByAnchor(
  * either side, nothing is touched — unless one of the edit's own retained
  * anchors can narrow the candidates by LOCATION to exactly one per side.
  * "Exactly one inside my own passage" is strictly stronger than the old
- * document-wide rule, and it is what lets two pending Mike edits that share
+ * document-wide rule, and it is what lets two pending Clausemoor edits that share
  * replacement text (the same correction in two places) resolve
  * independently. Each anchor gets its own batch: a stale proxy fails its
  * whole Word.run, and the next anchor must still get its chance.
@@ -1318,9 +1318,9 @@ async function resolveTrackedEditNow(
       }
     }
     if (!resolvedViaChildren) {
-      // Resolve through the edited passage: it was revision-free before Mike
+      // Resolve through the edited passage: it was revision-free before Clausemoor
       // touched it and every mutation below re-verifies content first, which
-      // keeps the scope of this decision to Mike's own edit. Word does not
+      // keeps the scope of this decision to Clausemoor's own edit. Word does not
       // reliably report both halves of a replacement through one anchor — an
       // anchor on the inserted text can see only the Added revision and the
       // replaced search range only the Deleted one — so the plan may resolve
@@ -1541,7 +1541,7 @@ async function resolveTrackedEditNow(
         handle,
         status: "error",
         error:
-          "The revisions in this passage changed after Mike applied the edit. Review them directly in Word.",
+          "The revisions in this passage changed after Clausemoor applied the edit. Review them directly in Word.",
       };
     }
     if (entry.stableEditId && entry.bookmarkName) {
@@ -1625,7 +1625,7 @@ export function revealTrackedEdit(
 /**
  * Rebuild an exact in-memory review handle from a document-persistent hidden
  * bookmark. The text/type verification prevents a later user revision inside
- * the bookmarked passage from being accepted or rejected by Mike.
+ * the bookmarked passage from being accepted or rejected by Clausemoor.
  */
 async function restoreTrackedEditNow(
   stableEditId: string,
@@ -2483,11 +2483,11 @@ export function resolveTrackedEdit(
 }
 
 /**
- * Resolve many edits through the revision proxies each one retained when Mike
+ * Resolve many edits through the revision proxies each one retained when Clausemoor
  * wrote (or restored) it: one Word.run per request context instead of one per
  * edit. Those proxies ARE the edit's revisions, so acting on them needs no
  * text match. A revision found elsewhere in the document by its text proves
- * nothing about whose it is: the user may have amended Mike's insertion, and
+ * nothing about whose it is: the user may have amended Clausemoor's insertion, and
  * an unrelated pending insertion may carry the replacement text.
  *
  * Before any decision is queued, the group's proxies are read back in one
@@ -2736,7 +2736,7 @@ export function useWordDoc() {
    * Accept the pending tracked changes occupying an edit's target passage,
    * so a follow-up applyTrackedEdits call finds the range revision-free.
    *
-   * This powers the conflicted card's "Accept & apply": Mike never layers a
+   * This powers the conflicted card's "Accept & apply": Clausemoor never layers a
    * tracked replacement over pending revisions (accepting the card would
    * silently resolve changes it never showed), so superseding them is an
    * explicit two-step the user clicks into — accept what's there, then
@@ -2956,7 +2956,7 @@ export function useWordDoc() {
                   continue;
                 }
 
-                // Never mix Mike's lifecycle with revisions that were already
+                // Never mix Clausemoor's lifecycle with revisions that were already
                 // present in the exact target. A single-occurrence edit skips
                 // wholesale; a replace-all only drops the occupied
                 // occurrences — its own earlier passes come back through this
@@ -3161,7 +3161,7 @@ export function useWordDoc() {
                 // run — in a shared paragraph Word reports sibling revisions
                 // too — so the verified set may be a by-text subset of what
                 // Word handed over. Anything less certain than an unambiguous
-                // subset is still Mike's edit (the target was revision-free a
+                // subset is still Clausemoor's edit (the target was revision-free a
                 // moment ago), so it stays reviewable through the edited
                 // passage instead of being handed back.
                 let managedCollections = generatedCollections;
@@ -3424,7 +3424,7 @@ export function useWordDoc() {
                 result.reason = outcome.reason;
                 if (outcome.status === "applied-unmanaged") {
                   result.error =
-                    "Applied in Word, but Mike couldn’t retain its review controls. Review it from Word’s Review tab.";
+                    "Applied in Word, but Clausemoor couldn’t retain its review controls. Review it from Word’s Review tab.";
                   if (edit.stableEditId) {
                     newlyAppliedEditIds.push(edit.stableEditId);
                   appliedEditIds.add(edit.stableEditId);

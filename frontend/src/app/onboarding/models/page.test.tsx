@@ -40,7 +40,7 @@ vi.mock("@/app/components/popups/MfaVerificationPopup", () => ({
 vi.mock("@/app/components/settings/RouterSettingsSection", () => ({
     RouterSettingsSection: () => null,
 }));
-vi.mock("@/app/components/site-logo", () => ({ SiteLogo: () => <div>Mike</div> }));
+vi.mock("@/app/components/site-logo", () => ({ SiteLogo: () => <div>Clausemoor</div> }));
 
 function noKeys() {
     return Object.fromEntries(

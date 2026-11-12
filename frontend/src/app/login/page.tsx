@@ -11,7 +11,7 @@ import {
     authInputUIClassName,
     AuthDividerUI,
     noticeActionClassName,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import Link from "next/link";
 import { SiteLogo } from "@/app/components/site-logo";
 import { useAuth } from "@/app/contexts/AuthContext";

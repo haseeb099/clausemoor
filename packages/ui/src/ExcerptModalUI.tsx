@@ -4,7 +4,7 @@ import type { ReactElement } from "react";
 import { ModalUI } from "./ModalUI";
 import { TextSlabUI } from "./TextSlabUI";
 import { excerptLabel } from "./ExcerptPillUI";
-import type { MessageExcerpt } from "@mike/client";
+import type { MessageExcerpt } from "@clausemoor/client";
 
 const LABEL_CLASS = "mb-2 text-sm font-medium text-gray-700";
 

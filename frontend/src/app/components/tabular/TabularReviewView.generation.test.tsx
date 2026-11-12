@@ -16,7 +16,7 @@ import type {
 import type { ReviewCellStore } from "./reviewCellStore";
 import { TRView } from "./TabularReviewView";
 import * as Sentry from "@sentry/react";
-import { clearToasts, privacyBoundaryIntegration } from "@mike/client";
+import { clearToasts, privacyBoundaryIntegration } from "@clausemoor/client";
 import { scrubEvent } from "@/app/lib/errorReporting";
 
 const { apiKeyState } = vi.hoisted(() => ({
@@ -40,7 +40,7 @@ vi.mock("next/navigation", () => ({
     useSearchParams: () => new URLSearchParams(),
 }));
 vi.mock("@/app/lib/mikeApi", async () => ({
-    reportedUpstreamMessage: (await import("@mike/client")).reportedUpstreamMessage,
+    reportedUpstreamMessage: (await import("@clausemoor/client")).reportedUpstreamMessage,
     MikeApiError: class MikeApiError extends Error {
         status: number;
         code: string | null;

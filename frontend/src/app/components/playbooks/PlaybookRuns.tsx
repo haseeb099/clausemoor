@@ -32,8 +32,8 @@ import {
   setViewedPlaybookRun,
 } from "@/app/lib/playbookRunActivity";
 import { diffWords } from "@/app/lib/wordDiff";
-import { modelDisplayName } from "@mike/client";
-import { PillButtonUI, TextButtonUI, TextSlabUI } from "@mike/ui";
+import { modelDisplayName } from "@clausemoor/client";
+import { PillButtonUI, TextButtonUI, TextSlabUI } from "@clausemoor/ui";
 import { ModalSegmentedToggle } from "@/app/components/modals/ModalSegmentedToggle";
 import { PlaybookPanels } from "./PlaybookPanels";
 import {
@@ -658,7 +658,7 @@ function RunResults({
           This review used extracted text from{" "}
           <span className="font-medium">{run.documentName}</span>. For a
           formatting-preserving Word redline, provide the original DOCX in
-          Assistant; if it is unavailable, Mike can create a text-reconstructed
+          Assistant; if it is unavailable, Clausemoor can create a text-reconstructed
           DOCX and will warn that formatting may differ.
         </p>
       )}

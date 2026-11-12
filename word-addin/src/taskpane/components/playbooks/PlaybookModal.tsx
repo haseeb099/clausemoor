@@ -50,7 +50,7 @@ export function PlaybookModal({
         setPlaybooks([]);
         setError(
           reportFault(reason, {
-            fallback: "Mike couldn't load your playbooks. Try again.",
+            fallback: "Clausemoor couldn't load your playbooks. Try again.",
             operation: "playbooks.review",
           }).message,
         );

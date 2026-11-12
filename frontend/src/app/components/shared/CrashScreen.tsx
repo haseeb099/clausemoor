@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useCrashBoundary } from "@/app/hooks/useCrashBoundary";
-import { PillButtonUI, textButtonUIClassName } from "@mike/ui";
+import { PillButtonUI, textButtonUIClassName } from "@clausemoor/ui";
 
 /**
  * The body of `app/error.tsx` and `app/global-error.tsx`: one markup, so the

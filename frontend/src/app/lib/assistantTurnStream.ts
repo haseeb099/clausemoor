@@ -1,5 +1,5 @@
 "use client";
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 
 import { streamChatTurn } from "@/app/lib/mikeApi";
 import { readSseFrames } from "@/app/lib/sse";
@@ -9,7 +9,7 @@ import type { AssistantTurnHandle } from "@/app/lib/assistantTurnTypes";
 import type {
   ConnectorApprovalItem,
   WebSource,
-} from "@mike/contracts";
+} from "@clausemoor/contracts";
 
 /**
  * Reading an assistant turn's SSE stream into its turn record.

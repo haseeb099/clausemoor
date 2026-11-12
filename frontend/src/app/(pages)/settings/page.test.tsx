@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { MikeApiError } from "@/app/lib/mikeApi";
 import SettingsPage from "./page";
 import { deleteAccount } from "@/app/lib/mikeApi";
-import { ToastViewportUI, clearToasts } from "@mike/ui";
+import { ToastViewportUI, clearToasts } from "@clausemoor/ui";
 
 const state = vi.hoisted(() => ({
     push: vi.fn(),
@@ -252,7 +252,7 @@ describe("SettingsPage Google email changes", () => {
 
         expect(
             await screen.findByText(
-                "Mike couldn't reach the server. Check your connection and try again.",
+                "Clausemoor couldn't reach the server. Check your connection and try again.",
             ),
         ).toBeInTheDocument();
     });

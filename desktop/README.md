@@ -1,4 +1,4 @@
-# Mike for Mac
+# Clausemoor for Mac
 
 ## Current local entry experience
 
@@ -29,7 +29,7 @@ notarization credentials; an unsigned build is not a finished consumer release.
 LibreOffice-dependent document conversions still require LibreOffice; chat,
 PDF/text reading and basic workspace operations do not require it.
 
-A native macOS shell around the Mike web app — the same pattern as the Word
+A native macOS shell around the Clausemoor web app — the same pattern as the Word
 add-in: clients don't re-implement the product, they give the web app a
 first-class home. The shell contributes the parts a browser tab can't:
 
@@ -47,11 +47,11 @@ frontend's main frame has one additional read-only bridge: it can obtain this
 installation's generated guest credentials for **Continue on this Mac**. A
 normal browser or a remote deployment receives no local guest credentials.
 
-The self-contained build first offers **Start on this Mac** or **Use Mike Cloud**,
+The self-contained build first offers **Start on this Mac** or **Use Clausemoor Cloud**,
 with a link to a firm server. The shell-only build (`npm run dist`) defaults to
-the hosted service at `https://app.mikeoss.com` and requires sign-in there.
+the hosted service at `https://app.clausemoor.com` and requires sign-in there.
 Self-hosters can change the connection through ⌘⇧, or the overrides below.
-Local mode supervises the bundled Mike stack on loopback, without Docker or a
+Local mode supervises the bundled Clausemoor stack on loopback, without Docker or a
 separately installed server; it creates an authenticated account only inside
 the installation's own database.
 
@@ -142,8 +142,8 @@ npm start -- --server-url=http://localhost:3000
 An explicit `--server-url=<url>` CLI flag, or then `MIKE_SERVER_URL`, overrides
 local mode and saved settings. Otherwise `--local` or a saved local choice uses
 the bundled frontend; remote mode uses the saved server URL or
-`https://app.mikeoss.com`. A fresh self-contained installation shows the welcome
-chooser. Settings live in `~/Library/Application Support/Mike/settings.json`;
+`https://app.clausemoor.com`. A fresh self-contained installation shows the welcome
+chooser. Settings live in `~/Library/Application Support/Clausemoor/settings.json`;
 tests use an isolated `MIKE_USER_DATA_DIR`.
 
 | Variable                    | Effect                                          |
@@ -156,8 +156,8 @@ tests use an isolated `MIKE_USER_DATA_DIR`.
 ## Package & test locally (no Apple account needed)
 
 ```bash
-npm run dist   # → dist/mac-arm64/Mike.app (unsigned)
-open dist/mac-arm64/Mike.app   # loads https://app.mikeoss.com
+npm run dist   # → dist/mac-arm64/Clausemoor.app (unsigned)
+open dist/mac-arm64/Clausemoor.app   # loads https://app.clausemoor.com
 ```
 
 **A locally-built app runs without any Gatekeeper prompt** — the "damaged / can't
@@ -170,7 +170,7 @@ docker-compose stack), use the connect screen (⌘⇧,) or launch with an
 override:
 
 ```bash
-open dist/mac-arm64/Mike.app --args --server-url=http://localhost:3100
+open dist/mac-arm64/Clausemoor.app --args --server-url=http://localhost:3100
 # or, without packaging:
 npm start -- --server-url=http://localhost:3100
 ```
@@ -203,12 +203,12 @@ npm run start:local    # dev-mode launch straight into local mode
 MIKE_E2E_DEV=1 npm run e2e:local   # fresh-userData first-run e2e, dev mode
 
 npm run local:stage    # stage built app into local-stack/app for packaging
-npm run dist:local     # package Mike.app WITH the whole stack inside (unsigned)
+npm run dist:local     # package Clausemoor.app WITH the whole stack inside (unsigned)
 npm run e2e:local      # same first-run e2e against the PACKAGED app
 ```
 
 On a first launch with no saved choice, a build that carries the stack shows
-a welcome chooser — **Start on this Mac / Use Mike Cloud / connect
+a welcome chooser — **Start on this Mac / Use Clausemoor Cloud / connect
 to your own server** — so local-first needs zero knowledge of shortcuts.
 Any explicit signal (`--server-url=`, `--local`, or a previously saved
 choice) skips the chooser, so automation and returning users never see it.
@@ -223,7 +223,7 @@ product falls back to client-side docx preview, as designed.
 `local:fetch` also downloads the upstream license/copyright files for the exact
 PostgreSQL, native packager, PostgREST and GoTrue versions, even when their binaries
 are already cached. `local:stage` verifies and includes those notices alongside
-Mike's root `LICENSE` and `SOURCE.json` with source URLs and the build commit.
+Clausemoor's root `LICENSE` and `SOURCE.json` with source URLs and the build commit.
 The staged files live in `local-stack/app/` and travel with the application.
 
 ## Signing & notarization (for a distributable release)
@@ -274,16 +274,16 @@ export APPLE_APP_SPECIFIC_PASSWORD="xxxx-xxxx-xxxx-xxxx"
 export APPLE_TEAM_ID="ABCDE12345"
 
 npm run dist:signed
-# → dist/Mike-<version>-arm64.dmg  and  .zip  (signed, notarized, stapled)
+# → dist/Clausemoor-<version>-arm64.dmg  and  .zip  (signed, notarized, stapled)
 ```
 
 Notarization typically takes a few minutes; electron-builder blocks until Apple
 returns the ticket. Verify the result:
 
 ```bash
-codesign --verify --deep --strict --verbose=2 "dist/mac-arm64/Mike.app"
-xcrun stapler validate                          "dist/mac-arm64/Mike.app"
-spctl -a -vvv -t install                        "dist/mac-arm64/Mike.app"
+codesign --verify --deep --strict --verbose=2 "dist/mac-arm64/Clausemoor.app"
+xcrun stapler validate                          "dist/mac-arm64/Clausemoor.app"
+spctl -a -vvv -t install                        "dist/mac-arm64/Clausemoor.app"
 # the spctl line should print: source=Notarized Developer ID
 ```
 
@@ -339,10 +339,10 @@ Verify the result the same way as the shell build, plus spot-check a nested
 binary and run the packaged first-run e2e against the signed app:
 
 ```bash
-codesign --verify --deep --strict --verbose=2 dist/mac-arm64/Mike.app
-codesign -dv dist/mac-arm64/Mike.app/Contents/Resources/local-stack/bin/pg/bin/postgres
-xcrun stapler validate dist/mac-arm64/Mike.app
-spctl -a -vvv -t install dist/mac-arm64/Mike.app   # → Notarized Developer ID
+codesign --verify --deep --strict --verbose=2 dist/mac-arm64/Clausemoor.app
+codesign -dv dist/mac-arm64/Clausemoor.app/Contents/Resources/local-stack/bin/pg/bin/postgres
+xcrun stapler validate dist/mac-arm64/Clausemoor.app
+spctl -a -vvv -t install dist/mac-arm64/Clausemoor.app   # → Notarized Developer ID
 npm run e2e:local                                   # full boot inside the signed app
 ```
 
@@ -364,7 +364,7 @@ Two constraints worth knowing before touching anything here:
 Distributing the unsigned `.dmg` still works, it's just rougher for the
 downloader: the app opens as **System Settings → Privacy & Security → "Open
 Anyway"**, or from Terminal with
-`xattr -dr com.apple.quarantine /Applications/Mike.app`. (macOS 15 Sequoia
+`xattr -dr com.apple.quarantine /Applications/Clausemoor.app`. (macOS 15 Sequoia
 removed the old Control-click → Open shortcut, so it's the Settings pane or the
 `xattr` command now.) Nothing about the app is degraded — signing is purely the
 download-trust gate.
@@ -413,7 +413,7 @@ The extraction step polls the local postgres (port 42810, password from
 Only the isolated parser child writes that row; the versions API's page counts
 are measured in-process at upload and stay correct even when every extraction
 fails. Before #799 the child's environment allowlist dropped
-`ELECTRON_RUN_AS_NODE`, so in the packaged app the child relaunched Mike
+`ELECTRON_RUN_AS_NODE`, so in the packaged app the child relaunched Clausemoor
 instead of parsing, while this suite passed. A failure here names the document,
 the text row and job status, and points at that cause; the screenshot is
 `local-04b-extracted.png`. DOCX extraction through LibreOffice is not covered.
@@ -431,7 +431,7 @@ With the docker-compose stack running and the app packaged:
 npm run e2e
 ```
 
-Launches the **packaged** `Mike.app` (not `electron .`, so packaging
+Launches the **packaged** `Clausemoor.app` (not `electron .`, so packaging
 regressions fail too) with a CDP port, drives it with Playwright: asserts the
 shell connects and routes an anonymous user to `/login`, signs up a fresh
 user through the real UI (local stack autoconfirms), creates a project via

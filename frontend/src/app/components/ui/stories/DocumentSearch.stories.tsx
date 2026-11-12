@@ -1,5 +1,5 @@
 import { DocSearchBlock } from "@/app/components/assistant/message/DocSearchBlock";
-import { DocReadBlockUI } from "@mike/ui";
+import { DocReadBlockUI } from "@clausemoor/ui";
 
 const meta = { title: "Assistant / Document Search" };
 export default meta;

@@ -13,7 +13,7 @@ import {
     DropdownContent,
     DropdownItem,
     DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { WarningPopup } from "@/app/components/popups/WarningPopup";
 import { docxCommentEditable } from "./docxCommentEditing";
 import {

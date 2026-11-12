@@ -2,7 +2,7 @@ import type {
   OrgPrivateContentItem,
   OrgPrivateContentKind,
   OrgPrivateContentPage,
-} from "@mike/contracts";
+} from "@clausemoor/contracts";
 import type { Db } from "../../lib/supabase";
 import {
   failure,
