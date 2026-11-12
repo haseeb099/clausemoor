@@ -64,7 +64,7 @@ jobs:
           push: false
           # The backend image is loaded so the next step can run it.
           load: ${{ matrix.image == 'backend' }}
-          tags: mike-${{ matrix.image }}:ci
+          tags: clausemoor-${{ matrix.image }}:ci
           # GIT_SHA becomes the Sentry release (docs/observability.md); an
           # image without it reports events nobody can map to a commit.
           build-args: |

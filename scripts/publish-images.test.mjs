@@ -26,7 +26,7 @@ function fixture() {
       return Response.json({ token: 'test-token' });
     }
     assert.equal(options.headers.Authorization, 'Bearer test-token');
-    const [, image, kind, ref] = parsed.pathname.match(/^\/v2\/test\/mike-(backend|frontend)\/(manifests|blobs)\/(.+)$/);
+    const [, image, kind, ref] = parsed.pathname.match(/^\/v2\/test\/clausemoor-(backend|frontend)\/(manifests|blobs)\/(.+)$/);
     const method = options.method ?? 'GET';
     const fault = faults.get(`${method} ${image} ${kind} ${ref}`);
     if (fault) return fault(options);
@@ -41,7 +41,7 @@ function fixture() {
     const raw = store.get(ref);
     return raw ? new Response(raw, { headers: { 'docker-content-digest': hash(raw) } }) : missing();
   };
-  const registries = Object.fromEntries(['backend', 'frontend'].map(image => [image, new Registry(`test/mike-${image}`, {
+  const registries = Object.fromEntries(['backend', 'frontend'].map(image => [image, new Registry(`test/clausemoor-${image}`, {
     actor: 'test', password: 'synthetic', fetchImpl,
   })]));
   function build(image, { revision = sha, imageVersion = version, index = true } = {}) {

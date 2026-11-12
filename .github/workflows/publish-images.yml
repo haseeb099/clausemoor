@@ -223,7 +223,7 @@ jobs:
           # Retain the exact build independently of expiring Actions artifacts.
           # Never rebuild/overwrite this tag when saved discovery found it.
           push: true
-          tags: ${{ env.REGISTRY }}/${{ needs.identity.outputs.owner }}/mike-${{ matrix.image }}:build-${{ needs.identity.outputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ needs.identity.outputs.owner }}/clausemoor-${{ matrix.image }}:build-${{ needs.identity.outputs.version }}
           labels: |
             org.opencontainers.image.version=${{ needs.identity.outputs.version }}
             org.opencontainers.image.revision=${{ github.sha }}
@@ -316,7 +316,7 @@ jobs:
             echo "## Published $RELEASE"
             echo
             for image in backend frontend; do
-              echo "- \`$REGISTRY/$OWNER/mike-$image\` @ \`$(cat "digests/$image")\`: tags $TAGS"
+              echo "- \`$REGISTRY/$OWNER/clausemoor-$image\` @ \`$(cat "digests/$image")\`: tags $TAGS"
             done
             echo
             echo "Error reporting baked into the images: $REPORTING. Source maps uploaded: $UPLOAD_MAPS."
