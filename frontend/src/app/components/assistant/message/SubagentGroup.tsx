@@ -1,5 +1,5 @@
 import { useId, useState, type ReactNode } from "react";
-import { MIKE_ICON_TINTS, MikeIcon, type MikeIconTint, TabPillButtonUI } from "@mike/ui";
+import { MIKE_ICON_TINTS, MikeIcon, type MikeIconTint, TabPillButtonUI } from "@clausemoor/ui";
 import type { AssistantEvent } from "../../shared/types";
 import { EventBlock, ReasoningContent } from "./EventBlocks";
 import { EventChevron, EventDisclosureButton, EventLabel } from "./EventDisclosure";
@@ -14,7 +14,7 @@ const subagents = (count: number) => (count === 1 ? "subagent" : "subagents");
 
 /**
  * "Started 2 subagents", "Resumed a subagent", "Started 1 and resumed 1
- * subagents": what Mike did, on its own line above the subagents' pills.
+ * subagents": what Clausemoor did, on its own line above the subagents' pills.
  */
 function startedLabel(delegations: DelegationEvent[]): string {
     const resumed = delegations.filter((d) => d.continued_from).length;
@@ -53,7 +53,7 @@ function subagentStatus(event: DelegationEvent): { text: string; failed: boolean
         case "needs_input":
             return line(
                 resumed,
-                event.approval_ids?.length ? "Waiting for your approval" : "Asked Mike a question",
+                event.approval_ids?.length ? "Waiting for your approval" : "Asked Clausemoor a question",
                 steps,
             );
         case "failed":
@@ -89,7 +89,7 @@ function DetailDisclosureRow({
 
 /**
  * A colour per subagent in a message, in the order they first appear. A
- * subagent Mike resumes in the same message keeps the colour it started with.
+ * subagent Clausemoor resumes in the same message keeps the colour it started with.
  */
 export function subagentTints(events: AssistantEvent[]): Map<string, MikeIconTint> {
     const tints = new Map<string, MikeIconTint>();
@@ -197,7 +197,7 @@ function SubagentDetails({
                 {status.text}
             </p>
             <DetailDisclosureRow
-                label="Task from Mike"
+                label="Task from Clausemoor"
                 showConnector={streaming || hasSteps || hasBrief || hasQuestion}
             >
                 <p className="mt-2 whitespace-pre-wrap text-gray-600 [overflow-wrap:anywhere]">
@@ -218,8 +218,8 @@ function SubagentDetails({
                 <DetailDisclosureRow
                     label={
                         event.status === "incomplete"
-                            ? "Returned a partial brief to Mike"
-                            : "Returned a brief to Mike"
+                            ? "Returned a partial brief to Clausemoor"
+                            : "Returned a brief to Clausemoor"
                     }
                     showConnector={hasQuestion}
                 >
@@ -228,14 +228,14 @@ function SubagentDetails({
             )}
             {hasQuestion && (
                 <EventBlock dotColor="gray">
-                    <EventLabel>Asked Mike</EventLabel>
+                    <EventLabel>Asked Clausemoor</EventLabel>
                     <p className="mt-0.5 whitespace-pre-wrap text-gray-800 [overflow-wrap:anywhere]">
                         {event.question}
                     </p>
                 </EventBlock>
             )}
             {/* Settings > Features > Response details, at the right end like
-                the details under Mike's own answer. */}
+                the details under Clausemoor's own answer. */}
             {details && (
                 <p className="self-end text-right font-serif text-sm text-gray-400 [overflow-wrap:anywhere]">
                     {details}
@@ -246,10 +246,10 @@ function SubagentDetails({
 }
 
 /**
- * Subagents Mike ran in parallel: "Started …" and "… finished" are steps on
- * Mike's line, and between them, set in from that line, a row of pills holds
+ * Subagents Clausemoor ran in parallel: "Started …" and "… finished" are steps on
+ * Clausemoor's line, and between them, set in from that line, a row of pills holds
  * one per subagent. Selecting a pill shows that subagent's own steps below
- * the row, so a subagent's work never reads as Mike's.
+ * the row, so a subagent's work never reads as Clausemoor's.
  */
 export function SubagentGroup({
     delegations,
@@ -263,7 +263,7 @@ export function SubagentGroup({
     tints: Map<string, MikeIconTint>;
     /** Show each subagent's model, effort and tokens (Settings > Features). */
     showDetails?: boolean;
-    /** Whether one of Mike's steps follows the group. */
+    /** Whether one of Clausemoor's steps follows the group. */
     showConnectorAfter: boolean;
     renderSteps: RenderSteps;
 }) {
@@ -275,7 +275,7 @@ export function SubagentGroup({
     const count = delegations.length;
     return (
         <>
-            {/* The pills sit in this step's content column, so Mike's line
+            {/* The pills sit in this step's content column, so Clausemoor's line
                 runs beside them to "finished" once every subagent is done. */}
             <EventBlock dotColor="green" showConnector={!running}>
                 <EventLabel>{startedLabel(delegations)}</EventLabel>
@@ -319,7 +319,7 @@ export function SubagentGroup({
     );
 }
 
-/** Mike's steps in a run of events, counting each subagent group as one. */
+/** Clausemoor's steps in a run of events, counting each subagent group as one. */
 export function timelineStepCount(events: AssistantEvent[]): number {
     return events.filter(
         (event, i) => event.type !== "delegation" || events[i - 1]?.type !== "delegation",

@@ -20,7 +20,7 @@ import {
   SettingsLabel,
 } from "@/app/components/settings/SettingsText";
 import { SettingsRow } from "@/app/components/settings/SettingsRow";
-import { GlassCardUI, PillButtonUI } from "@mike/ui";
+import { GlassCardUI, PillButtonUI } from "@clausemoor/ui";
 
 export function DeletedOrganizations({
   onRestored,

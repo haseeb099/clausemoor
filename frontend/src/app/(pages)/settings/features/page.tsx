@@ -5,7 +5,7 @@ import {
   SettingsDescription,
   SettingsLabel,
 } from "@/app/components/settings/SettingsText";
-import { GlassCardUI, ToggleSwitchUI } from "@mike/ui";
+import { GlassCardUI, ToggleSwitchUI } from "@clausemoor/ui";
 import { SettingsHeading } from "@/app/components/settings/SettingsHeading";
 import { SettingsRow } from "@/app/components/settings/SettingsRow";
 import { WebSearchSection } from "@/app/components/settings/WebSearchSection";

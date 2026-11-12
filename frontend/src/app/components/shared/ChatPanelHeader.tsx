@@ -8,7 +8,7 @@ import { FormTextInput } from "@/app/components/ui/form-field";
 import {
     ChatHistoryDropdownUI,
     type ChatHistoryDropdownItemUI,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import {
     LIQUID_GLASS_HOVER_CLASS,
     LIQUID_GLASS_SUBTLE_CLASS,

@@ -10,7 +10,7 @@ import {
     normalizeExcerptNote,
     normalizeExcerptText,
     type MessageExcerpt,
-} from "@mike/client";
+} from "@clausemoor/client";
 
 /** Marks the response text a reader can highlight to quote or annotate. */
 export const EXCERPT_SOURCE_PROPS = { "data-excerpt-source": "" } as const;

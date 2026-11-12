@@ -1,4 +1,4 @@
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 /**
  * How the task pane tells the user something failed.
  *
@@ -10,7 +10,7 @@ import { BACKEND_REPORTING_OWNER } from "@mike/client";
  * Word, which is why it is an action and not an anchor.
  *
  * The toast, the Retry and the cancellation rule are the web app's own
- * (`createErrorNotifier` in `@mike/client`), so a failure reads the same in Word as it does in
+ * (`createErrorNotifier` in `@clausemoor/client`), so a failure reads the same in Word as it does in
  * the browser; this file adds only what differs in the pane. Screens must
  * never render a raw `error.message` from the API, a stream, or Office.js.
  */
@@ -25,7 +25,7 @@ import {
   notifyInfo,
   notifySuccess,
   type NotifyErrorOptions as SharedNotifyErrorOptions,
-} from "@mike/client";
+} from "@clausemoor/client";
 import {
   isSessionHandledError,
   retryWhenSessionRecovers,
@@ -54,8 +54,8 @@ export {
   isNetworkError,
   type UserErrorKind,
   type UserFacingError,
-} from "@mike/client";
-export { notifyInfo, notifySuccess } from "@mike/client";
+} from "@clausemoor/client";
+export { notifyInfo, notifySuccess } from "@clausemoor/client";
 
 /** Which client the support email came from. */
 export const SUPPORT_PRODUCT = "word-addin";

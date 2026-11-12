@@ -42,7 +42,7 @@ export function identifyApplicationError(error: object, kind: ErrorKind): void {
 
 /** Fixed external protocol vocabulary; application labels use the source contract above. */
 export const DIAGNOSTIC_VOCABULARY: Record<string, ReadonlySet<string>> = Object.fromEntries(Object.entries({
-  service: 'mike-backend mike-frontend mike-word-addin',
+  service: 'clausemoor-backend clausemoor-frontend clausemoor-word-addin',
   role: 'api worker worker-thread job',
   runtime: 'browser server edge',
   surface: 'taskpane commands dialog',
@@ -75,7 +75,7 @@ export const DIAGNOSTIC_VOCABULARY: Record<string, ReadonlySet<string>> = Object
   warning_name: 'Warning DeprecationWarning ExperimentalWarning MaxListenersExceededWarning TimeoutOverflowWarning TimeoutNegativeWarning UnsupportedWarning',
 }).map(([key, values]) => [key, new Set(values.split(' '))]));
 const ENUMS = DIAGNOSTIC_VOCABULARY;
-const ROUTE_PARTS = new Set(('word-chat orgs single-documents tabular-review quick-actions workflow-addons audit manifest-signing-key api auth login logout refresh session user users projects directory people access memory ids filter-options folder-paths resolve folder documents versions files folders upload uploads upload-sessions parts complete abort content download preview source text conversion chats chat messages stream cancel assistant tabular tabular-reviews reviews rows columns cells run results export workflows playbooks templates library models configured ollama openrouter vercel opencode-go bedrock azure azure-foundry vertex xai custom settings profile organizations members permissions shares keys api-keys health observability sentry-test').split(' '));
+const ROUTE_PARTS = new Set(('word-chat orgs single-documents tabular-review quick-actions workflow-addons audit manifest-signing-key api auth login logout refresh session user users projects directory people access memory ids filter-options folder-paths resolve folder documents versions files folders upload uploads upload-sessions parts complete abort content download preview source text conversion chats chat messages stream cancel assistant tabular tabular-reviews reviews rows columns cells run results export workflows playbooks templates library models configured ollama openrouter vercel opencode-go bedrock azure azure-foundry vertex xai custom settings profile organizations members permissions shares keys api-keys health observability sentry-test billing checkout portal webhook status').split(' '));
 const ID_KEYS = new Set(('request_id requestId document_id documentId file_id fileId job_id jobId review_id reviewId row_id rowId session_id sessionId version_id versionId run_id import_id playbook_id').split(' '));
 const CONFIGURATION_FIELDS = new Set('SUPABASE_URL SUPABASE_PUBLISHABLE_KEY SUPABASE_SECRET_KEY AUTH_HANDOFF_ENCRYPTION_SECRET USER_API_KEYS_ENCRYPTION_SECRET MCP_CONNECTORS_ENCRYPTION_SECRET FRONTEND_URL API_PUBLIC_URL WORD_ADDIN_URL'.split(' '));
 /** Static exception identifiers are trusted under the source contract, not because of this syntax check. */
@@ -400,7 +400,7 @@ export function diagnosticEnvelope(envelope: Envelope, destination?: string): En
 /** Applies to browser, server, workers and add-in, in both install modes. */
 export function privacyBoundaryIntegration(options: { acceptEvent?: (event: RecordValue) => boolean } = {}) {
   return {
-    name: 'MikePrivacyBoundary',
+    name: 'ClausemoorPrivacyBoundary',
     setup(client: {
       getTransport(): Transport | undefined;
       getDsn?(): { protocol: string; publicKey?: string; host: string; port?: string; path?: string; projectId: string } | undefined;

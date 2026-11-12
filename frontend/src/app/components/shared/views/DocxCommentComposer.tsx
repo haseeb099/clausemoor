@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 import { MessageSquarePlus } from "lucide-react";
 import type { Editor } from "@docx-editor.dev/core/contracts/editor";
 import { useEditorSnapshot } from "@docx-editor.dev/react";
-import { PillButtonUI, TextButtonUI } from "@mike/ui";
+import { PillButtonUI, TextButtonUI } from "@clausemoor/ui";
 import {
   Popover,
   PopoverAnchor,
@@ -17,7 +17,7 @@ import {
 } from "@/app/components/ui/popover";
 import { openReviewPane } from "./docxReviewPane";
 
-/** Mike-owned comment UI, using only the public open-source Editor contract. */
+/** Clausemoor-owned comment UI, using only the public open-source Editor contract. */
 export function DocxCommentComposer({
   editor,
   author,

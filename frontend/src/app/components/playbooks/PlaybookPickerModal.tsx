@@ -12,7 +12,7 @@ import {
 import { useDocumentWorkspace } from "@/app/contexts/WorkspaceContext";
 import { useWorkspaceIdentity } from "@/app/hooks/useWorkspaceIdentity";
 import { listPlaybooks, type Playbook } from "@/app/lib/mikeApi";
-import { LIQUID_GLASS_SUBTLE_CLASS } from "@mike/ui";
+import { LIQUID_GLASS_SUBTLE_CLASS } from "@clausemoor/ui";
 
 type Props = {
   open: boolean;

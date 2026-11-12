@@ -23,7 +23,7 @@ import {
     LIQUID_GLASS_FLOAT_CLASS,
     LIQUID_GLASS_HOVER_CLASS,
     LIQUID_GLASS_MODAL_ROW_HOVER_CLASS,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 
 export type AccessScope = "direct" | "project";
 

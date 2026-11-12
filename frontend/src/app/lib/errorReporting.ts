@@ -1,8 +1,8 @@
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 /**
  * Error reporting for the web app: a thin, testable layer over the Sentry
  * SDK. Application code calls these helpers instead of `@sentry/nextjs`
- * directly so the PII policy (see `@mike/client`'s sentryEvent) and the
+ * directly so the PII policy (see `@clausemoor/client`'s sentryEvent) and the
  * explicit opt-out rule live in one place.
  */
 
@@ -12,7 +12,6 @@ import {
     eventBudget,
     eventBudgetLimits,
     type Operation,
-    MIKE_SENTRY_DSN,
     createEventScrubber,
     sentryEnvironment,
     installKind,
@@ -20,12 +19,20 @@ import {
     parseSampleRate,
     releaseName,
     resolveDsn,
-} from "@mike/client";
+} from "@clausemoor/client";
 
 export type ReportLevel = "fatal" | "error" | "warning";
 
 /** Where the browser SDK posts envelopes; served by app/monitoring/route.ts. */
 export const SENTRY_TUNNEL_PATH = "/monitoring";
+
+/**
+ * The browser SDK refuses to start without a DSN string. This host does not
+ * resolve. Every envelope goes through /monitoring, which drops it unless the
+ * operator set SENTRY_DSN or FRONTEND_SENTRY_DSN.
+ */
+export const SENTRY_TUNNEL_PLACEHOLDER_DSN =
+    "https://00000000000000000000000000000000@o0.ingest.sentry.invalid/1";
 
 export type ReportContext = {
     tags?: Record<string, string | number | boolean | null | undefined>;
@@ -339,7 +346,7 @@ export function browserSentryOptions(env: {
         // The SDK requires a valid DSN even with a tunnel. This placeholder
         // never chooses the destination: /monitoring rewrites it. Always
         // initialize so a runtime override can enable a baked-off image.
-        dsn: MIKE_SENTRY_DSN.frontend,
+        dsn: SENTRY_TUNNEL_PLACEHOLDER_DSN,
         enabled: true,
         environment: sentryEnvironment(env.environment, env.nodeEnv === "development"),
         release: releaseName(env.release, env.version, env.gitSha),
@@ -368,7 +375,7 @@ export function browserSentryOptions(env: {
         integrations: [privacyBoundaryIntegration(), Sentry.captureConsoleIntegration({ levels: ["error"] })],
         initialScope: {
             tags: {
-                service: "mike-frontend",
+                service: "clausemoor-frontend",
                 runtime: "browser",
                 build_mode: env.nodeEnv,
                 diagnostics_version: "2",
@@ -401,7 +408,7 @@ export type ReportingDestination = {
  *   SENTRY_DSN                    the deployment's project (FRONTEND_SENTRY_DSN in compose)
  *   NEXT_PUBLIC_SENTRY_DSN        the project baked in at image build, for images
  *                                 built with a DSN and run without the runtime one
- *   otherwise                     the built-in Mike project (community default)
+ *   otherwise                     off. There is no built-in Sentry project.
  *
  * The result is printed at boot (sentry.server.config.ts) and answered by
  * GET /monitoring, so an operator can see which rule applied.
@@ -421,7 +428,7 @@ export function reportingDestination(env: NodeJS.ProcessEnv): ReportingDestinati
     const resolved = resolveDsn({
         disabled: runtimeDisabled || env.NEXT_PUBLIC_SENTRY_DISABLED?.trim(),
         dsn: runtimeDsn || buildDsn,
-        fallback: MIKE_SENTRY_DSN.frontend,
+        fallback: "",
         // `next dev` runs with NODE_ENV=development; `next build`/`next
         // start` (every image) with production.
         development: env.NODE_ENV === "development",
@@ -464,7 +471,7 @@ export function describeReportingDestination(destination: ReportingDestination):
         case "build":
             return `[sentry] web app reports → NEXT_PUBLIC_SENTRY_DSN project ${project} (baked at build; set SENTRY_DSN to change it at runtime), browser included`;
         default:
-            return "[sentry] web app reports → Mike project Sentry (community default), browser included. Opt out with SENTRY_DISABLED=true or point SENTRY_DSN at your own project.";
+            return "[sentry] web app reports: off (no SENTRY_DSN or FRONTEND_SENTRY_DSN), browser included";
     }
 }
 
@@ -478,7 +485,7 @@ export function serverSentryOptions(
         dsn: dsn || undefined,
         enabled: dsn.length > 0,
         environment: sentryEnvironment(env.SENTRY_ENVIRONMENT, env.NODE_ENV === "development"),
-        integrations: [privacyBoundaryIntegration({ acceptEvent: eventBudget(eventBudgetLimits(env.SENTRY_MAX_REPEAT_EVENTS_PER_DAY, dsn, Object.values(MIKE_SENTRY_DSN))) })],
+        integrations: [privacyBoundaryIntegration({ acceptEvent: eventBudget(eventBudgetLimits(env.SENTRY_MAX_REPEAT_EVENTS_PER_DAY, dsn, [])) })],
         release: releaseName(env.SENTRY_RELEASE, env.MIKE_VERSION, env.GIT_SHA),
         tracesSampleRate: parseSampleRate(env.SENTRY_TRACES_SAMPLE_RATE, 0),
         dataCollection: {
@@ -497,7 +504,7 @@ export function serverSentryOptions(
         attachStacktrace: true,
         initialScope: {
             tags: {
-                service: "mike-frontend",
+                service: "clausemoor-frontend",
                 runtime,
                 build_mode: env.NODE_ENV,
                 diagnostics_version: "2",

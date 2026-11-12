@@ -3,7 +3,7 @@ import {
   GOOGLE_OAUTH_MESSAGE_TYPE,
   type GoogleOAuthDialogMessage,
 } from "../taskpane/auth/oauthProtocol";
-import { describeError } from "@mike/client";
+import { describeError } from "@clausemoor/client";
 import { initAddinErrorReporting } from "../taskpane/lib/errorReporting";
 
 initAddinErrorReporting("oauth-dialog");
@@ -170,7 +170,7 @@ Office.onReady(() => {
     // Whatever threw here — fetch, Office.js, a bad redirect — its text is
     // for the console. The pane shows this sentence.
     const message = describeError(error, {
-      fallback: "Mike couldn't complete Google sign-in. Try again.",
+      fallback: "Clausemoor couldn't complete Google sign-in. Try again.",
     }).message;
     if (requestId) {
       sendError(requestId, message);

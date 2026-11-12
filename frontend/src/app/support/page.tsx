@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { FieldLabel } from "@/app/components/ui/form-field";
 import { authenticatedFetch } from "@/app/lib/authEvents";
-import { textButtonUIClassName } from "@mike/ui";
+import { textButtonUIClassName } from "@clausemoor/ui";
 import {
     describeError,
     supportMailtoFor,
@@ -50,7 +50,7 @@ export default function SupportPage() {
         {
             value: "question",
             label: "Question",
-            description: "Ask a question about using Mike",
+            description: "Ask a question about using Clausemoor",
         },
         {
             value: "other",
@@ -106,7 +106,7 @@ export default function SupportPage() {
                 describeError(err, {
                     action: "send your message",
                     fallback:
-                        "Mike couldn't send your message. Try again, or email us directly.",
+                        "Clausemoor couldn't send your message. Try again, or email us directly.",
                 }),
             );
         } finally {
@@ -205,7 +205,7 @@ export default function SupportPage() {
                                         onChange={(e) =>
                                             setLink(e.target.value)
                                         }
-                                        placeholder="https://mikeoss.com/..."
+                                        placeholder="https://clausemoor.com/..."
                                         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                                     />
                                     <p className="text-xs text-gray-500 mt-1">

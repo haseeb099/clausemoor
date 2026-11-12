@@ -31,7 +31,7 @@ import {
     uploadStandaloneDocuments,
     uploadWorkflowAssets,
 } from "./mikeApi";
-import { uploadProcessingPollDelayMs } from "@mike/client";
+import { uploadProcessingPollDelayMs } from "@clausemoor/client";
 
 const fetchMock = vi.fn();
 const API_URL = "/api";

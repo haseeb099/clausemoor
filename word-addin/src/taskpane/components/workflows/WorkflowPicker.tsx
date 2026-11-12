@@ -204,7 +204,7 @@ export function WorkflowPicker({
           setSaveError(
             reportFault(reason, {
               fallback:
-                "Mike couldn't save these instructions. Try again.",
+                "Clausemoor couldn't save these instructions. Try again.",
               operation: "workflows.run",
             }).message
           );

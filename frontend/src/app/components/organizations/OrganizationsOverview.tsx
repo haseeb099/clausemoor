@@ -20,7 +20,7 @@ import {
 } from "@/app/lib/mikeApi";
 import { ORG_ROLE_LABELS } from "@/app/lib/permissions";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import { GlassCardUI, LIQUID_GLASS_SUBTLE_CLASS, PillButtonUI } from "@mike/ui";
+import { GlassCardUI, LIQUID_GLASS_SUBTLE_CLASS, PillButtonUI } from "@clausemoor/ui";
 import { DeletedOrganizations } from "./DeletedOrganizations";
 import { CreateOrganizationModal } from "./OrganizationModals";
 import { organizationSettingsHref } from "./OrganizationSettingsShell";

@@ -17,7 +17,7 @@ import {
   unenrollMfa,
   verifyMfa,
 } from "@/app/lib/authApi";
-import { PillButtonUI, ToggleSwitchUI, GlassCardUI } from "@mike/ui";
+import { PillButtonUI, ToggleSwitchUI, GlassCardUI } from "@clausemoor/ui";
 import { PasswordSettingsSection } from "@/app/components/settings/PasswordSettingsSection";
 import { SettingsHeading } from "@/app/components/settings/SettingsHeading";
 import { SettingsRow } from "@/app/components/settings/SettingsRow";
@@ -202,7 +202,7 @@ export default function SecurityPage() {
     const described = describeError(error, {
       action,
       codeMessages: MFA_ERROR_MESSAGES,
-      fallback: `Mike couldn't ${action}. Try again.`,
+      fallback: `Clausemoor couldn't ${action}. Try again.`,
     });
     setStatus(described.message);
     setStatusError(described);
@@ -278,13 +278,13 @@ export default function SecurityPage() {
 
       let data;
       try {
-        data = await enrollMfa("Mike");
+        data = await enrollMfa("Clausemoor");
       } catch (error) {
         if (!isDuplicateFriendlyNameError(error)) throw error;
         traceMfa("[security/mfa] retrying enrollment with unique name", {
           error: error instanceof Error ? error.message : String(error),
         });
-        data = await enrollMfa(`Mike ${Date.now()}`);
+        data = await enrollMfa(`Clausemoor ${Date.now()}`);
       }
       traceMfa("[security/mfa] enrollment created", {
         factorId: data.id,

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Lifecycle for Mike's Docker stacks: start, stop, and garbage-collect.
+# Lifecycle for Clausemoor's Docker stacks: start, stop, and garbage-collect.
 #
 #   scripts/stack.sh up [compose up args…]      # gc, then `docker compose up`
 #   scripts/stack.sh down [--purge]             # `docker compose down` (+ -v --rmi local)
@@ -80,7 +80,7 @@ default_project() {
 
 # Is this compose file ours? It is identified by the marker on its first lines
 # rather than by path, so worktrees and renamed checkouts are all recognised.
-is_mike_compose_file() { [ -f "$1" ] && head -5 "$1" | grep -q 'MikeOSS'; }
+is_mike_compose_file() { [ -f "$1" ] && head -5 "$1" | grep -q 'Clausemoor'; }
 
 # Inventories print "-" for empty fields (a bare tab would be collapsed by
 # `read`); blank() maps it back to the empty string.

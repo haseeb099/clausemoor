@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Upload } from "lucide-react";
-import { WorkflowSlashCommandUI } from "@mike/ui";
+import { WorkflowSlashCommandUI } from "@clausemoor/ui";
 import type { Workflow } from "../../types";
 import { createWorkflow } from "../../api/mikeApi";
 import { Modal } from "../primitives/Modal";
@@ -177,7 +177,7 @@ export function NewWorkflowModal({
     } catch (reason) {
       setError(
         reportFault(reason, {
-          fallback: "Mike couldn't create that workflow. Try again.",
+          fallback: "Clausemoor couldn't create that workflow. Try again.",
           operation: "workflows.run",
         }).message
       );

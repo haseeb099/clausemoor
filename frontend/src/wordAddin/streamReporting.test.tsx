@@ -2,7 +2,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import * as Sentry from "@sentry/react";
-import { clearToasts, privacyBoundaryIntegration } from "@mike/client";
+import { clearToasts, privacyBoundaryIntegration } from "@clausemoor/client";
 
 const mocks = vi.hoisted(() => ({ stream: vi.fn(), resume: vi.fn() }));
 vi.mock("../../../word-addin/src/taskpane/api/mikeApi", async () => ({

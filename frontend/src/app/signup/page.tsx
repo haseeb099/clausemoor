@@ -11,8 +11,9 @@ import {
     authGlassCardUIClassName,
     authInputUIClassName,
     AuthDividerUI,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import Link from "next/link";
+import { privacyUrl, termsUrl } from "@clausemoor/client";
 import { SiteLogo } from "@/app/components/site-logo";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { cn } from "@/app/lib/utils";
@@ -244,7 +245,7 @@ function SignupContent() {
                             <div className="text-center text-xs text-gray-500">
                                 By signing up, you agree to our{" "}
                                 <Link
-                                    href="https://mikeoss.com/terms"
+                                    href={termsUrl()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-600 hover:underline"
@@ -253,7 +254,7 @@ function SignupContent() {
                                 </Link>{" "}
                                 and{" "}
                                 <Link
-                                    href="https://mikeoss.com/privacy"
+                                    href={privacyUrl()}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-600 hover:underline"
@@ -279,14 +280,33 @@ function SignupContent() {
                         </div>
                     </form>
                 </div>
-                <div className="text-center text-sm text-gray-500">
-                    Have an account?{" "}
-                    <Link
-                        href="/login"
-                        className="font-medium transition-colors hover:text-gray-950"
-                    >
-                        Log in
-                    </Link>
+                <div className="space-y-2 text-center text-sm text-gray-500">
+                    <p>
+                        Have an account?{" "}
+                        <Link
+                            href="/login"
+                            className="font-medium transition-colors hover:text-gray-950"
+                        >
+                            Log in
+                        </Link>
+                    </p>
+                    <p>
+                        Buying for a firm?{" "}
+                        <Link
+                            href="/pricing"
+                            className="font-medium transition-colors hover:text-gray-950"
+                        >
+                            See plans
+                        </Link>
+                        {" or "}
+                        <Link
+                            href="/contact"
+                            className="font-medium transition-colors hover:text-gray-950"
+                        >
+                            contact sales
+                        </Link>
+                        .
+                    </p>
                 </div>
             </div>
             <WarningPopup

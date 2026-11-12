@@ -109,7 +109,7 @@ export function usePaginatedChats(
           timedOut
             ? "Chat history took too long to load."
             : reportFault(reason, {
-                fallback: "Mike couldn't load your chat history. Try again.",
+                fallback: "Clausemoor couldn't load your chat history. Try again.",
                 operation: "word_chat.turn",
               }).message,
         );

@@ -36,11 +36,11 @@ Before creating UI markup, search these locations in order:
 
 1. `frontend/src/app/components/ui/` contains reusable web primitives such as
    buttons, inputs, dropdowns, search, empty states, and liquid-glass surfaces.
-2. `packages/ui/` (imported as `@mike/ui`) contains framework-light
+2. `packages/ui/` (imported as `@clausemoor/ui`) contains framework-light
    components rendered by both the web app and Word add-in. Files use the
    `XxxUI.tsx` convention and are exported from `packages/ui/src/index.ts`,
    with thin web adapters or re-exports in `frontend/src/app/components/ui/`
-   where appropriate. Code here may import `@mike/client` but never an
+   where appropriate. Code here may import `@clausemoor/client` but never an
    application (`frontend/src/app/`, `word-addin/src/`).
 3. `frontend/src/app/components/shared/` contains web-app building blocks that
    understand the application shell, including `PageHeader`,
@@ -100,7 +100,7 @@ Preserve the accessibility baseline:
   `frontend/src/app/lib/`, with a colocated `*.test.ts` or `*.test.tsx` file.
   Behavior the Word add-in also needs (error classification and toasts, the
   model catalog, upload sessions, response excerpts, Sentry event hygiene)
-  lives in `packages/client/`, imported as `@mike/client`, and must stay
+  lives in `packages/client/`, imported as `@clausemoor/client`, and must stay
   framework-free. Its public surface is `packages/client/src/index.ts`; its
   tests are colocated and run with the frontend's Vitest.
 - Use the `@/` alias for imports rooted at `frontend/src/`.
@@ -165,7 +165,7 @@ failure is shown.
   composes handlers and failure hooks. Keep queue transport in `lib/dbq/` and
   `workers/`, and the assistant engine in `modules/chat/engine/`.
 - Shared serialized API/event declarations live in `packages/contracts/` and
-  are imported with `import type` from `@mike/contracts`. Keep client display
+  are imported with `import type` from `@clausemoor/contracts`. Keep client display
   state local and update producer/consumer tests when changing a wire payload.
 - Authentication and other request middleware live in
   `backend/src/middleware/`.

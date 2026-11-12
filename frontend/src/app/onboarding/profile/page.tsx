@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { OnboardingShell } from "@/app/components/auth/OnboardingShell";
-import { authInputUIClassName, InputUI, PillButtonUI } from "@mike/ui";
+import { authInputUIClassName, InputUI, PillButtonUI } from "@clausemoor/ui";
 import { FullScreenLoader } from "@/app/components/shared/FullScreenLoader";
 import { useAuth } from "@/app/contexts/AuthContext";
 import { useUserProfile } from "@/app/contexts/UserProfileContext";
@@ -77,7 +77,7 @@ function ProfileDetailsForm({
         <OnboardingShell
             step="Step 1 of 4"
             title="Tell us about you"
-            description="Add the details we should use across Mike."
+            description="Add the details we should use across Clausemoor."
         >
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>

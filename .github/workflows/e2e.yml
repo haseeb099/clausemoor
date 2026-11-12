@@ -364,7 +364,7 @@ jobs:
 
       # Production runs this as a release job after migrations and before the
       # backend starts. E2E must exercise the same ordering so defaults exist.
-      - name: Sync Mike workflow catalog
+      - name: Sync Clausemoor workflow catalog
         run: npm run sync:workflows --prefix backend
 
       - name: Start backend API

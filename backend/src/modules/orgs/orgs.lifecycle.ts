@@ -1,4 +1,4 @@
-import type { DeletedOrganization } from "@mike/contracts";
+import type { DeletedOrganization } from "@clausemoor/contracts";
 import type { Db } from "../../lib/supabase";
 import {
     failure,

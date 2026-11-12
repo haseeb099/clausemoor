@@ -90,7 +90,7 @@ import {
   DropdownItem,
   DropdownSurface,
   DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 
 const STATUS_DOT_STYLES: Record<string, string> = {
   completed: "bg-green-400/80",

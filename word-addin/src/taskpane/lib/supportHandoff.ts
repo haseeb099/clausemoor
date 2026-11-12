@@ -13,7 +13,7 @@
  * user is told what actually happened; when both fail the block is put on
  * screen to copy by hand.
  */
-import { SUPPORT_EMAIL, supportDetailLines, type UserFacingError } from "@mike/client";
+import { SUPPORT_EMAIL, supportDetailLines, type UserFacingError } from "@clausemoor/client";
 
 export type SupportErrorFields = Pick<
   UserFacingError,
@@ -48,7 +48,7 @@ export function buildSupportDiagnostics(
   context: SupportContext = {},
 ): string {
   const lines: string[] = [
-    "Mike support details",
+    "Clausemoor support details",
     `What happened: ${error.title}`,
     `Message shown: ${error.message}`,
   ];

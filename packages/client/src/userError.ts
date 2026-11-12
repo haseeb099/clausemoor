@@ -12,7 +12,10 @@
  * framework-free and must not import from an application (`frontend/src/app/` or `word-addin/src/`).
  */
 
-export const SUPPORT_EMAIL = "will@mikeoss.com";
+import { productName, supportEmail } from "./brand";
+
+/** Support address at module load. `buildSupportMailto` reads the env again. */
+export const SUPPORT_EMAIL = supportEmail();
 
 export type UserErrorKind =
     | "offline"
@@ -102,7 +105,7 @@ const KIND_TITLES: Record<UserErrorKind, string> = {
 /**
  * The one sentence shown when a request never reached the server.
  *
- * Both clients say this. The add-in passes the origin because Mike is
+ * Both clients say this. The add-in passes the origin because Clausemoor is
  * self-hostable and "check your connection" is useless advice to someone
  * whose own API container is down; the web app omits it because the API is
  * same-origin there and naming it would add noise, not information.
@@ -111,9 +114,9 @@ export function networkMessage(origin?: string): string {
     // Naming the origin is for self-hosters, whose own server may be the
     // thing that is down, so that variant also says to check the server.
     if (origin) {
-        return `Mike couldn't reach the server at ${origin}. Check your connection and that the server is running, then try again.`;
+        return `${productName()} couldn't reach the server at ${origin}. Check your connection and that the server is running, then try again.`;
     }
-    return "Mike couldn't reach the server. Check your connection and try again.";
+    return `${productName()} couldn't reach the server. Check your connection and try again.`;
 }
 
 /**
@@ -136,7 +139,7 @@ const KIND_MESSAGES: Record<UserErrorKind, string> = {
     payload_too_large: "That's too large to upload.",
     rate_limited: "Too many requests. Wait a moment and try again.",
     unavailable:
-        "Mike is temporarily unavailable. Try again in a moment.",
+        `${productName()} is temporarily unavailable. Try again in a moment.`,
     server: SERVER_FAILURE_MESSAGE,
     unknown: GENERIC_FAILURE_MESSAGE,
 };
@@ -446,7 +449,7 @@ export function buildSupportMailto(
 ): string {
     const when = context.when ?? new Date();
     const lines: string[] = [
-        "Hi Mike team,",
+        `Hi ${productName()} team,`,
         "",
         "I ran into a problem and need help.",
         "",
@@ -459,12 +462,12 @@ export function buildSupportMailto(
     lines.push(...supportDetailLines(error, { ...context, when }));
     lines.push("", "Thanks,");
 
-    const subject = `Mike support: ${error.title}`;
+    const subject = `${productName()} support: ${error.title}`;
     const params = new URLSearchParams({
         subject,
         body: lines.join("\n"),
     });
     // URLSearchParams encodes spaces as "+", which mail clients render
     // literally. Percent-encode them so the draft reads as typed.
-    return `mailto:${SUPPORT_EMAIL}?${params.toString().replace(/\+/g, "%20")}`;
+    return `mailto:${supportEmail()}?${params.toString().replace(/\+/g, "%20")}`;
 }

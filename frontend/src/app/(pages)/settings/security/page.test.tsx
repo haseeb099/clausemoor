@@ -71,7 +71,7 @@ describe("SecurityPage", () => {
 
         expect(
             await screen.findByText(
-                "Mike couldn't reach the server. Check your connection and try again.",
+                "Clausemoor couldn't reach the server. Check your connection and try again.",
             ),
         ).toBeInTheDocument();
     });
@@ -88,7 +88,7 @@ describe("SecurityPage", () => {
         ).toBeInTheDocument();
         expect(
             screen.getByRole("link", { name: "Contact support" }),
-        ).toHaveAttribute("href", expect.stringContaining("will@mikeoss.com"));
+        ).toHaveAttribute("href", expect.stringContaining("support@clausemoor.com"));
     });
 
     it("retries enrollment on the provider's name-conflict code", async () => {
@@ -115,6 +115,6 @@ describe("SecurityPage", () => {
         );
 
         await waitFor(() => expect(enrollMfa).toHaveBeenCalledTimes(2));
-        expect(enrollMfa.mock.calls[1][0]).toMatch(/^Mike /);
+        expect(enrollMfa.mock.calls[1][0]).toMatch(/^Clausemoor /);
     });
 });

@@ -1,0 +1,104 @@
+{
+  "currency": "GBP",
+  "billingModel": "stripe-or-invoice",
+  "vatNote": "List prices are in GBP and exclude VAT where VAT applies. Stripe Checkout collects tax IDs where enabled.",
+  "responseSla": "We reply to sales enquiries within one UK business day.",
+  "note": "Hosted Chambers and Firm plans can be paid by card through Stripe Checkout when STRIPE_SECRET_KEY is set. Self-hosted and custom deals stay on invoice against an order form. Have a UK solicitor confirm the terms that sit behind these plans.",
+  "plans": [
+    {
+      "id": "pilot",
+      "name": "Pilot",
+      "audience": "Evaluation workspace for a prospective firm",
+      "priceMonthly": null,
+      "priceAnnual": null,
+      "priceLabel": "No charge",
+      "billingPeriod": "one-time",
+      "highlighted": false,
+      "cta": {
+        "label": "Create a pilot account",
+        "kind": "signup"
+      },
+      "seats": "Up to 3 users",
+      "deployment": "Hosted by Clausemoor",
+      "features": [
+        "Full assistant, document review, and tabular review",
+        "Bring-your-own model keys",
+        "Word add-in access",
+        "14-day evaluation by default",
+        "Support by email during the pilot"
+      ]
+    },
+    {
+      "id": "chambers",
+      "name": "Chambers",
+      "audience": "Hosted subscription for a small firm or chambers",
+      "priceMonthly": 499,
+      "priceAnnual": 4990,
+      "priceLabel": "£499 / month",
+      "billingPeriod": "monthly-or-annual",
+      "highlighted": true,
+      "cta": {
+        "label": "Request invoice",
+        "kind": "contact"
+      },
+      "seats": "Up to 10 users",
+      "deployment": "Hosted by Clausemoor in the UK or EU region you choose",
+      "features": [
+        "Everything in Pilot",
+        "Organisation workspaces and member roles",
+        "Playbooks and workflow library",
+        "Data Processing Addendum for hosted matters",
+        "Business-hours UK support",
+        "Annual invoice option (two months free vs monthly)"
+      ]
+    },
+    {
+      "id": "firm",
+      "name": "Firm",
+      "audience": "Hosted subscription for a larger practice",
+      "priceMonthly": 1490,
+      "priceAnnual": 14900,
+      "priceLabel": "£1,490 / month",
+      "billingPeriod": "monthly-or-annual",
+      "highlighted": false,
+      "cta": {
+        "label": "Request invoice",
+        "kind": "contact"
+      },
+      "seats": "Up to 50 users",
+      "deployment": "Hosted by Clausemoor in the UK or EU region you choose",
+      "features": [
+        "Everything in Chambers",
+        "Priority support queue",
+        "Named customer success contact",
+        "SSO readiness and onboarding workshop",
+        "Quarterly usage review",
+        "Custom seat packs on the order form"
+      ]
+    },
+    {
+      "id": "self-hosted",
+      "name": "Self-hosted",
+      "audience": "Installed on the client's own servers with a support contract",
+      "priceMonthly": null,
+      "priceAnnual": 24000,
+      "priceLabel": "From £24,000 / year",
+      "billingPeriod": "annual",
+      "highlighted": false,
+      "cta": {
+        "label": "Request self-hosted",
+        "kind": "contact"
+      },
+      "seats": "Seat count set in the support contract",
+      "deployment": "Client VPC or on-premise; UK/EU data stays on client systems",
+      "features": [
+        "Docker Compose install on the client's infrastructure",
+        "Annual support and maintenance contract",
+        "Upgrade guidance and security bulletins",
+        "Optional paid implementation assistance",
+        "Source code access under AGPL-3.0",
+        "No hosted matter data held by Clausemoor"
+      ]
+    }
+  ]
+}

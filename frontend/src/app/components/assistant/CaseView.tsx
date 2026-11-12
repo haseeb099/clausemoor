@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import DOMPurify from "dompurify";
 import { Loader2 } from "lucide-react";
-import { PillButtonUI, LIQUID_GLASS_FLAT_CLASS } from "@mike/ui";
+import { PillButtonUI, LIQUID_GLASS_FLAT_CLASS } from "@clausemoor/ui";
 import { cn } from "@/app/lib/utils";
 import type {
     PanelDocument,

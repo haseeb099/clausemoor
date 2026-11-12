@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { ToggleSwitchUI } from "@mike/ui";
+import { ToggleSwitchUI } from "@clausemoor/ui";
 import {
   createQuickAction,
   listWorkflows,
@@ -65,7 +65,7 @@ export function DocumentActions({
         if (cancelled) return;
         setWorkflowsError(
           reportFault(reason, {
-            fallback: "Mike couldn't load your quick actions. Try again.",
+            fallback: "Clausemoor couldn't load your quick actions. Try again.",
             operation: "quick_actions.run",
           }).message,
         );

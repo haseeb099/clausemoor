@@ -9,7 +9,7 @@
  *
  * The notifier is injected so the decision can be asserted without a DOM.
  */
-import { UserVisibleError } from "@mike/client";
+import { UserVisibleError } from "@clausemoor/client";
 import { notifyError } from "./notify";
 import type { WordChatStorageMode } from "./wordChatTypes";
 

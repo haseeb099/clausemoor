@@ -89,7 +89,7 @@ export type ChatMessage = {
  * EXTRACTED source text (not the raw file bytes) and are only present for
  * single-segment quotes that matched.
  */
-export type { QuoteVerification } from "@mike/contracts";
+export type { QuoteVerification } from "@clausemoor/contracts";
 
 // ---------------------------------------------------------------------------
 // Doc resolution helpers (used by citations + documentOps)
@@ -145,19 +145,19 @@ export function createDocLabelResolver(
 // Event / annotation types (shared between toolDispatcher and streaming)
 // ---------------------------------------------------------------------------
 
-export type { AskInputOption } from "@mike/contracts";
+export type { AskInputOption } from "@clausemoor/contracts";
 
 export const MAX_ASK_INPUT_TEXT_LENGTH = 5_000;
 export const MAX_ASK_INPUT_CHOICE_LENGTH = 1_000;
 /** What the user sees for a failed tool call; the raw error stays server-side. */
 export const TOOL_ERROR_MESSAGE = "This tool could not complete its request.";
 
-export type { AskInputItem } from "@mike/contracts";
+export type { AskInputItem } from "@clausemoor/contracts";
 
-export type { AskInputsEvent } from "@mike/contracts";
+export type { AskInputsEvent } from "@clausemoor/contracts";
 
-export type { AskInputResponseItem } from "@mike/contracts";
+export type { AskInputResponseItem } from "@clausemoor/contracts";
 
-export type { AskInputsResponseRequest } from "@mike/contracts";
+export type { AskInputsResponseRequest } from "@clausemoor/contracts";
 
-export type { EditAnnotation } from "@mike/contracts";
+export type { EditAnnotation } from "@clausemoor/contracts";

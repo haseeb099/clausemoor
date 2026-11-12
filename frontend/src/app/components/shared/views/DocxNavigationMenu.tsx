@@ -10,7 +10,7 @@ import {
     DropdownCheckboxItem,
     DropdownContent,
     DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 
 /** Extend EigenPal's overflow panel; keep navigation available when nothing overflows. */
 export function DocxNavigationMenu({ toolbar, open, onToggle }: {

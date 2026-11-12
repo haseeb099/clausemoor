@@ -12,7 +12,7 @@ async function main() {
   setOperation("workflows.sync");
   const result = await syncWorkflowCatalog(createServerSupabase());
   console.log(
-    `Synced ${result.workflows} Mike workflows and ${result.assets} assets from ${result.sourceCommit}`,
+    `Synced ${result.workflows} Clausemoor workflows and ${result.assets} assets from ${result.sourceCommit}`,
   );
 }
 
@@ -23,11 +23,11 @@ void main().catch(async (error) => {
   // nothing twice.
   const failure = new AppError(
     "workflows.sync_failed",
-    "Mike workflow sync failed",
+    "Clausemoor workflow sync failed",
     { cause: error },
   );
   reportError(failure, { tags: { component: "workflow-sync" }, level: "fatal" });
-  console.error("Mike workflow sync failed", failure);
+  console.error("Clausemoor workflow sync failed", failure);
   await flushSentry();
   process.exit(1);
 });

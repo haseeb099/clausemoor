@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { AssistantEvent, Message } from "@/app/components/shared/types";
-import type { ConnectorApprovalItem } from "@mike/contracts";
+import type { ConnectorApprovalItem } from "@clausemoor/contracts";
 import { streamChatTurn } from "./mikeApi";
 import { beginAssistantTurn } from "./assistantTurns";
 import {

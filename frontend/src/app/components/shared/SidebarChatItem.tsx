@@ -16,7 +16,7 @@ import {
     DropdownContent,
     DropdownItem,
     DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { useChatHistoryContext } from "@/app/contexts/ChatHistoryContext";
 import { RenameModal } from "@/app/components/modals/RenameModal";
 import { LeaveChatPopup } from "@/app/components/assistant/LeaveChatPopup";

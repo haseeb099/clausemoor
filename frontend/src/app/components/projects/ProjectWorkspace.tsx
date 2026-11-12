@@ -33,7 +33,7 @@ import type {
     Project,
 } from "@/app/components/shared/types";
 import { TableToolbar } from "@/app/components/shared/TableToolbar";
-import { TabPillButtonUI } from "@mike/ui";
+import { TabPillButtonUI } from "@clausemoor/ui";
 import { NewTRModal } from "@/app/components/tabular/NewTRModal";
 import { ConfirmPopup } from "@/app/components/popups/ConfirmPopup";
 import {

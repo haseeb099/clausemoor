@@ -1,6 +1,6 @@
 import { FileText, TriangleAlert } from "lucide-react";
 import { EmptyState } from "@/app/components/ui/empty-state";
-import { PillButtonUI } from "@mike/ui";
+import { PillButtonUI } from "@clausemoor/ui";
 
 const meta = { title: "UI / EmptyState" };
 export default meta;

@@ -1,7 +1,7 @@
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 import { randomUUID } from "node:crypto";
 import { reportError } from "@/app/lib/errorReporting";
-import { diagnosticErrorTags, diagnosticRoute } from "@mike/client";
+import { diagnosticErrorTags, diagnosticRoute } from "@clausemoor/client";
 import type { NextRequest } from "next/server";
 import {
     UPSTREAM_UNAVAILABLE_FINGERPRINT,

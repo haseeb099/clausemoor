@@ -78,7 +78,7 @@ import {
     type PersonOption,
 } from "@/app/components/shared/PersonFilter";
 import { EmptyState } from "@/app/components/ui/empty-state";
-import { PillButtonUI } from "@mike/ui";
+import { PillButtonUI } from "@clausemoor/ui";
 import { useQueryParamTab } from "@/app/hooks/useQueryParamTab";
 import { AccessScopeLabel } from "@/app/components/shared/AccessScopeLabel";
 import { useIdSet } from "@/app/hooks/useIdSet";

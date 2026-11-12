@@ -13,7 +13,7 @@ import { Modal } from "@/app/components/modals/Modal";
 import { ConfirmPopup } from "@/app/components/popups/ConfirmPopup";
 import { EmptyState } from "@/app/components/ui/empty-state";
 import { FieldLabel } from "@/app/components/ui/form-field";
-import { GlassCardUI, PillButtonUI, ToggleSwitchUI } from "@mike/ui";
+import { GlassCardUI, PillButtonUI, ToggleSwitchUI } from "@clausemoor/ui";
 import { MarkdownEditor } from "@/app/components/ui/markdown-editor";
 import {
     getProjectMemory,

@@ -64,7 +64,7 @@ jobs:
           push: false
           # The backend image is loaded so the next step can run it.
           load: ${{ matrix.image == 'backend' }}
-          tags: mike-${{ matrix.image }}:ci
+          tags: clausemoor-${{ matrix.image }}:ci
           # GIT_SHA becomes the Sentry release (docs/observability.md); an
           # image without it reports events nobody can map to a commit.
           build-args: |
@@ -87,7 +87,7 @@ jobs:
             -e FRONTEND_URL=https://mike.example.com \
             -e ALLOWED_ORIGINS=https://word.example.com \
             -e MIKE_ORIGINS_MODULE=/app/dist/lib/origins.js \
-            --entrypoint node mike-backend:ci /storage-cors.mjs 2>stderr.txt)
+            --entrypoint node clausemoor-backend:ci /storage-cors.mjs 2>stderr.txt)
           cat stderr.txt
           echo "$policy"
           test ! -s stderr.txt

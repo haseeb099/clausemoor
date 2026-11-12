@@ -25,7 +25,7 @@ import {
     isOnAuthRoute,
     notifyError,
 } from "@/app/lib/userFacingError";
-import { clearToasts, dismissToastsWithKey } from "@mike/ui";
+import { clearToasts, dismissToastsWithKey } from "@clausemoor/ui";
 
 type User = AuthUser;
 

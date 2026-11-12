@@ -1,5 +1,5 @@
-import { modelDisplayName } from "@mike/client";
-import { REASONING_LEVEL_LABELS, REASONING_LEVELS } from "@mike/ui";
+import { modelDisplayName } from "@clausemoor/client";
+import { REASONING_LEVEL_LABELS, REASONING_LEVELS } from "@clausemoor/ui";
 import type { AssistantEvent } from "../../shared/types";
 
 /**
@@ -40,7 +40,7 @@ function runText(run: {
 }
 
 /**
- * Mike's own answer: "Gemini 3.8 Flash (High): 190K tokens". With subagents,
+ * Clausemoor's own answer: "Gemini 3.8 Flash (High): 190K tokens". With subagents,
  * what they used between them follows as its own total, since they may have
  * run on other models: "Main: Gemini 3.8 Flash (High): 190K tokens.
  * Subagents total: 608K tokens."

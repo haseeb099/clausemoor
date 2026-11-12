@@ -257,7 +257,7 @@ remaining inline queries per routes file and only ever goes down.
 - **Infrastructure:** `supabase`, `storage`, `queue/`, `dbq/` (durable jobs),
   `llm/`, `mcp/`, `httpError`, `serviceResult`, `pagination`, `search`,
   `privateIp`, `origins`, `runtimeConfig`, `courtlistener` (an external API
-  client), `webSearch/` (Mike's own web search and page reader), `convert`,
+  client), `webSearch/` (Clausemoor's own web search and page reader), `convert`,
   `pdfjs`, `zipExport`, `concurrency`.
 - **Cross-domain primitives** that several modules and the job handlers share:
   `access` (project/document authorization), `audit` (audit-row writes),
@@ -352,7 +352,7 @@ PR snapshot (`54d067d3`), so their assertions characterize existing behavior.
 
 `packages/contracts` is the common declaration package for serialized assistant
 activity, input requests/responses, source documents, and normalized Word edits.
-All three applications resolve `@mike/contracts` to the same authored declarations.
+All three applications resolve `@clausemoor/contracts` to the same authored declarations.
 Client event models add their rendering state locally. No client imports a backend
 implementation to obtain these types. See [the package guide](../packages/contracts/README.md).
 

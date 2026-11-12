@@ -3,7 +3,6 @@ import * as Sentry from '@sentry/node';
 import { reportProcessWarning, resetSentryForTests, scrubEvent, reportError, markErrorHandled } from './sentry';
 import { toProviderStreamError } from '../llm/providerErrors';
 import { eventBudget, eventBudgetLimits } from './sentryVolume';
-import { MIKE_SENTRY_DSN } from './sentry';
 import { privacyBoundaryIntegration } from './sentryPrivacy';
 
 // The final transport also emits Sentry's legacy top-level message stack.
@@ -126,12 +125,12 @@ it('preserves the primary exception, ownership, privacy and new failures through
   expect(JSON.stringify(events)).not.toContain('SYNTHETIC_PRIVATE');
 });
 
-it('enforces the shared project ceiling through final SDK envelopes even with an explicit DSN', async () => {
+it('does not apply an upstream daily ceiling to the operator DSN', async () => {
   const events: Sentry.Event[] = [];
   resetSentryForTests('community');
   Sentry.init({
-    dsn: MIKE_SENTRY_DSN.backend, defaultIntegrations: false,
-    integrations: [privacyBoundaryIntegration({ acceptEvent: eventBudget(eventBudgetLimits(undefined, MIKE_SENTRY_DSN.backend, Object.values(MIKE_SENTRY_DSN))) })],
+    dsn: 'https://key@sentry.invalid/1', defaultIntegrations: false,
+    integrations: [privacyBoundaryIntegration({ acceptEvent: eventBudget(eventBudgetLimits(undefined, 'https://key@sentry.invalid/1', [])) })],
     beforeSend: scrubEvent,
     transport: () => ({ send: async envelope => {
       for (const [header, payload] of envelope[1]) if (header.type === 'event') events.push(payload as Sentry.Event);
@@ -140,7 +139,7 @@ it('enforces the shared project ceiling through final SDK envelopes even with an
   });
   for (let n = 0; n < 60; n++) Sentry.captureEvent({ message: 'PRIVATE_QUOTA_CANARY', tags: { diagnostic_test: 'true' } });
   await Sentry.flush(2000);
-  expect(events).toHaveLength(50);
+  expect(events).toHaveLength(60);
   expect(JSON.stringify(events)).not.toContain('PRIVATE_QUOTA_CANARY');
 });
 

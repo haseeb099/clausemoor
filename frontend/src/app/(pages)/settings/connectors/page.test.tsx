@@ -22,7 +22,7 @@ import {
     updateGoogleWorkspaceSettings,
     updateMcpConnector,
 } from "@/app/lib/mikeApi";
-import type { GoogleWorkspaceStatus } from "@mike/contracts";
+import type { GoogleWorkspaceStatus } from "@clausemoor/contracts";
 import { needsMfaVerification } from "@/app/components/popups/MfaVerificationPopup";
 
 // Replace only the network functions the OAuth popup flow drives; keep the real
@@ -534,7 +534,7 @@ describe("ConnectorsPage operator setup guidance", () => {
             screen.getByRole("link", { name: "Open connector setup guide" }),
         ).toHaveAttribute(
             "href",
-            "https://github.com/open-legal-products/mike/blob/main/docs/connectors.md#slack",
+            "https://github.com/haseeb099/clausemoor/blob/main/docs/connectors.md#slack",
         );
         expect(refreshMcpConnectorTools).not.toHaveBeenCalled();
         expect(startMcpConnectorOAuth).not.toHaveBeenCalled();

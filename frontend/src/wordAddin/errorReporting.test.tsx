@@ -1,12 +1,12 @@
 /**
  * The Word add-in has no test runner of its own; its pure error-reporting
- * functions are exercised here through the same `@mike/*` aliases webpack
+ * functions are exercised here through the same `@clausemoor/*` aliases webpack
  * resolves, so a change to either side of the contract fails one suite.
  */
 import { act, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ToastViewportUI, clearToasts } from "@mike/ui";
-import { MIKE_SENTRY_DSN, describeError } from "@mike/client";
+import { ToastViewportUI, clearToasts } from "@clausemoor/ui";
+import { describeError } from "@clausemoor/client";
 import {
     MikeApiError,
     parseApiErrorBody,
@@ -84,7 +84,7 @@ describe("network failures", () => {
         });
         expect(error).toBeInstanceOf(NetworkUnreachableError);
         expect(error.message).toBe(
-            "Mike couldn't reach the server at http://localhost:3001. Check your connection and that the server is running, then try again.",
+            "Clausemoor couldn't reach the server at http://localhost:3001. Check your connection and that the server is running, then try again.",
         );
         const described = describeError(error, { action: "sign in" });
         expect(described.kind).toBe("network");
@@ -150,7 +150,7 @@ describe("add-in notify", () => {
         expect(details).toContain("Request ID: req-7");
 
         const opened = open.mock.calls[0]?.[0] as string;
-        expect(opened.startsWith("mailto:will@mikeoss.com?")).toBe(true);
+        expect(opened.startsWith("mailto:support@clausemoor.com?")).toBe(true);
         expect(opened).not.toContain("/support");
         const draft = decodeURIComponent(opened);
         expect(draft).toContain("Client: word-addin");
@@ -221,14 +221,14 @@ describe("an unreachable session check", () => {
 });
 
 // The add-in's webpack dev server (`npm start`, NODE_ENV=development) is a
-// contributor's machine, not an install: it must not report to the Mike
+// contributor's machine, not an install: it must not report to the Clausemoor
 // project, and when a developer points it at a DSN of their own the events
 // say "development".
 describe("addinSentryOptions for development builds", () => {
     it("is off by default, even with the example's REACT_APP_SENTRY_DISABLED=false", () => {
         expect(addinSentryOptions("taskpane", { nodeEnv: "development", disabled: "false" }).enabled).toBe(false);
         const production = addinSentryOptions("taskpane", { nodeEnv: "production" });
-        expect(production).toMatchObject({ enabled: true, dsn: MIKE_SENTRY_DSN.wordAddin, environment: "self-hosted" });
+        expect(production).toMatchObject({ enabled: false, dsn: undefined, environment: "self-hosted" });
     });
 
     it("reports as development to a DSN set on purpose, unless an environment is set", () => {

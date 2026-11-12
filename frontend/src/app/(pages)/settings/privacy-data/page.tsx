@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Download, Trash2 } from "lucide-react";
-import { PillButtonUI, GlassCardUI } from "@mike/ui";
+import { PillButtonUI, GlassCardUI } from "@clausemoor/ui";
 import {
   SettingsDescription,
   SettingsLabel,
@@ -187,7 +187,7 @@ function PrivacyData({
       const status = await getUserExportStatus(export_id);
       if (status.status === "failed") {
         throw new UserVisibleError(
-          "Mike couldn't build the export. Try again, and contact support if it keeps happening.",
+          "Clausemoor couldn't build the export. Try again, and contact support if it keeps happening.",
           { retryable: true },
         );
       }

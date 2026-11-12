@@ -9,7 +9,7 @@ import type {
     Citation,
     PanelDocument,
 } from "../../shared/types";
-import { CitationPillUI, EXCERPT_SOURCE_PROPS } from "@mike/ui";
+import { CitationPillUI, EXCERPT_SOURCE_PROPS } from "@clausemoor/ui";
 import { withoutMarkdownNode } from "./messageStyles";
 import { citationTooltip } from "./CitationSources";
 import {

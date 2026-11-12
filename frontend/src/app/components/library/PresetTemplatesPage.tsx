@@ -17,7 +17,7 @@ import { SelectionActionsMenu } from "@/app/components/shared/SelectionActionsMe
 import { TableToolbar } from "@/app/components/shared/TableToolbar";
 import type { Document } from "@/app/components/shared/types";
 import { userFacingApiError } from "@/app/lib/userFacingError";
-import { TabPillButtonUI } from "@mike/ui";
+import { TabPillButtonUI } from "@clausemoor/ui";
 import { useLibraryWorkspace } from "./LibraryWorkspace";
 import {
   addPresetTemplate,

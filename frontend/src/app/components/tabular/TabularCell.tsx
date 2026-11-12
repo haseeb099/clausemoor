@@ -9,7 +9,7 @@ import { preprocessCitations, type ParsedCitation } from "./citation-utils";
 import { getPillClass } from "./pillUtils";
 import { SkeletonLine } from "../shared/TablePrimitive";
 import { TRExpandedCellSurface } from "./TRExpandedCellSurface";
-import { CitationPillUI } from "@mike/ui";
+import { CitationPillUI } from "@clausemoor/ui";
 
 interface Props {
     cell: TCell;

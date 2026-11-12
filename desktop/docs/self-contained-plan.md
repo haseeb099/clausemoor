@@ -1,9 +1,9 @@
-# Plan: fully self-contained Mike.app
+# Plan: fully self-contained Clausemoor.app
 
-**Goal.** A user downloads `Mike.app` and everything runs locally on their Mac —
+**Goal.** A user downloads `Clausemoor.app` and everything runs locally on their Mac —
 no Docker, no separate server, no cloud dependency (except LLM API calls, which
 are supplied per-user via Settings → API Keys, env vars, or a local Ollama).
-This complements the hosted default (`https://app.mikeoss.com`): hosted stays
+This complements the hosted default (`https://app.clausemoor.com`): hosted stays
 the zero-friction path; "Run locally on this Mac" becomes a third mode next to
 hosted and self-hosted-URL on the connect screen.
 
@@ -96,7 +96,7 @@ service_role tokens).
   `main.js`) gains **"Run locally on this Mac"** alongside the server URL;
   `serverUrl()` gains a `local` mode that boots the supervisor then loads the
   local frontend URL. Hosted/self-host modes unchanged.
-- Data dir: `~/Library/Application Support/Mike/local/{pgdata,storage,secrets,logs}`
+- Data dir: `~/Library/Application Support/Clausemoor/local/{pgdata,storage,secrets,logs}`
   (the `MIKE_USER_DATA_DIR` test seam already exists).
 - Dev mode first: supervisor over repo-built artifacts + Homebrew binaries,
   before packaging.

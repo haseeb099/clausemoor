@@ -6,7 +6,7 @@ import {
     within,
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ToastViewportUI, clearToasts } from "@mike/ui";
+import { ToastViewportUI, clearToasts } from "@clausemoor/ui";
 
 const {
     setUserProfilePhoto,
@@ -556,7 +556,7 @@ function ProfileSummary() {
 describe("UserProfileProvider when the server omits apiKeyStatus", () => {
     // Sentry MIKE-FRONTEND-4H: a profile answered 200 without
     // `apiKeyStatus`; normalising it threw, the throw was filed as a fault
-    // and the user got the placeholder profile. Every Mike backend sends the
+    // and the user got the placeholder profile. Every Clausemoor backend sends the
     // field, so the sender was a forked server or a proxy/misroute.
     const withoutKeyStatus = () => {
         const body: Partial<ReturnType<typeof apiProfile>> = apiProfile(false);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, type ReactNode } from "react";
-import { useReasoningDisclosure, DocFindBlockUI, DocReadBlockUI } from "@mike/ui";
+import { useReasoningDisclosure, DocFindBlockUI, DocReadBlockUI } from "@clausemoor/ui";
 import { ChevronDown } from "lucide-react";
 import { Markdown } from "../../../../shared/chat/Markdown";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { LIQUID_GLASS_FLAT_CLASS, PillButtonUI } from "@mike/ui";
+import { LIQUID_GLASS_FLAT_CLASS, PillButtonUI } from "@clausemoor/ui";
 import { MemorySaveStatus } from "@/app/components/memory/MemoryEditorState";
 import { useMemoryAutosave } from "@/app/components/memory/useMemoryAutosave";
 import { SettingsHeading } from "@/app/components/settings/SettingsHeading";
@@ -97,7 +97,7 @@ export function CustomInstructionsSection() {
         ) : null}
       </div>
       <SettingsDescription>
-        Tell Mike how you would like it to respond in chats.
+        Tell Clausemoor how you would like it to respond in chats.
       </SettingsDescription>
 
       {loading ? (

@@ -50,7 +50,7 @@ import {
   TabPillButtonUI,
   DropdownAtPoint,
   DropdownItem,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { setRowDragPreview } from "@/app/lib/rowDragPreview";
 import { movePlaybookRule, type RuleDropTarget } from "./playbookRuleMoves";
 import { createPlaybookRule } from "./playbookRules";

@@ -12,9 +12,9 @@ import React from "react";
 export function OutsideOfficeNotice(): React.ReactElement {
   return (
     <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
-      <p className="text-sm font-medium text-foreground">Open Mike in Word</p>
+      <p className="text-sm font-medium text-foreground">Open Clausemoor in Word</p>
       <p className="text-xs text-muted-foreground">
-        This page is Mike's Word add-in. It works inside Microsoft Word.
+        This page is Clausemoor's Word add-in. It works inside Microsoft Word.
       </p>
     </div>
   );

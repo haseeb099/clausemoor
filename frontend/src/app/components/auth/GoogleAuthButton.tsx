@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { GoogleIconUI, PillButtonUI } from "@mike/ui";
+import { GoogleIconUI, PillButtonUI } from "@clausemoor/ui";
 import { startGoogleOAuth } from "@/app/lib/authApi";
 import {
     describeError,

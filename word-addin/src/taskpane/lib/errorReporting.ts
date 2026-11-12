@@ -1,4 +1,4 @@
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 /**
  * Error reporting for the Word add-in. Same policy as the web app (see
  * frontend/src/app/lib/errorReporting.ts and the shared scrubber it uses):
@@ -15,7 +15,6 @@ import {
   privacyBoundaryIntegration,
   eventBudget,
   eventBudgetLimits,
-  MIKE_SENTRY_DSN,
   createEventScrubber,
   installKind,
   normalizeApiPath,
@@ -23,7 +22,7 @@ import {
   releaseName,
   resolveDsn,
   sentryEnvironment,
-} from "@mike/client";
+} from "@clausemoor/client";
 
 export type ReportLevel = "fatal" | "error" | "warning";
 
@@ -67,15 +66,14 @@ export function addinSentryOptions(
     maxRepeatEventsPerDay?: string;
   },
 ): Sentry.BrowserOptions {
-  // ON BY DEFAULT: the Mike project's own DSN unless REACT_APP_SENTRY_DISABLED
-  // or a DSN of your own is baked in at build time (README, "Telemetry").
-  // webpack sets NODE_ENV from --mode: the dev server is "development",
-  // `npm run build` (every image) is "production".
+  // Off unless REACT_APP_SENTRY_DSN is baked in at build time. webpack sets
+  // NODE_ENV from --mode: the dev server is "development", `npm run build`
+  // (every image) is "production".
   const development = env.nodeEnv === "development";
   const { dsn } = resolveDsn({
     disabled: env.disabled,
     dsn: env.dsn,
-    fallback: MIKE_SENTRY_DSN.wordAddin,
+    fallback: "",
     development,
   });
   const dataCollection = {
@@ -100,10 +98,10 @@ export function addinSentryOptions(
     // No session replay: the pane sits next to a privileged document.
     dataCollection,
     attachStacktrace: true,
-    integrations: [privacyBoundaryIntegration({ acceptEvent: eventBudget(eventBudgetLimits(env.maxRepeatEventsPerDay, dsn, Object.values(MIKE_SENTRY_DSN))) }), Sentry.captureConsoleIntegration({ levels: ["error"] })],
+    integrations: [privacyBoundaryIntegration({ acceptEvent: eventBudget(eventBudgetLimits(env.maxRepeatEventsPerDay, dsn, [])) }), Sentry.captureConsoleIntegration({ levels: ["error"] })],
     initialScope: {
       tags: {
-        service: "mike-word-addin",
+        service: "clausemoor-word-addin",
         surface,
         build_mode: env.nodeEnv,
         diagnostics_version: "2",
@@ -168,7 +166,7 @@ function officeDiagnostics():
 }
 
 /**
- * Office.onReady resolved with no host, so the pane shows the "open Mike in
+ * Office.onReady resolved with no host, so the pane shows the "open Clausemoor in
  * Word" notice instead of the app. A plain browser tab (a crawler, a link
  * preview, a pasted URL) has no Office diagnostics either, and stays silent.
  * Diagnostics WITH a null host is a contradiction only a real Office client

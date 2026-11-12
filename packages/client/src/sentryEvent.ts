@@ -10,7 +10,7 @@ import { retainExceptionTypes, diagnosticErrorTags } from "./sentryPrivacy";
  *
  * Two jobs:
  *
- *  1. SCRUB. Mike handles privileged legal documents. An event may carry a
+ *  1. SCRUB. Clausemoor handles privileged legal documents. An event may carry a
  *     user id and a route; it must never carry a request body, a cookie, an
  *     auth header, or anything under a key that looks like a secret.
  *  2. DEDUPE. Every remaining `console.error` is bridged into Sentry so no
@@ -250,35 +250,21 @@ export function redactShaped(value: unknown, depth = 0): unknown {
     return value;
 }
 
-/**
-  * The Mike project's own Sentry projects. A DSN is a write-only address:
-  * it lets an SDK post events and nothing else, so it is public by design
-  * (it ships in every browser bundle). Community installs report here by
-  * default so the project learns what forks run into; the opt-out and the
-  * override are one variable each (see resolveDsn).
-  */
-export const MIKE_SENTRY_DSN = {
-    backend:
-        "https://d0d66029ed783707289c965cd3d5c868@o4512288166510592.ingest.us.sentry.io/4512288204718080",
-    frontend:
-        "https://fa97921af9f387723a4bc3d42dd7bb44@o4512288166510592.ingest.us.sentry.io/4512288207798272",
-    wordAddin:
-        "https://2b90028876534676ea38580cfc61cdde@o4512288166510592.ingest.us.sentry.io/4512288210812928",
-} as const;
-
 export type DsnResolution = {
     dsn: string;
     /**
-     * Where the DSN came from; "default" means the Mike project's Sentry and
-     * "development" means off because this is a development build.
+     * "env" is the operator's DSN. "default" is the caller's fallback, which
+     * Clausemoor leaves empty so reporting stays off. "development" is off
+     * because this is a development build.
      */
     source: "disabled" | "env" | "default" | "development";
 };
 
 /**
-  * Off if the runtime's *_SENTRY_DISABLED is "true"; the runtime's own DSN
-  * when one is set (a self-hoster's own Sentry); otherwise the built-in Mike
-  * project DSN. Test processes are guarded separately by the caller.
+  * Off if the runtime's *_SENTRY_DISABLED is "true". The operator's own DSN
+  * when one is set. A development build stays off unless that DSN is set.
+  * Otherwise the caller's fallback is used. Clausemoor passes an empty
+  * fallback: there is no built-in Sentry project.
   */
 export function resolveDsn(input: {
     disabled?: string;
@@ -286,9 +272,9 @@ export function resolveDsn(input: {
     fallback: string;
     /**
      * A development build (`next dev`, `tsx watch`, the add-in's webpack dev
-     * server): a contributor's laptop, not an install. It never falls back to
-     * the Mike project; only a DSN set on purpose (your own project, or the
-     * local sink in scripts/sentry-sink.mjs) turns it on.
+     * server): a contributor's laptop, not an install. It stays off unless a
+     * DSN is set on purpose (your own project, or the local sink in
+     * scripts/sentry-sink.mjs).
      */
     development?: boolean;
 }): DsnResolution {
@@ -415,7 +401,7 @@ function mapStringLeaves(
 }
 
 /**
-  * COMMUNITY INSTALLS: a fork or self-hosted Mike reporting to the Mike
+  * COMMUNITY INSTALLS: a fork or self-hosted Clausemoor reporting to the Clausemoor
   * project's Sentry sends only what our own code owns and what is too broad
   * to identify anyone. Removed: the machine name, the user id, request
   * headers and host, every breadcrumb, device / app / locale contexts, local
@@ -767,10 +753,10 @@ export function normalizeVersion(raw: string | undefined): string {
  * The release every event is tagged with, and the one the build plugins
  * upload source maps under (releaseName.cjs is the CommonJS twin for the
  * build configs). An explicit SENTRY_RELEASE wins; otherwise
- * `mike@<version>+<sha12>` from the MIKE_VERSION and GIT_SHA build
+ * `clausemoor@<version>+<sha12>` from the MIKE_VERSION and GIT_SHA build
  * arguments. Sentry reads `package@version+build` as semver, so releases
  * order by version while the build metadata keeps the exact commit. A build
- * without a version is `mike@0.0.0...`: valid, and visibly not a release.
+ * without a version is `clausemoor@0.0.0...`: valid, and visibly not a release.
  */
 export function releaseName(
     explicit: string | undefined,
@@ -780,6 +766,6 @@ export function releaseName(
     const named = explicit?.trim();
     if (named) return named;
     const sha = gitSha?.trim().slice(0, 12);
-    const base = `mike@${normalizeVersion(version)}`;
+    const base = `clausemoor@${normalizeVersion(version)}`;
     return sha ? `${base}+${sha}` : base;
 }

@@ -1,5 +1,5 @@
 /**
- * Bulk accept/reject of Mike's tracked edits, through the add-in's public
+ * Bulk accept/reject of Clausemoor's tracked edits, through the add-in's public
  * restore + resolve API against a small in-memory Word host (the add-in
  * package has no unit-test runner of its own).
  *
@@ -122,7 +122,7 @@ function wordHost({ desktopRevisions = false } = {}) {
         refuseOnce(id: string) {
             refusals.add(id);
         },
-        /** One of Mike's replacements, inside its persistent bookmark. */
+        /** One of Clausemoor's replacements, inside its persistent bookmark. */
         mikeEdit(stableEditId: string, original: string, replacement: string) {
             const bookmark = bookmarkNameForEdit(stableEditId);
             records.push(
@@ -131,7 +131,7 @@ function wordHost({ desktopRevisions = false } = {}) {
             );
             return { stableEditId, edit: { original, replacement } };
         },
-        /** A pending revision someone else made, outside Mike's passages. */
+        /** A pending revision someone else made, outside Clausemoor's passages. */
         foreignInsertion(id: string, text: string) {
             records.push({ id, type: "Added", text, bookmark: null, state: "pending" });
         },
@@ -162,8 +162,8 @@ describe("bulk tracked-edit resolution", () => {
         const first = host.mikeEdit("m:edit-0", "original clause", "replacement clause");
         const second = host.mikeEdit("m:edit-1", "second original", "second replacement");
         const handles = await restore([first, second]);
-        // The user rewrote Mike's insertion; elsewhere, an unrelated pending
-        // insertion now carries Mike's replacement text.
+        // The user rewrote Clausemoor's insertion; elsewhere, an unrelated pending
+        // insertion now carries Clausemoor's replacement text.
         host.records.find((r) => r.id === "m:edit-0:added")!.text = "user amended replacement";
         host.foreignInsertion("foreign", "replacement clause");
 

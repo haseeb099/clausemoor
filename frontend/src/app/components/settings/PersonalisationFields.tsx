@@ -11,7 +11,7 @@ import {
   DropdownRadioGroup,
   DropdownRadioItem,
   DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { OptionPill } from "@/app/components/ui/option-pill";
 import { FieldLabel } from "@/app/components/ui/form-field";
 import { cn } from "@/app/lib/utils";

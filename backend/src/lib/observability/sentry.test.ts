@@ -58,7 +58,6 @@ vi.mock("@sentry/node", () => ({
 import * as Sentry from "@sentry/node";
 import {
   bestEffort,
-  MIKE_SENTRY_DSN,
   flushSentry,
   initSentry,
   markStage,
@@ -95,7 +94,7 @@ afterEach(() => {
 
 describe("sentryConfiguration", () => {
   it.each([
-    ["upstream", "", "", true, MIKE_SENTRY_DSN.backend],
+    ["no DSN", "", "", false, ""],
     ["fork without Sentry", "true", "", false, ""],
     ["fork with its own Sentry", "", "https://fork@self.example/9", true, "https://fork@self.example/9"],
   ])("preserves %s reporting defaults with the stock Compose env_file", (_kind, disabled, dsn, enabled, expectedDsn) => {
@@ -110,10 +109,10 @@ describe("sentryConfiguration", () => {
     expect(config.dsn).toBe(expectedDsn);
   });
 
-  it("is ON BY DEFAULT: the Mike project DSN, a community install, environment self-hosted", () => {
+  it("is OFF without a DSN: empty project, a community install tag, environment self-hosted", () => {
     const config = sentryConfiguration({ NODE_ENV: "production" } as NodeJS.ProcessEnv);
-    expect(config.enabled).toBe(true);
-    expect(config.dsn).toBe(MIKE_SENTRY_DSN.backend);
+    expect(config.enabled).toBe(false);
+    expect(config.dsn).toBe("");
     expect(config.dsnSource).toBe("default");
     expect(config.install).toBe("community");
     // NODE_ENV no longer leaks into the environment tag: a fork's
@@ -121,7 +120,7 @@ describe("sentryConfiguration", () => {
     expect(config.environment).toBe("self-hosted");
     expect(config.tracesSampleRate).toBe(0);
     // No MIKE_VERSION or GIT_SHA: a visibly unversioned build, never undefined.
-    expect(config.release).toBe("mike@0.0.0");
+    expect(config.release).toBe("clausemoor@0.0.0");
   });
 
   it("is off with SENTRY_DISABLED=true, whatever else is set", () => {
@@ -148,13 +147,13 @@ describe("sentryConfiguration", () => {
     const config = sentryConfiguration({
       SENTRY_DSN: " https://key@o1.ingest.sentry.io/1 ",
       SENTRY_ENVIRONMENT: "staging",
-      SENTRY_RELEASE: "mike@1.2.3",
+      SENTRY_RELEASE: "clausemoor@1.2.3",
       SENTRY_TRACES_SAMPLE_RATE: "7",
     } as NodeJS.ProcessEnv);
     expect(config.enabled).toBe(true);
     expect(config.dsn).toBe("https://key@o1.ingest.sentry.io/1");
     expect(config.environment).toBe("staging");
-    expect(config.release).toBe("mike@1.2.3");
+    expect(config.release).toBe("clausemoor@1.2.3");
     expect(config.tracesSampleRate).toBe(1);
   });
 
@@ -206,40 +205,35 @@ describe("sentryConfiguration", () => {
     ).toBe(true);
   });
 
-  it("reads the repeat-event budget without imposing a community cap on custom DSNs", () => {
-    expect(sentryConfiguration({}, false).repeatEventsPerDay).toBe(25);
+  it("reads the repeat-event budget without imposing an upstream cap", () => {
+    expect(sentryConfiguration({}, false).repeatEventsPerDay).toBe(Infinity);
     expect(sentryConfiguration({ SENTRY_DSN: "https://key@sentry.invalid/1" }, false).repeatEventsPerDay).toBe(Infinity);
     expect(sentryConfiguration({ SENTRY_MAX_REPEAT_EVENTS_PER_DAY: "0" }, false).repeatEventsPerDay).toBe(0);
-    for (const dsn of Object.values(MIKE_SENTRY_DSN)) {
-      expect(sentryConfiguration({ SENTRY_DSN: dsn }, false)).toMatchObject({ repeatEventsPerDay: 25, eventsPerDay: 50 });
-      expect(sentryConfiguration({ MIKE_BUILD_SENTRY_DSN: dsn }, false)).toMatchObject({ repeatEventsPerDay: 25, eventsPerDay: 50 });
-    }
-
   });
 
-  it("derives mike@<version>+<sha12> from the build args when SENTRY_RELEASE is unset", () => {
+  it("derives clausemoor@<version>+<sha12> from the build args when SENTRY_RELEASE is unset", () => {
     expect(
       sentryConfiguration({
         ...quietEnv,
         MIKE_VERSION: "2.1.0",
         GIT_SHA: "0123456789abcdef0123",
       } as NodeJS.ProcessEnv).release,
-    ).toBe("mike@2.1.0+0123456789ab");
+    ).toBe("clausemoor@2.1.0+0123456789ab");
     expect(
       sentryConfiguration({ ...quietEnv, GIT_SHA: "0123456789abcdef0123" } as NodeJS.ProcessEnv)
         .release,
-    ).toBe("mike@0.0.0+0123456789ab");
+    ).toBe("clausemoor@0.0.0+0123456789ab");
     expect(releaseName(undefined, "v2.1.0-dev.4", "0123456789abcdef0123")).toBe(
-      "mike@2.1.0-dev.4+0123456789ab",
+      "clausemoor@2.1.0-dev.4+0123456789ab",
     );
-    expect(releaseName(undefined, "2.1.0+meta", undefined)).toBe("mike@0.0.0");
+    expect(releaseName(undefined, "2.1.0+meta", undefined)).toBe("clausemoor@0.0.0");
     expect(
       sentryConfiguration({
         ...quietEnv,
         GIT_SHA: "0123456789abcdef0123",
-        SENTRY_RELEASE: "mike@2.0.0",
+        SENTRY_RELEASE: "clausemoor@2.0.0",
       } as NodeJS.ProcessEnv).release,
-    ).toBe("mike@2.0.0");
+    ).toBe("clausemoor@2.0.0");
   });
 
   it("ignores a non-numeric sample rate", () => {
@@ -287,7 +281,7 @@ describe("initSentry", () => {
     expect(options.environment).toBe("staging");
     expect(options.beforeSend).toBe(scrubEvent);
     expect(options.initialScope).toEqual({
-      tags: { service: "mike-backend", role: "worker", install: "community", build_mode: "test", diagnostics_version: "2" },
+      tags: { service: "clausemoor-backend", role: "worker", install: "community", build_mode: "test", diagnostics_version: "2" },
     });
     expect(sentryMock.httpIntegration).toHaveBeenCalledWith();
     // Crash parity: an unhandled rejection must still take the process
@@ -859,15 +853,14 @@ describe("operation and stage trail", () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     initSentry("api", {
       ...dsnEnv,
-      SENTRY_DSN: undefined,
       MIKE_VERSION: "2.1.0",
       GIT_SHA: "0123456789abcdef0123",
     } as NodeJS.ProcessEnv);
-    expect(log).toHaveBeenCalledWith(expect.stringContaining("release mike@2.1.0+0123456789ab"));
+    expect(log).toHaveBeenCalledWith(expect.stringContaining("release clausemoor@2.1.0+0123456789ab"));
     expect(warn).not.toHaveBeenCalled();
     resetSentryForTests();
-    initSentry("api", { ...dsnEnv, SENTRY_DSN: undefined, NODE_ENV: "production" } as NodeJS.ProcessEnv);
-    expect(log).toHaveBeenCalledWith(expect.stringContaining("release mike@0.0.0"));
+    initSentry("api", { ...dsnEnv, NODE_ENV: "production" } as NodeJS.ProcessEnv);
+    expect(log).toHaveBeenCalledWith(expect.stringContaining("release clausemoor@0.0.0"));
     expect(warn).toHaveBeenCalledWith(expect.stringContaining("unversioned release"));
   });
 });
@@ -914,7 +907,7 @@ describe("Node process warnings", () => {
     expect(consoleEvent(printed)).toBeNull();
     expect(consoleEvent("(node:1) ExperimentalWarning: SQLite is an experimental feature")).toBeNull();
     expect(consoleEvent("[dbq] tick failed")).not.toBeNull();
-    expect(consoleEvent("Mike workflow sync failed")).not.toBeNull();
+    expect(consoleEvent("Clausemoor workflow sync failed")).not.toBeNull();
   });
 
   it("stays silent when the operator set NODE_NO_WARNINGS=1", () => {
@@ -1041,7 +1034,7 @@ describe("community install minimisation", () => {
 });
 
 // MIKE-BACKEND-B, 8, C, 1V, 1M: culprits under backend/src/... are `tsx
-// watch` checkouts reporting to the Mike project as environment=self-hosted.
+// watch` checkouts reporting to the Clausemoor project as environment=self-hosted.
 describe("development builds", () => {
   it("are the TypeScript source, not the compiled image", () => {
     expect(isDevelopmentBuild(["node", "/home/dev/mike/backend/src/index.ts"])).toBe(true);
@@ -1049,12 +1042,13 @@ describe("development builds", () => {
     expect(isDevelopmentBuild(["node", "/app/dist/jobs/syncWorkflows.js"])).toBe(false);
   });
 
-  it("do not fall back to the Mike project, even with the example's SENTRY_DISABLED=false", () => {
+  it("do not fall back to the Clausemoor project, even with the example's SENTRY_DISABLED=false", () => {
     const config = sentryConfiguration({ NODE_ENV: "development", SENTRY_DISABLED: "false" } as NodeJS.ProcessEnv, true);
     expect(config).toMatchObject({ enabled: false, dsn: "", dsnSource: "development" });
     // The compiled image under compose's NODE_ENV=development is an install.
     expect(sentryConfiguration({ NODE_ENV: "development" } as NodeJS.ProcessEnv, false)).toMatchObject({
-      enabled: true,
+      enabled: false,
+      dsn: "",
       dsnSource: "default",
       environment: "self-hosted",
     });
@@ -1086,9 +1080,14 @@ describe("development builds", () => {
     expect(initSentry("api", env, true)).toBe(false);
 
     resetSentryForTests();
-    expect(initSentry("api", { ...env, SENTRY_SOURCE_RUN_IS_INSTALL: "TRUE" } as NodeJS.ProcessEnv, true)).toBe(true);
+    expect(initSentry("api", { ...env, SENTRY_SOURCE_RUN_IS_INSTALL: "TRUE" } as NodeJS.ProcessEnv, true)).toBe(false);
+    expect(initSentry("api", {
+      ...env,
+      SENTRY_SOURCE_RUN_IS_INSTALL: "TRUE",
+      SENTRY_DSN: "https://key@sentry.invalid/1",
+    } as NodeJS.ProcessEnv, true)).toBe(true);
     const options = vi.mocked(Sentry.init).mock.calls[0][0]!;
-    expect(options).toMatchObject({ dsn: MIKE_SENTRY_DSN.backend, environment: "self-hosted" });
+    expect(options).toMatchObject({ dsn: "https://key@sentry.invalid/1", environment: "self-hosted" });
     expect(options.initialScope).toMatchObject({ tags: { build_mode: "production" } });
   });
 

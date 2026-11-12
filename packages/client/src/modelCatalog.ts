@@ -1,5 +1,5 @@
 // The model catalog both clients build their pickers from, published by
-// @mike/client to the web app and the Word add-in. Pure data and functions
+// @clausemoor/client to the web app and the Word add-in. Pure data and functions
 // only: nothing here may import from an application or reach a framework.
 //
 // It owns:

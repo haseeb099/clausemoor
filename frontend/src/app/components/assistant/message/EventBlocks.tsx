@@ -1,6 +1,6 @@
 import { useMarkdownCheckpoint } from "./markdownCheckpoint";
 import { memo, useEffect, useRef, useState, type ReactNode } from "react";
-import { useReasoningDisclosure, DocEditBlockUI, DocFindBlockUI, DocReadBlockUI } from "@mike/ui";
+import { useReasoningDisclosure, DocEditBlockUI, DocFindBlockUI, DocReadBlockUI } from "@clausemoor/ui";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Download, Loader2 } from "lucide-react";

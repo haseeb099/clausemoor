@@ -5,7 +5,7 @@ import type {
     DelegationEvent,
     DelegationModelTier,
     McpToolEvent,
-} from "@mike/contracts";
+} from "@clausemoor/contracts";
 import { filterAccessibleDocumentIds } from "../../../../lib/access";
 import type { NormalizedToolCall } from "../../../../lib/llm";
 import { AppError } from "../../../../lib/appError";

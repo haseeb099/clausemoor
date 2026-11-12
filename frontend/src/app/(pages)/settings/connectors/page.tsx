@@ -70,7 +70,7 @@ import {
 import { reportFault } from "@/app/lib/userFacingError";
 import { SettingsDescription } from "@/app/components/settings/SettingsText";
 import { SettingsHeading } from "@/app/components/settings/SettingsHeading";
-import { PillButtonUI, LIQUID_GLASS_SUBTLE_CLASS, ToggleSwitchUI } from "@mike/ui";
+import { PillButtonUI, LIQUID_GLASS_SUBTLE_CLASS, ToggleSwitchUI } from "@clausemoor/ui";
 
 /** What the user was doing, for "Couldn't ..." and honest retry text. */
 const CONNECTOR_ACTION_LABELS = {
@@ -97,7 +97,7 @@ const CONNECTOR_ACTION_LABELS = {
 function connectorMessage(error: unknown, action: string): string {
   return reportFault(error, {
     action,
-    fallback: `Mike couldn't ${action}. Try again.`,
+    fallback: `Clausemoor couldn't ${action}. Try again.`,
     operation: "settings.connectors",
   }).message;
 }
@@ -136,7 +136,7 @@ type CreateSurface = "modal" | "page";
 const AUTOSAVE_DELAY_MS = 1200;
 
 const CONNECTOR_SETUP_GUIDE_URL =
-  "https://github.com/open-legal-products/mike/blob/main/docs/connectors.md";
+  "https://github.com/haseeb099/clausemoor/blob/main/docs/connectors.md";
 
 const emptyAddDraft: AddDraft = {
   name: "",
@@ -325,7 +325,7 @@ function ConnectorBrandIcon({ name }: { name: string }) {
 }
 
 function googleSetupGuideUrl(provider: GoogleConnectorProvider) {
-  return `https://github.com/open-legal-products/mike/blob/main/docs/google-workspace.md#${
+  return `https://github.com/haseeb099/clausemoor/blob/main/docs/google-workspace.md#${
     provider === "google-drive" ? "google-drive" : "gmail-and-google-calendar"
   }`;
 }

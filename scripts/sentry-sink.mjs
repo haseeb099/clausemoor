@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // A local stand-in for Sentry's ingest endpoint, for verifying error tracking
-// without an account: point any Mike runtime's DSN at it and every event the
+// without an account: point any Clausemoor runtime's DSN at it and every event the
 // SDK would have sent to sentry.io lands here instead, printed to the
 // terminal and listed at http://localhost:<port>/ .
 //
@@ -102,7 +102,7 @@ async function decodeBody(req) {
   return raw.toString("utf8");
 }
 
-/** Permit browser access only from the sink itself and Mike's local app origins. */
+/** Permit browser access only from the sink itself and Clausemoor's local app origins. */
 function corsHeaders(req) {
   const origin = req.headers.origin;
   if (typeof origin !== "string" || !ALLOWED_ORIGINS.has(origin)) return {};
@@ -262,6 +262,6 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, "127.0.0.1", () => {
   console.log(`Sentry sink listening on http://localhost:${port}`);
-  console.log(`  DSN for any Mike runtime: http://mike@localhost:${port}/1`);
+  console.log(`  DSN for any Clausemoor runtime: http://mike@localhost:${port}/1`);
   console.log(`  Events page:               http://localhost:${port}/`);
 });

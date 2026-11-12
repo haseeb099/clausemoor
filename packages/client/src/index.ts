@@ -1,11 +1,14 @@
-// Public surface of @mike/client: the client-side behavior the web app and the
+// Public surface of @clausemoor/client: the client-side behavior the web app and the
 // Word add-in share that has nothing to do with rendering. Consumers import
-// from "@mike/client" only; a file in this directory that is not re-exported
+// from "@clausemoor/client" only; a file in this directory that is not re-exported
 // here is internal to the package.
 //
 // Everything here is framework-free: no React (type-only imports excepted),
 // no DOM at module scope, no application imports. Playwright loads this
 // package directly in Node for the add-in's end-to-end tests.
+
+// Operator-configurable product name, support contact, and legal links
+export * from "./brand";
 
 // Failure classification and presentation
 export * from "./userError";

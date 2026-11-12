@@ -46,11 +46,11 @@ describe("SupportPage", () => {
 
         const alert = await screen.findByRole("alert");
         expect(alert).toHaveTextContent(
-            "Mike is temporarily unavailable. Try again in a moment.",
+            "Clausemoor is temporarily unavailable. Try again in a moment.",
         );
         expect(
             screen.getByRole("link", { name: "Email support directly" }),
-        ).toHaveAttribute("href", expect.stringContaining("will@mikeoss.com"));
+        ).toHaveAttribute("href", expect.stringContaining("support@clausemoor.com"));
 
         // The form keeps what was typed, so Submit is the retry.
         await user.click(screen.getByRole("button", { name: "Submit" }));
@@ -67,7 +67,7 @@ describe("SupportPage", () => {
         await submitFeedback();
 
         expect(await screen.findByRole("alert")).toHaveTextContent(
-            "Mike couldn't reach the server. Check your connection and try again.",
+            "Clausemoor couldn't reach the server. Check your connection and try again.",
         );
     });
 });

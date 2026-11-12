@@ -3,7 +3,7 @@
 # The add-in bundles the packages it shares with the web app (packages/ui and
 # packages/client, reached through webpack aliases, tsconfig paths, and a
 # Tailwind @source entry), the web app's icons (frontend/public/icons, the
-# @icons alias), and the @mike/contracts declarations. Nothing else outside
+# @icons alias), and the @clausemoor/contracts declarations. Nothing else outside
 # word-addin/ is read.
 # .github/workflows/docker-images.yml builds this file in CI so a new outside
 # dependency fails the pull request, not the next deploy.
@@ -26,7 +26,7 @@ ARG REACT_APP_SENTRY_DISABLED=
 ARG REACT_APP_SENTRY_INSTALL=
 ARG REACT_APP_SENTRY_ENVIRONMENT=
 ARG REACT_APP_SENTRY_RELEASE=
-# Release identity (docs/observability.md): mike@<version>+<sha12>.
+# Release identity (docs/observability.md): clausemoor@<version>+<sha12>.
 ARG MIKE_VERSION=
 ARG GIT_SHA=
 ENV REACT_APP_API_BASE_URL=/api \

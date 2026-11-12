@@ -1,6 +1,7 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
-import { ToggleSwitchUI, PillButtonUI as PillButton, GlassCardUI } from "@mike/ui";
+import { ATTRIBUTION_LINE, sourceCodeUrl } from "@clausemoor/client";
+import { ToggleSwitchUI, PillButtonUI as PillButton, GlassCardUI } from "@clausemoor/ui";
 import { PageTitle } from "../primitives/PageTitle";
 import type { WordChatStorageMode } from "../../lib/wordChatSettings";
 import { Modal } from "../primitives/Modal";
@@ -30,7 +31,7 @@ export function SettingsPage({
     } catch (reason) {
       setError(
         reportFault(reason, {
-          fallback: "Mike couldn't save that setting. Try again.",
+          fallback: "Clausemoor couldn't save that setting. Try again.",
           operation: "settings.keys",
         }).message,
       );
@@ -113,7 +114,7 @@ export function SettingsPage({
                 setError(
                   reportFault(reason, {
                     fallback:
-                      "Mike couldn't delete the device-only chats. Try again.",
+                      "Clausemoor couldn't delete the device-only chats. Try again.",
                     operation: "settings.keys",
                   }).message,
                 ),
@@ -133,6 +134,17 @@ export function SettingsPage({
           account on this device. Cloud chats are not affected.
         </p>
       </Modal>
+      <footer className="mt-6 space-y-2 px-1 text-xs leading-5 text-gray-500">
+        <p>{ATTRIBUTION_LINE}</p>
+        <a
+          href={sourceCodeUrl()}
+          target="_blank"
+          rel="noreferrer"
+          className="font-medium text-gray-700 underline"
+        >
+          Source code
+        </a>
+      </footer>
     </div>
   );
 }

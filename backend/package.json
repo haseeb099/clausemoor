@@ -1,5 +1,5 @@
 {
-  "name": "mike-backend",
+  "name": "clausemoor-backend",
   "version": "1.0.0",
   "private": true,
   "engines": {
@@ -56,6 +56,7 @@
     "linkedom": "^0.18.15",
     "mammoth": "^1.13.0",
     "pdfjs-dist": "^6.5.438",
+    "stripe": "^19.3.0",
     "undici": "^8.12.4",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
     "yaml": "2.9.1",

@@ -8,7 +8,7 @@ import {
   DropdownRadioGroup,
   DropdownRadioItem,
   DropdownTrigger,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import { SettingsRow } from "@/app/components/settings/SettingsRow";
 import {
   SettingsDescription,

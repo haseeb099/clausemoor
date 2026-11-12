@@ -43,7 +43,7 @@ export function WorkflowModal({
         setWorkflows([]);
         setError(
           reportFault(reason, {
-            fallback: "Mike couldn't load your workflows. Try again.",
+            fallback: "Clausemoor couldn't load your workflows. Try again.",
             operation: "workflows.run",
           }).message
         );

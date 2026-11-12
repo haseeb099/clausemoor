@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import type { WebSource } from "@mike/contracts";
+import type { WebSource } from "@clausemoor/contracts";
 import type { AssistantEvent } from "../../shared/types";
 import { EventBlock } from "./EventBlocks";
 import { EventDisclosureButton, EventLabel } from "./EventDisclosure";

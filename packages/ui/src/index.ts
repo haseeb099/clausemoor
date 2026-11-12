@@ -1,9 +1,9 @@
-// Public surface of @mike/ui: the React primitives the web app and the Word
-// add-in render in common. Consumers import from "@mike/ui" only; a file in
+// Public surface of @clausemoor/ui: the React primitives the web app and the Word
+// add-in render in common. Consumers import from "@clausemoor/ui" only; a file in
 // this directory that is not re-exported here is internal to the package.
 //
 // Every component is framework-light (React, lucide-react, clsx,
-// tailwind-merge, Radix dropdown) and may depend on @mike/client, never on an
+// tailwind-merge, Radix dropdown) and may depend on @clausemoor/client, never on an
 // application. docs/design-system.md describes how to add one.
 
 // Liquid-glass surfaces and class-name constants

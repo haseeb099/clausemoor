@@ -10,7 +10,7 @@ import {
     DropdownTrigger,
     LIQUID_GLASS_HOVER_CLASS,
     LIQUID_GLASS_SUBTLE_CLASS,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 
 const DESKTOP_QUERY = "(min-width: 768px)";
 

@@ -7,7 +7,7 @@ import {
     getProjectAccess,
 } from "@/app/lib/mikeApi";
 import { ProjectWorkspaceProvider } from "./ProjectWorkspace";
-import { ToastViewportUI, clearToasts } from "@mike/ui";
+import { ToastViewportUI, clearToasts } from "@clausemoor/ui";
 
 vi.mock("next/navigation", () => ({
     useRouter: () => ({ push: vi.fn() }),

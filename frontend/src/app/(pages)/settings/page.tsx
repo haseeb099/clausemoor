@@ -1,10 +1,14 @@
 "use client";
 
 import { ProfilePhotoSettings } from "@/app/components/settings/ProfilePhotoSettings";
+import { SourceNotice } from "@/app/components/SourceNotice";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
-import { PillButtonUI, GlassCardUI } from "@mike/ui";
+import { PillButtonUI, GlassCardUI } from "@clausemoor/ui";
+import { formatGbp, plansCatalog } from "@/app/lib/plans";
+import { BillingPlanActions } from "@/app/components/settings/BillingPlanActions";
 import { Modal } from "@/app/components/modals/Modal";
 import { FieldLabel } from "@/app/components/ui/form-field";
 import { SettingsTextInput } from "@/app/components/settings/SettingsTextInput";
@@ -325,9 +329,49 @@ export default function SettingsPage() {
         <SettingsHeading id="usage-plan">Usage Plan</SettingsHeading>
         <GlassCardUI>
           <SettingsRow layout="stacked">
-            <p className="text-base font-medium text-gray-500 capitalize">
-              {profile?.tier || "Free"}
-            </p>
+            <div className="space-y-3">
+              <div>
+                <p className="text-base font-medium text-gray-800 capitalize">
+                  Current: {profile?.tier || "Pilot"}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-gray-500">
+                  Paid plans are sold on invoice. {plansCatalog.vatNote}
+                </p>
+              </div>
+              <ul className="space-y-2 text-sm text-gray-700">
+                {plansCatalog.plans.map((plan) => (
+                  <li
+                    key={plan.id}
+                    className="flex flex-wrap items-baseline justify-between gap-2 border-t border-gray-100 pt-2 first:border-t-0 first:pt-0"
+                  >
+                    <span>
+                      <span className="font-medium">{plan.name}</span>
+                      <span className="text-gray-500"> · {plan.seats}</span>
+                    </span>
+                    <span className="text-gray-600">
+                      {plan.priceMonthly != null
+                        ? `${formatGbp(plan.priceMonthly)}/mo`
+                        : plan.priceLabel}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <BillingPlanActions />
+              <div className="flex flex-wrap gap-3 pt-1 text-xs font-medium">
+                <Link
+                  href="/pricing"
+                  className="text-gray-700 underline decoration-gray-300 underline-offset-4 hover:text-gray-950"
+                >
+                  View pricing
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-gray-700 underline decoration-gray-300 underline-offset-4 hover:text-gray-950"
+                >
+                  Contact sales
+                </Link>
+              </div>
+            </div>
           </SettingsRow>
         </GlassCardUI>
       </section>
@@ -357,6 +401,7 @@ export default function SettingsPage() {
           </SettingsRow>
         </GlassCardUI>
       </section>
+      <SourceNotice detailed />
       <ConfirmPopup
         open={deleteConfirm}
         title="Delete account?"

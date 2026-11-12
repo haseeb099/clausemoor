@@ -26,8 +26,8 @@ RUN npm run build
 # --enable-source-maps: every entrypoint in this image (API, worker,
 # sync:workflows) reports stack frames as src/*.ts lines, not dist/*.js.
 # Release identity: the product version and the commit this image was built
-# from (docs/observability.md); Sentry tags events mike@<version>+<sha12>
-# unless SENTRY_RELEASE is set. A build without them is mike@0.0.0.
+# from (docs/observability.md); Sentry tags events clausemoor@<version>+<sha12>
+# unless SENTRY_RELEASE is set. A build without them is clausemoor@0.0.0.
 ARG MIKE_VERSION=
 ARG GIT_SHA=
 # Reporting defaults a fork's published image can bake in (both stay

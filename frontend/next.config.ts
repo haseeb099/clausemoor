@@ -1,12 +1,12 @@
 import path from "node:path";
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs/config";
-import { releaseName } from "@mike/client";
+import { releaseName } from "@clausemoor/client";
 
 // The repository root: the parent of this directory, here and in the Docker
 // image (frontend/Dockerfile mirrors the layout at /app/frontend and
-// /app/packages). The shared packages the app imports, @mike/ui and
-// @mike/client (packages/ui, packages/client), live there.
+// /app/packages). The shared packages the app imports, @clausemoor/ui and
+// @clausemoor/client (packages/ui, packages/client), live there.
 const REPO_ROOT = path.resolve(__dirname, "..");
 
 const nextConfig: NextConfig = {

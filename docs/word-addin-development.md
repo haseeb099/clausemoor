@@ -1,17 +1,17 @@
 # Word add-in development and deployment
 
 This guide contains the detailed setup, deployment, testing, and troubleshooting
-reference for the [Mike Word add-in](../word-addin/README.md).
+reference for the [Clausemoor Word add-in](../word-addin/README.md).
 
 ## Architecture
 
-The add-in uses the same backend-managed session and Mike API as the web app:
+The add-in uses the same backend-managed session and Clausemoor API as the web app:
 
-- Password, Google, refresh, and logout operations go through the Mike backend.
-- Chat, workflows, uploads, profiles, and model discovery use the Mike API.
+- Password, Google, refresh, and logout operations go through the Clausemoor backend.
+- Chat, workflows, uploads, profiles, and model discovery use the Clausemoor API.
 - Word conversations use dedicated `word_*` tables and do not appear in the
   web assistant's normal chat history.
-- The task pane requires HTTPS, so local development proxies `/api` to Mike
+- The task pane requires HTTPS, so local development proxies `/api` to Clausemoor
   through `https://localhost:3200`.
 
 Password and Google sign-in both produce the same HttpOnly cookie session.
@@ -47,7 +47,7 @@ steps manually:
 
    ```env
    REACT_APP_API_BASE_URL=https://localhost:3200/api
-   REACT_APP_WEB_APP_URL=https://app.mikeoss.com
+   REACT_APP_WEB_APP_URL=https://app.clausemoor.com
    API_PROXY_TARGET=http://localhost:3001
    OBJECT_STORAGE_PROXY_TARGET=http://localhost:9000
    OBJECT_STORAGE_BUCKET_NAME=mike
@@ -71,7 +71,7 @@ steps manually:
 
    Fully quit and reopen Word after installing it.
 
-4. Start the Mike backend:
+4. Start the Clausemoor backend:
 
    ```bash
    (cd ../backend && npm run dev)
@@ -93,7 +93,7 @@ steps manually:
 
    `WORD_ADDIN_SIDELOAD` applies only to `npm start` and the setup helper.
 
-The task pane appears under **Home → Mike Legal AI → Mike**. `npm run
+The task pane appears under **Home → Clausemoor Legal AI → Clausemoor**. `npm run
 dev:server` is retained as an internal alias for the direct webpack command.
 
 ## Manual sideloading
@@ -105,7 +105,7 @@ mkdir -p ~/Library/Containers/com.microsoft.Word/Data/Documents/wef
 cp manifest.xml ~/Library/Containers/com.microsoft.Word/Data/Documents/wef/
 ```
 
-Restart Word, then choose **Insert → Add-ins → My Add-ins → Mike**.
+Restart Word, then choose **Insert → Add-ins → My Add-ins → Clausemoor**.
 
 ### Word on the web
 
@@ -138,7 +138,7 @@ npm run build
 The build writes task-pane assets and a URL-rewritten manifest to `dist/`.
 The checked-in `manifest.xml` remains configured for localhost.
 
-The add-in host must reverse-proxy `https://word.example.com/api/*` to the Mike
+The add-in host must reverse-proxy `https://word.example.com/api/*` to the Clausemoor
 backend while preserving `Cookie`, `Origin`, response `Set-Cookie` headers, and
 streaming bodies. Keeping `/api` on the task-pane origin avoids third-party
 cookie restrictions across Word desktop and Word on the web.
@@ -190,16 +190,16 @@ does not copy or delete conversations.
 
 Cloud history is associated with an identifier in the Word document's Office
 settings. That identifier travels with copied files, although server access is
-still scoped to the signed-in Mike account. A same-account **Save As** copy can
+still scoped to the signed-in Clausemoor account. A same-account **Save As** copy can
 therefore initially share the source document's chat history.
 
 ## Errors and support
 
 The task pane never renders a raw `error.message`. `describeError` (shared
-with the web app through `@mike/client`, `packages/client/src/userError.ts`)
+with the web app through `@clausemoor/client`, `packages/client/src/userError.ts`)
 classifies a thrown value once, and `word-addin/src/taskpane/lib/notify.ts`
 shows the result as a toast with an honest "Retry", built on the toast core it
-shares with the web app (`createErrorNotifier` in `@mike/client`). Transport
+shares with the web app (`createErrorNotifier` in `@clausemoor/client`). Transport
 failures go through
 `word-addin/src/taskpane/lib/networkError.ts`, which calls the shared
 `networkMessage(origin)` so both clients say the same sentence; the add-in
@@ -208,13 +208,13 @@ not helped by "check your connection". Failures a user cannot fix offer a
 support hand-off carrying the request id, code, status, page and time —
 enough for support to find the request in the logs without the user quoting
 anything from a document. `frontend/src/wordAddin/errorReporting.test.tsx`
-exercises these add-in modules through the same `@mike/*` aliases webpack
+exercises these add-in modules through the same `@clausemoor/*` aliases webpack
 resolves, so a change on either side of the contract fails that suite.
 
 ## Automated tests
 
 The Playwright suite uses a mocked Office.js host and stubbed backend, so it
-does not require Word, Supabase, or a live Mike API:
+does not require Word, Supabase, or a live Clausemoor API:
 
 ```bash
 cd word-addin
@@ -254,12 +254,12 @@ Design tokens are not compared by hand: both targets import
 holds only the add-in's base layer.
 
 Code with no add-in-specific behavior is not vendored at all: it lives in the
-two packages the add-in shares with the web app, `@mike/ui` (`packages/ui`,
-React primitives) and `@mike/client` (`packages/client`, framework-free client
+two packages the add-in shares with the web app, `@clausemoor/ui` (`packages/ui`,
+React primitives) and `@clausemoor/client` (`packages/client`, framework-free client
 behavior), each consumed by name through `webpack.config.js` and
 `tsconfig.json` and exposing one public `src/index.ts`. There is nothing to
 keep in sync. The model catalog is one example: it is exported by
-`@mike/client` (`packages/client/src/modelCatalog.ts`), and
+`@clausemoor/client` (`packages/client/src/modelCatalog.ts`), and
 `src/taskpane/lib/modelCatalog.ts` only adapts the add-in's key-status shape
 to it. The packages have no `node_modules` of their own; their dependencies
 resolve to the add-in's through the `paths` entries in `tsconfig.json` and the
@@ -320,6 +320,6 @@ Confirm the Word host supports `WordApi 1.6`.
 
 ### Uploads or workflows fail
 
-Confirm the Mike API is reachable at the configured URL, the object-storage
+Confirm the Clausemoor API is reachable at the configured URL, the object-storage
 bucket exists, and the database contains at least one workflow. Check backend
 logs for the underlying request error.

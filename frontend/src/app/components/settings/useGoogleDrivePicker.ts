@@ -30,7 +30,7 @@ export function useGoogleDrivePicker(workspace?: string) {
       );
       setMessage(
         picked.length
-          ? `Added ${picked.length} ${picked.length === 1 ? "file" : "files"}. Mike can now search and read them.`
+          ? `Added ${picked.length} ${picked.length === 1 ? "file" : "files"}. Clausemoor can now search and read them.`
           : "No files added.",
       );
     } catch (error) {

@@ -17,7 +17,7 @@ import {
   normalizeVertexLocation,
 } from "@/app/lib/cloudProviderSettings";
 import type { ApiKeyProvider, ApiKeySettings } from "@/app/lib/mikeApi";
-import { isRouterSlug } from "@mike/client";
+import { isRouterSlug } from "@clausemoor/client";
 
 export type ByokProvider = {
   provider: ApiKeyProvider;

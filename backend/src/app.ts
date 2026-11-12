@@ -31,6 +31,10 @@ import {
   userMemoryRouter,
 } from "./modules/memory/memory.routes";
 import { playbooksRouter } from "./modules/playbooks/playbooks.routes";
+import {
+  billingRouter,
+  billingWebhookRouter,
+} from "./modules/billing/billing.routes";
 import { manifestPublicKey } from "./lib/manifestSigning";
 import {
   handleUnhandledError,
@@ -318,6 +322,13 @@ app.delete("/user/tabular-reviews", dataDeleteLimiter);
 // no body parser may consume it first — a .json upload otherwise would be.
 app.put("/download/signed/:token", blobUploadLimiter, blobUploadHandler);
 
+// Stripe needs the raw request body to verify webhook signatures.
+app.use(
+  "/billing/webhook",
+  express.raw({ type: "application/json" }),
+  billingWebhookRouter,
+);
+
 app.use(express.json({ limit: JSON_BODY_LIMIT }));
 
 // Body-aware account throttling complements the per-IP login limiter. The key
@@ -340,6 +351,7 @@ app.use("/quick-actions", quickActionsRouter);
 app.use("/workflow-addons", workflowAddonsRouter);
 app.use("/user/memory", userMemoryRouter);
 app.use("/user", userRouter);
+app.use("/billing", billingRouter);
 app.use("/download", downloadsRouter);
 app.use("/documents", sourceDocumentsRouter);
 app.use("/audit", auditRouter);

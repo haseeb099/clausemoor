@@ -1,5 +1,5 @@
 "use client";
-import { BACKEND_REPORTING_OWNER } from "@mike/client";
+import { BACKEND_REPORTING_OWNER } from "@clausemoor/client";
 
 import {
   useCallback,

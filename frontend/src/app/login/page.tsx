@@ -11,7 +11,7 @@ import {
     authInputUIClassName,
     AuthDividerUI,
     noticeActionClassName,
-} from "@mike/ui";
+} from "@clausemoor/ui";
 import Link from "next/link";
 import { SiteLogo } from "@/app/components/site-logo";
 import { useAuth } from "@/app/contexts/AuthContext";
@@ -351,14 +351,31 @@ export default function LoginPage() {
                         </form>
                     </details>
                 </div>
-                <div className="text-center text-sm text-gray-500">
-                    Don&apos;t have an account?{" "}
-                    <Link
-                        href="/signup"
-                        className="font-medium transition-colors hover:text-gray-950"
-                    >
-                        Sign up
-                    </Link>
+                <div className="space-y-2 text-center text-sm text-gray-500">
+                    <p>
+                        Don&apos;t have an account?{" "}
+                        <Link
+                            href="/signup"
+                            className="font-medium transition-colors hover:text-gray-950"
+                        >
+                            Sign up
+                        </Link>
+                    </p>
+                    <p>
+                        <Link
+                            href="/pricing"
+                            className="font-medium transition-colors hover:text-gray-950"
+                        >
+                            Plans and pricing
+                        </Link>
+                        {" · "}
+                        <Link
+                            href="/contact"
+                            className="font-medium transition-colors hover:text-gray-950"
+                        >
+                            Contact sales
+                        </Link>
+                    </p>
                 </div>
             </div>
             <WarningPopup

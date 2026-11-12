@@ -9,7 +9,7 @@ import {
     startUserExport,
 } from "@/app/lib/mikeApi";
 import PrivacyDataPage from "./page";
-import { ToastViewportUI, clearToasts } from "@mike/ui";
+import { ToastViewportUI, clearToasts } from "@clausemoor/ui";
 
 // The export buttons drive the async job flow: schedule → poll → download.
 // These tests pin that wiring (start called with the right type, download
@@ -135,7 +135,7 @@ describe("privacy-data async exports", () => {
         const toast = await screen.findByRole("alert");
         expect(toast).toHaveTextContent("Couldn't export your chats");
         expect(toast).toHaveTextContent(
-            "Mike couldn't build the export. Try again, and contact support if it keeps happening.",
+            "Clausemoor couldn't build the export. Try again, and contact support if it keeps happening.",
         );
         expect(
             screen.getByRole("button", { name: "Retry" }),
