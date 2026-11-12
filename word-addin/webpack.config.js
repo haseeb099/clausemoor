@@ -261,6 +261,7 @@ module.exports = async (_env, options) => {
           : process.env.REACT_APP_WEB_APP_URL || "",
         REACT_APP_PRODUCT_NAME: process.env.REACT_APP_PRODUCT_NAME || process.env.PRODUCT_NAME || "",
         REACT_APP_SUPPORT_EMAIL: process.env.REACT_APP_SUPPORT_EMAIL || process.env.SUPPORT_EMAIL || "",
+        REACT_APP_SALES_EMAIL: process.env.REACT_APP_SALES_EMAIL || process.env.SALES_EMAIL || "",
         REACT_APP_TERMS_URL: process.env.REACT_APP_TERMS_URL || process.env.TERMS_URL || "",
         REACT_APP_PRIVACY_URL: process.env.REACT_APP_PRIVACY_URL || process.env.PRIVACY_URL || "",
         REACT_APP_DPA_URL: process.env.REACT_APP_DPA_URL || process.env.DPA_URL || "",

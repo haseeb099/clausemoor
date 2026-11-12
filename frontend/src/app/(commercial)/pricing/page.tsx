@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { productName } from "@clausemoor/client";
 import { formatGbp, plansCatalog } from "@/app/lib/plans";
+import { PlanCheckoutActions } from "./PlanCheckoutActions";
 
 export const metadata: Metadata = {
     title: `Pricing · ${productName()}`,
@@ -88,6 +89,12 @@ export default function PricingPage() {
                                 >
                                     {plan.cta.label}
                                 </Link>
+                            ) : plan.id === "chambers" || plan.id === "firm" ? (
+                                <PlanCheckoutActions
+                                    planId={plan.id}
+                                    highlighted={plan.highlighted}
+                                    contactLabel={plan.cta.label}
+                                />
                             ) : (
                                 <Link
                                     href={`/contact?plan=${encodeURIComponent(plan.id)}`}

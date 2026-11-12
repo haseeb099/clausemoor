@@ -358,7 +358,7 @@ export default function LoginPage() {
                             href="/signup"
                             className="font-medium transition-colors hover:text-gray-950"
                         >
-                            Start a pilot
+                            Sign up
                         </Link>
                     </p>
                     <p>

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
 import { PillButtonUI, GlassCardUI } from "@clausemoor/ui";
 import { formatGbp, plansCatalog } from "@/app/lib/plans";
+import { BillingPlanActions } from "@/app/components/settings/BillingPlanActions";
 import { Modal } from "@/app/components/modals/Modal";
 import { FieldLabel } from "@/app/components/ui/form-field";
 import { SettingsTextInput } from "@/app/components/settings/SettingsTextInput";
@@ -355,6 +356,7 @@ export default function SettingsPage() {
                   </li>
                 ))}
               </ul>
+              <BillingPlanActions />
               <div className="flex flex-wrap gap-3 pt-1 text-xs font-medium">
                 <Link
                   href="/pricing"

@@ -9,7 +9,7 @@ import {
 describe("plans catalog", () => {
     it("publishes the four commercial plans with GBP list prices", () => {
         expect(plansCatalog.currency).toBe("GBP");
-        expect(plansCatalog.billingModel).toBe("invoice");
+        expect(plansCatalog.billingModel).toBe("stripe-or-invoice");
         expect(plansCatalog.plans.map((plan) => plan.id)).toEqual([
             "pilot",
             "chambers",

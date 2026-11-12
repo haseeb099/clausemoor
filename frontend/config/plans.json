@@ -1,9 +1,9 @@
 {
   "currency": "GBP",
-  "billingModel": "invoice",
-  "vatNote": "List prices are in GBP and exclude VAT where VAT applies.",
+  "billingModel": "stripe-or-invoice",
+  "vatNote": "List prices are in GBP and exclude VAT where VAT applies. Stripe Checkout collects tax IDs where enabled.",
   "responseSla": "We reply to sales enquiries within one UK business day.",
-  "note": "Subscription and support contracts are sold on invoice against an order form. Card checkout is not built into the app. Replace operator legal name and bank details on the order form before you take payment. Have a UK solicitor confirm the terms that sit behind these plans.",
+  "note": "Hosted Chambers and Firm plans can be paid by card through Stripe Checkout when STRIPE_SECRET_KEY is set. Self-hosted and custom deals stay on invoice against an order form. Have a UK solicitor confirm the terms that sit behind these plans.",
   "plans": [
     {
       "id": "pilot",
@@ -38,7 +38,7 @@
       "billingPeriod": "monthly-or-annual",
       "highlighted": true,
       "cta": {
-        "label": "Request Chambers",
+        "label": "Request invoice",
         "kind": "contact"
       },
       "seats": "Up to 10 users",
@@ -62,7 +62,7 @@
       "billingPeriod": "monthly-or-annual",
       "highlighted": false,
       "cta": {
-        "label": "Request Firm",
+        "label": "Request invoice",
         "kind": "contact"
       },
       "seats": "Up to 50 users",
