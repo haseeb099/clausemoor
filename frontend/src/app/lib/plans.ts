@@ -36,7 +36,7 @@ export function planById(id: string): CommercialPlan | undefined {
 export function formatGbp(amount: number): string {
     return new Intl.NumberFormat("en-GB", {
         style: "currency",
-        currency: plansCatalog.currency || "GBP",
+        currency: plansCatalog.currency,
         maximumFractionDigits: 0,
     }).format(amount);
 }

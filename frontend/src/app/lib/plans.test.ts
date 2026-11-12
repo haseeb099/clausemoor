@@ -36,4 +36,13 @@ describe("plans catalog", () => {
         expect(decodeURIComponent(href)).toContain("Example LLP");
         expect(decodeURIComponent(href)).toContain("UK hosted");
     });
+
+    it("falls back when the plan or contact fields are missing", () => {
+        expect(planById("missing")).toBeUndefined();
+        const href = salesMailto({});
+        const decoded = decodeURIComponent(href);
+        expect(decoded).toContain("Clausemoor sales enquiry");
+        expect(decoded).toContain("Plan: Not sure yet");
+        expect(formatGbp(1490)).toMatch(/£1,490/);
+    });
 });
